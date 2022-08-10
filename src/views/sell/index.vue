@@ -90,8 +90,7 @@
     });
     let sysOrder = {
       sysOrderTicketList,
-      name: name || '',
-      phone: phone || '',
+      sysOrderCustomerList: [{ name: name || '', phone: phone || '' }],
     };
     await save(sysOrder, handleSuccess);
   };
