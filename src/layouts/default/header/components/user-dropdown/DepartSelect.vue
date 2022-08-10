@@ -50,8 +50,8 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, watch, unref, defineExpose } from 'vue';
-  import { Avatar } from 'ant-design-vue';
+  import { ref, watch, unref } from 'vue';
+  // import { Avatar } from 'ant-design-vue';
   import { BasicModal } from '/@/components/Modal';
   import { getUserDeparts, selectDepart } from '/@/views/system/depart/depart.api';
   import { getUserTenants } from '/@/views/system/tenant/tenant.api';

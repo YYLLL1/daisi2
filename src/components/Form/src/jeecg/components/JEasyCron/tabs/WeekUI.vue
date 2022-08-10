@@ -24,9 +24,7 @@
         <a-radio :value="TypeEnum.specify" v-bind="beforeRadioAttrs">指定</a-radio>
         <div class="list list-cn">
           <a-checkbox-group v-model:value="valueList">
-            <template v-for="opt in weekOptions" :key="i">
-              <a-checkbox :value="opt.value" v-bind="typeSpecifyAttrs">{{ opt.label }}</a-checkbox>
-            </template>
+            <a-checkbox v-for="(opt, i) in weekOptions" :key="i" :value="opt.value" v-bind="typeSpecifyAttrs">{{ opt.label }}</a-checkbox>
           </a-checkbox-group>
         </div>
       </div>

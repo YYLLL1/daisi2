@@ -70,7 +70,7 @@
               </Popconfirm>
 
               <template #overlay>
-                <a-menu @click="">
+                <a-menu>
                   <a-menu-item key="1" @click="onAddChildDepart(dataRef)">添加子级</a-menu-item>
                   <a-menu-item key="2" @click="visibleTreeKey = treeKey">
                     <span style="color: red">删除</span>
@@ -88,7 +88,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { inject, nextTick, ref, unref, defineExpose } from 'vue';
+  import { inject, nextTick, ref, unref } from 'vue';
   import { useModal } from '/@/components/Modal';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { useMethods } from '/@/hooks/system/useMethods';

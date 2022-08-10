@@ -10,14 +10,14 @@
 </template>
 <script lang="ts" name="monitor-datalog" setup>
   import { ref } from 'vue';
-  import { BasicTable, TableAction } from '/@/components/Table';
+  import { BasicTable } from '/@/components/Table';
   import DataLogCompareModal from './DataLogCompareModal.vue';
-  const [registerModal, { openModal }] = useModal();
   import { getDataLogList } from './datalog.api';
   import { columns, searchFormSchema } from './datalog.data';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { useModal } from '/@/components/Modal';
   import { useListPage } from '/@/hooks/system/useListPage';
+  const [registerModal, { openModal }] = useModal();
   const { createMessage } = useMessage();
   const checkedRows = ref<Array<object | number>>([]);
 

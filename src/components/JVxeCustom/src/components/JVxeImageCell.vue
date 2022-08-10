@@ -1,16 +1,14 @@
 <template>
   <div>
-    <template v-if="hasFile" v-for="(file, fileKey) of [innerFile || {}]" :key="fileKey">
-      <div class="j-vxe-image-list">
+    <template v-if="hasFile">
+      <div v-for="(file, fileKey) of [innerFile || {}]" :key="fileKey" class="j-vxe-image-list">
         <template v-if="!file || !(file['url'] || file['path'] || file['message'])">
           <a-tooltip :title="'请稍后: ' + JSON.stringify(file) + (file['url'] || file['path'] || file['message'])">
             <LoadingOutlined />
           </a-tooltip>
         </template>
         <template v-else-if="file['path']">
-          <template v-for="src of imgList">
-            <img class="j-vxe-image" :src="src" alt="图片错误" @click="handleMoreOperation" />
-          </template>
+          <img v-for="(src, index) of imgList" :key="index" class="j-vxe-image" :src="src" alt="图片错误" @click="handleMoreOperation" />
         </template>
         <a-tooltip v-else :title="file.message || '上传失败'" @click="handleClickShowImageError">
           <Icon icon="ant-design:exclamation-circle" style="color: red" />
@@ -20,7 +18,7 @@
     <div class="j-vxe-image-upload">
       <a-upload name="file" :data="{ isup: 1 }" :multiple="false" :action="uploadAction" :headers="uploadHeaders" :showUploadList="false" v-bind="cellProps" @change="handleChangeUpload">
         <a-button v-if="!hasFile" preIcon="ant-design:upload">{{ originColumn.btnText || '上传图片' }}</a-button>
-        <div v-if="hasFile && imgList.length < maxCount" class="j-vxe-plus" @click="">
+        <div v-if="hasFile && imgList.length < maxCount" class="j-vxe-plus">
           <Icon icon="ant-design:plus" />
         </div>
       </a-upload>

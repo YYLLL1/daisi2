@@ -11,7 +11,7 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, ref, inject, reactive } from 'vue';
+  import { defineComponent, ref, inject } from 'vue';
   import { propTypes } from '/@/utils/propTypes';
   import { useAttrs } from '/@/hooks/core/useAttrs';
 
@@ -23,12 +23,12 @@
       showButton: propTypes.bool.def(true),
       // 是否支持多选，默认 true
       multiple: {
-        type: Boolean,
+        type: String,
         default: 'multiple',
       },
     },
     emits: ['btnOk'],
-    setup(props, { emit, refs }) {
+    setup(props, { emit }) {
       //接收下拉框选项
       const options = inject('selectOptions') || ref([]);
       //接收选择的值

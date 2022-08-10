@@ -16,7 +16,7 @@
     props: {
       value: {
         type: Array,
-        default: ['', ''],
+        default: () => ['', ''],
       },
     },
     emits: ['change'],

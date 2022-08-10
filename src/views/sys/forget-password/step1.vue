@@ -15,9 +15,9 @@
   </Form>
 </template>
 <script lang="ts">
-  import { defineComponent, reactive, ref, computed, unref, toRaw } from 'vue';
+  import { defineComponent, reactive, ref, toRaw } from 'vue';
 
-  import { Form, Input, Button, steps } from 'ant-design-vue';
+  import { Form, Input, Button } from 'ant-design-vue';
   import { CountdownInput } from '/@/components/CountDown';
 
   import { useI18n } from '/@/hooks/web/useI18n';
@@ -26,7 +26,7 @@
   import { phoneVerify, getCaptcha } from '/@/api/sys/user';
 
   export default defineComponent({
-    name: 'step1',
+    name: 'Step1',
     components: {
       Button,
       Form,

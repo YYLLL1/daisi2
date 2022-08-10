@@ -11,7 +11,7 @@
           :style="{ height: '500px', 'border-right': '2px solid #c1c1c1', 'overflow-y': 'auto' }"
           @expand="onExpand"
           @select="onSelect"
-        ></a-tree>
+        />
       </a-col>
 
       <!--右侧缩略图-->
@@ -118,7 +118,7 @@
   /**
    * 节点选中事件
    */
-  function onSelect(selectedKeys, info) {
+  function onSelect(selectedKeys) {
     for (var i = 0; i < unref(imgList).length; i++) {
       if (unref(imgList)[i].key === selectedKeys[0]) {
         sort.value = unref(imgList)[i].sort;

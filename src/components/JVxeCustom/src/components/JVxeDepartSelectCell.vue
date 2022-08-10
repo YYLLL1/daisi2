@@ -47,20 +47,18 @@
       const { prefixCls } = useCellDesign('depart-select');
 
       const selectedValue = computed(() => {
-        let val: any = innerValue.value;
+        let val = innerValue.value;
         if (val == null) {
           return val;
-        }
-        if (isEmpty(val)) {
+        } else if (isEmpty(val)) {
           return [];
-        }
-        if (isArray(val)) {
+        } else if (isArray(val)) {
           return val;
+        } else if (isString(val)) {
+          return val.split(',');
+        } else {
+          return [val];
         }
-        if (isString(val)) {
-          return (<string>val).split(',');
-        }
-        return [val];
       });
 
       const multiple = computed(() => cellProps.value['multi'] != false);

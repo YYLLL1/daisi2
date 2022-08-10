@@ -1,10 +1,10 @@
 <template>
-  <BasicForm @register="registerForm"></BasicForm>
+  <BasicForm @register="registerForm" />
 </template>
 
 <script>
   import { BasicForm, useForm } from '/@/components/Form/index';
-  import { computed, defineComponent, toRaw } from 'vue';
+  import { computed, defineComponent } from 'vue';
   import { defHttp } from '/@/utils/http/axios';
   import { propTypes } from '/@/utils/propTypes';
   import { getOrderCustomerFormSchema } from '../data';

@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref, computed, watch, unref, reactive, UnwrapRef } from 'vue';
+  import { defineComponent, ref, computed, unref, reactive, UnwrapRef } from 'vue';
   import { Avatar } from 'ant-design-vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { useMessage } from '/@/hooks/web/useMessage';
@@ -63,7 +63,7 @@
     tenantId: number;
   }
   export default defineComponent({
-    name: 'loginSelect',
+    name: 'LoginSelect',
     components: {
       Avatar,
       BasicModal,
@@ -109,7 +109,7 @@
           return '请选择租户和部门';
         } else if (unref(isMultiDepart) && !unref(isMultiTenant)) {
           return '请选择部门';
-        } else if (!unref(isMultiDepart) && unref(isMultiTenant)) {
+        } else {
           return '请选择租户';
         }
       });
@@ -267,11 +267,11 @@
         validate_status1.value = '';
       }
 
-      function handleTenantChange(e) {
+      function handleTenantChange() {
         validate_status.value = '';
       }
 
-      function handleDepartChange(e) {
+      function handleDepartChange() {
         validate_status1.value = '';
       }
 

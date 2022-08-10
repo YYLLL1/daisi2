@@ -22,7 +22,7 @@
 <script lang="ts" setup>
   import { reactive, ref } from 'vue';
   // noinspection ES6UnusedImports
-  import { Popconfirm } from 'ant-design-vue';
+  // import { Popconfirm } from 'ant-design-vue';
   import { JVxeColumn, JVxeTableInstance, JVxeTypes } from '/@/components/jeecg/JVxeTable/types';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { random } from 'lodash-es';

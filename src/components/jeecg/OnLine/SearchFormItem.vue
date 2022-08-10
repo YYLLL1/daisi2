@@ -4,12 +4,12 @@
       <span :title="item.label" class="label-text">{{ item.label }}</span>
     </template>
     <template v-if="single_mode === item.mode">
-      <a-date-picker :showTime="false" valueFormat="YYYY-MM-DD" :placeholder="'请选择' + item.label" v-model:value="queryParam[item.field]"></a-date-picker>
+      <a-date-picker :showTime="false" valueFormat="YYYY-MM-DD" :placeholder="'请选择' + item.label" v-model:value="queryParam[item.field]" />
     </template>
     <template v-else>
-      <a-date-picker :showTime="false" valueFormat="YYYY-MM-DD" placeholder="开始日期" v-model:value="queryParam[item.field + '_begin']" style="width: calc(50% - 15px)"></a-date-picker>
+      <a-date-picker :showTime="false" valueFormat="YYYY-MM-DD" placeholder="开始日期" v-model:value="queryParam[item.field + '_begin']" style="width: calc(50% - 15px)" />
       <span class="group-query-strig">~</span>
-      <a-date-picker :showTime="false" valueFormat="YYYY-MM-DD" placeholder="结束日期" v-model:value="queryParam[item.field + '_end']" style="width: calc(50% - 15px)"></a-date-picker>
+      <a-date-picker :showTime="false" valueFormat="YYYY-MM-DD" placeholder="结束日期" v-model:value="queryParam[item.field + '_end']" style="width: calc(50% - 15px)" />
     </template>
   </a-form-item>
 
@@ -18,7 +18,7 @@
       <span :title="item.label" class="label-text">{{ item.label }}</span>
     </template>
     <template v-if="single_mode === item.mode">
-      <a-date-picker :placeholder="'请选择' + item.label" :show-time="true" valueFormat="YYYY-MM-DD HH:mm:ss" v-model:value="queryParam[item.field]"></a-date-picker>
+      <a-date-picker :placeholder="'请选择' + item.label" :show-time="true" valueFormat="YYYY-MM-DD HH:mm:ss" v-model:value="queryParam[item.field]" />
     </template>
     <template v-else>
       <a-date-picker
@@ -27,15 +27,9 @@
         valueFormat="YYYY-MM-DD HH:mm:ss"
         v-model:value="queryParam[item.field + '_begin']"
         style="width: calc(50% - 9px); min-width: 60px"
-      ></a-date-picker>
+      />
       <span class="group-query-strig" style="width: auto; padding: 0 4px">~</span>
-      <a-date-picker
-        placeholder="2选择结束时间"
-        :show-time="true"
-        valueFormat="YYYY-MM-DD HH:mm:ss"
-        v-model:value="queryParam[item.field + '_end']"
-        style="width: calc(50% - 9px); min-width: 60px"
-      ></a-date-picker>
+      <a-date-picker placeholder="2选择结束时间" :show-time="true" valueFormat="YYYY-MM-DD HH:mm:ss" v-model:value="queryParam[item.field + '_end']" style="width: calc(50% - 9px); min-width: 60px" />
     </template>
   </a-form-item>
 
@@ -44,12 +38,12 @@
       <span :title="item.label" class="label-text">{{ item.label }}</span>
     </template>
     <template v-if="single_mode === item.mode">
-      <a-date-picker :placeholder="'请选择' + item.label" mode="time" valueFormat="HH:mm:ss" v-model:value="queryParam[item.field]"></a-date-picker>
+      <a-date-picker :placeholder="'请选择' + item.label" mode="time" valueFormat="HH:mm:ss" v-model:value="queryParam[item.field]" />
     </template>
     <template v-else>
-      <a-date-picker placeholder="请选择开始时间" mode="time" valueFormat="HH:mm:ss" v-model:value="queryParam[item.field + '_begin']" style="width: calc(50% - 15px)"></a-date-picker>
+      <a-date-picker placeholder="请选择开始时间" mode="time" valueFormat="HH:mm:ss" v-model:value="queryParam[item.field + '_begin']" style="width: calc(50% - 15px)" />
       <span class="group-query-strig">~</span>
-      <a-date-picker placeholder="请选择结束时间" mode="time" valueFormat="HH:mm:ss" v-model:value="queryParam[item.field + '_end']" style="width: calc(50% - 15px)"></a-date-picker>
+      <a-date-picker placeholder="请选择结束时间" mode="time" valueFormat="HH:mm:ss" v-model:value="queryParam[item.field + '_end']" style="width: calc(50% - 15px)" />
     </template>
   </a-form-item>
 
@@ -57,7 +51,7 @@
     <template #label>
       <span :title="item.label" class="label-text">{{ item.label }}</span>
     </template>
-    <JDictSelectTag v-if="item.config === '1'" :placeholder="'请选择' + item.label" v-model="queryParam[item.field]" :dictCode="getDictCode(item)"> </JDictSelectTag>
+    <JDictSelectTag v-if="item.config === '1'" :placeholder="'请选择' + item.label" v-model="queryParam[item.field]" :dictCode="getDictCode(item)" />
     <a-select v-else :placeholder="'请选择' + item.label" v-model:value="queryParam[item.field]">
       <template v-for="(obj, index) in dictOptions[getDictOptionKey(item)]" :key="index">
         <a-select-option :value="obj.value"> {{ obj.text }}</a-select-option>
@@ -77,8 +71,7 @@
       :pidValue="item.pidValue"
       :hasChildField="item.hasChildField"
       load-triggle-change
-    >
-    </JTreeSelect>
+    />
   </a-form-item>
 
   <a-form-item v-else-if="item.view === CompTypeEnum.CatTree" :labelCol="labelCol" :class="'jeecg-online-search'">
@@ -92,7 +85,7 @@
     <template #label>
       <span :title="item.label" class="label-text">{{ item.label }}</span>
     </template>
-    <JDictSelectTag v-if="item.config === '1'" v-model:value="queryParam[item.field]" :placeholder="'请选择' + item.label" :dict="getDictCode(item)"> </JDictSelectTag>
+    <JDictSelectTag v-if="item.config === '1'" v-model:value="queryParam[item.field]" :placeholder="'请选择' + item.label" :dict="getDictCode(item)" />
     <!--TODO 新需要的组件-->
     <!-- <j-online-search-select
                 v-else
@@ -107,7 +100,7 @@
     <template #label>
       <span :title="item.label" class="label-text">{{ item.label }}</span>
     </template>
-    <JSelectUserByDept v-model:value="queryParam[item.field]" :placeholder="'请选择' + item.label"></JSelectUserByDept>
+    <JSelectUserByDept v-model:value="queryParam[item.field]" :placeholder="'请选择' + item.label" />
   </a-form-item>
 
   <a-form-item v-else-if="item.view == CompTypeEnum.SelDepart" :labelCol="labelCol" :class="'jeecg-online-search'">
@@ -151,12 +144,12 @@
       <span :title="item.label" class="label-text">{{ item.label }}</span>
     </template>
     <template v-if="single_mode === item.mode">
-      <a-input :placeholder="'请输入' + item.label" v-model:value="queryParam[item.field]"></a-input>
+      <a-input :placeholder="'请输入' + item.label" v-model:value="queryParam[item.field]" />
     </template>
     <template v-else>
-      <a-input :placeholder="'请输入开始' + item.label" v-model:value="queryParam[item.field + '_begin']" style="width: calc(50% - 15px)"></a-input>
+      <a-input :placeholder="'请输入开始' + item.label" v-model:value="queryParam[item.field + '_begin']" style="width: calc(50% - 15px)" />
       <span class="group-query-strig">~</span>
-      <a-input :placeholder="'请输入结束' + item.label" v-model:value="queryParam[item.field + '_end']" style="width: calc(50% - 15px)"></a-input>
+      <a-input :placeholder="'请输入结束' + item.label" v-model:value="queryParam[item.field + '_end']" style="width: calc(50% - 15px)" />
     </template>
   </a-form-item>
 </template>
@@ -261,20 +254,23 @@
   }
 
   /* 查询条件左对齐样式设置 */
-  .jeecg-online-search ::v-deep .ant-form-item-label {
-    flex: 0 0 auto !important;
-    width: auto;
-  }
-  .jeecg-online-search ::v-deep .ant-form-item-control {
-    max-width: 100%;
-  }
+  .jeecg-online-search {
+    ::v-deep(.ant-form-item-label) {
+      flex: 0 0 auto !important;
+      width: auto;
+    }
 
-  /* label显示宽度 超出显示... */
-  .jeecg-online-search ::v-deep .label-text {
-    max-width: v-bind(labelTextMaxWidth);
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow-wrap: break-word;
+    ::v-deep(.ant-form-item-control) {
+      max-width: 100%;
+    }
+
+    /* label显示宽度 超出显示... */
+    ::v-deep(.label-text) {
+      max-width: v-bind(labeltextmaxwidth);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow-wrap: break-word;
+    }
   }
 </style>

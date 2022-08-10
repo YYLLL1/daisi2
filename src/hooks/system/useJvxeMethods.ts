@@ -10,7 +10,7 @@ export function useJvxeMethod(requestAddOrEdit, classifyIntoFormData, tableRefs,
     defHttp
       .get({ url, params }, { isTransformResponse: false })
       .then((res) => {
-        let { result } = res;
+        const { result } = res;
         if (res.success && result) {
           if (Array.isArray(result)) {
             tab.dataSource = result;
@@ -35,7 +35,7 @@ export function useJvxeMethod(requestAddOrEdit, classifyIntoFormData, tableRefs,
 
   /** 获取所有的editableTable实例*/
   function getAllTable() {
-    let values = Object.values(tableRefs);
+    const values = Object.values(tableRefs);
     return Promise.all(values);
   }
   /** 确定按钮点击事件 */
@@ -43,7 +43,7 @@ export function useJvxeMethod(requestAddOrEdit, classifyIntoFormData, tableRefs,
     /** 触发表单验证 */
     getAllTable()
       .then((tables) => {
-        let values = formRef.value.getFieldsValue();
+        const values = formRef.value.getFieldsValue();
         return validateFormModelAndTables(formRef.value.validate, values, tables, formRef.value.getProps);
       })
       .then((allValues) => {
@@ -54,7 +54,7 @@ export function useJvxeMethod(requestAddOrEdit, classifyIntoFormData, tableRefs,
         if (typeof classifyIntoFormData !== 'function') {
           throw throwNotFunction('classifyIntoFormData');
         }
-        let formData = classifyIntoFormData(allValues);
+        const formData = classifyIntoFormData(allValues);
         // 发起请求
         return requestAddOrEdit(formData);
       })
@@ -103,19 +103,19 @@ export function useValidateAntFormAndTable(activeKey, refMap) {
    * 获取所有子表数据
    */
   async function getSubFormAndTableData() {
-    let formData = {};
-    let all = Object.keys(refMap);
+    const formData = {};
+    const all = Object.keys(refMap);
     let key = '';
     for (let i = 0; i < all.length; i++) {
       key = all[i];
-      let instance = refMap[key].value;
+      const instance = refMap[key].value;
       if (instance.isForm) {
-        let subFormData = await validateFormAndGetData(instance, key);
+        const subFormData = await validateFormAndGetData(instance, key);
         if (subFormData) {
           formData[key + 'List'] = [subFormData];
         }
       } else {
-        let arr = await validateTableAndGetData(instance, key);
+        const arr = await validateTableAndGetData(instance, key);
         if (arr && arr.length > 0) {
           formData[key + 'List'] = arr;
         }
@@ -163,7 +163,7 @@ export function useValidateAntFormAndTable(activeKey, refMap) {
    */
   async function validateFormAndGetData(instance, key) {
     try {
-      let data = await instance.getFormData();
+      const data = await instance.getFormData();
       transformData(data);
       return data;
     } catch (e) {

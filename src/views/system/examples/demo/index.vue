@@ -6,14 +6,14 @@
         <a-row :gutter="24">
           <a-col :lg="8">
             <a-form-item label="用户名">
-              <a-input placeholder="请输入名称模糊查询" v-model:value="queryParam.name"></a-input>
+              <a-input placeholder="请输入名称模糊查询" v-model:value="queryParam.name" />
             </a-form-item>
           </a-col>
           <a-col :lg="8">
             <a-form-item label="年龄">
-              <a-input placeholder="最小年龄" type="ge" v-model:value="queryParam.age_begin" style="width: calc(50% - 15px)"></a-input>
+              <a-input placeholder="最小年龄" type="ge" v-model:value="queryParam.age_begin" style="width: calc(50% - 15px)" />
               <span>~</span>
-              <a-input placeholder="最大年龄" type="le" v-model:value="queryParam.age_end" style="width: calc(50% - 15px)"></a-input>
+              <a-input placeholder="最大年龄" type="le" v-model:value="queryParam.age_end" style="width: calc(50% - 15px)" />
             </a-form-item>
           </a-col>
           <template v-if="toggleSearchStatus">
@@ -43,9 +43,9 @@
     </div>
     <BasicTable @register="registerTable" :rowSelection="rowSelection" :class="{ 'p-4': customSearch }">
       <template #form-age="{ model, field }">
-        <a-input placeholder="最小年龄" type="ge" v-model:value="min" style="width: calc(50% - 15px)" @change="ageChange(model, field)"></a-input>
+        <a-input placeholder="最小年龄" type="ge" v-model:value="min" style="width: calc(50% - 15px)" @change="ageChange(model, field)" />
         <span>~</span>
-        <a-input placeholder="最大年龄" type="le" v-model:value="max" style="width: calc(50% - 15px)" @change="ageChange(model, field)"></a-input>
+        <a-input placeholder="最大年龄" type="le" v-model:value="max" style="width: calc(50% - 15px)" @change="ageChange(model, field)" />
       </template>
       <template #tableTitle>
         <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd">新增</a-button>
@@ -53,7 +53,7 @@
           <a-button preIcon="ant-design:import-outlined" type="primary">导入</a-button>
         </a-upload>
         <a-button preIcon="ant-design:export-outlined" type="primary" @click="handleExportXls('单表示例', getExportUrl, exportParams)">导出</a-button>
-        <a-button preIcon="ant-design:filter" type="primary" @click="">高级查询?</a-button>
+        <a-button preIcon="ant-design:filter" type="primary">高级查询?</a-button>
         <a-button preIcon="ant-design:plus-outlined" type="primary" @click="openTab">打开Tab页</a-button>
         <a-button preIcon="ant-design:retweet-outlined" type="primary" @click="customSearch = !customSearch">{{ customSearch ? '表单配置查询' : '自定义查询' }}</a-button>
         <a-button preIcon="ant-design:import-outlined" type="primary" @click="handleImport">弹窗导入</a-button>
@@ -64,14 +64,14 @@
           <template #overlay>
             <a-menu>
               <a-menu-item key="1" @click="batchHandleDelete">
-                <Icon icon="ant-design:delete-outlined"></Icon>
+                <Icon icon="ant-design:delete-outlined" />
                 删除
               </a-menu-item>
             </a-menu>
           </template>
           <a-button
             >批量操作
-            <Icon style="fontsize: 12px" icon="ant-design:down-outlined"></Icon>
+            <Icon icon="ant-design:down-outlined" />
           </a-button>
         </a-dropdown>
       </template>
@@ -90,12 +90,12 @@
   import DemoModal from './DemoModal.vue';
   import JImportModal from '/@/components/Form/src/jeecg/components/JImportModal.vue';
   import JDictSelectTag from '/@/components/Form/src/jeecg/components/JDictSelectTag.vue';
-  import { useMessage } from '/@/hooks/web/useMessage';
+  // import { useMessage } from '/@/hooks/web/useMessage';
   import { useMethods } from '/@/hooks/system/useMethods';
   import { getDemoList, deleteDemo, batchDeleteDemo, getExportUrl, getImportUrl } from './demo.api';
   import { columns, searchFormSchema } from './demo.data';
   import { useGo } from '/@/hooks/web/usePage';
-  import { router } from '/@/router';
+  // import { router } from '/@/router';
   import { filterObj } from '/@/utils/common/compUtils';
   import SuperQuery from '/@/components/jeecg/super/superquery/SuperQuery.vue';
 
@@ -103,7 +103,7 @@
   const checkedKeys = ref<Array<string | number>>([]);
   const [registerModal, { openModal }] = useModal();
   const [registerModal1, { openModal: openModal1 }] = useModal();
-  const [registerDetailModal, { openModal: openDetailModal }] = useModal();
+  const [{ openModal: openDetailModal }] = useModal();
   const { handleExportXls, handleImportXls } = useMethods();
   const min = ref();
   const max = ref();

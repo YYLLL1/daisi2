@@ -1,8 +1,8 @@
 <!--用户选择组件-->
 <template>
   <div>
-    <JSelectBiz @handleOpen="handleOpen" :loading="loadingEcho" v-bind="attrs"></JSelectBiz>
-    <UserSelectModal :rowKey="rowKey" @register="regModal" @getSelectResult="setValue" v-bind="getBindValue"></UserSelectModal>
+    <JSelectBiz @handleOpen="handleOpen" :loading="loadingEcho" v-bind="attrs" />
+    <UserSelectModal :rowKey="rowKey" @register="regModal" @getSelectResult="setValue" v-bind="getBindValue" />
   </div>
 </template>
 <script lang="ts">
@@ -39,7 +39,7 @@
       },
     },
     emits: ['options-change', 'change', 'update:value'],
-    setup(props, { emit, refs }) {
+    setup(props, { emit }) {
       const emitData = ref<object>();
       //注册model
       const [regModal, { openModal }] = useModal();

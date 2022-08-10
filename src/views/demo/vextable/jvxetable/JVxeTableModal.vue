@@ -49,7 +49,7 @@
             :loading="table1.loading"
             :columns="table1.columns"
             :dataSource="table1.dataSource"
-          ></JVxeTable>
+          />
         </a-tab-pane>
 
         <a-tab-pane tab="机票信息" key="tableRef2" forceRender>
@@ -66,7 +66,7 @@
             :loading="table2.loading"
             :columns="table2.columns"
             :dataSource="table2.dataSource"
-          ></JVxeTable>
+          />
         </a-tab-pane>
       </a-tabs>
     </a-form>
@@ -74,8 +74,8 @@
 </template>
 <script lang="ts">
   import { defineComponent, ref, reactive, computed, unref } from 'vue';
-  import { BasicModal, useModalInner } from '/src/components/Modal';
-  import { JVxeTable } from '/src/components/jeecg/JVxeTable';
+  import { BasicModal, useModalInner } from '/@/components/Modal';
+  import { JVxeTable } from '/@/components/jeecg/JVxeTable';
   import { columns, columns1 } from './jvxetable.data';
   import { orderCustomerList, orderTicketList, saveOrUpdate } from './jvxetable.api';
   import { useJvxeMethod } from '/@/hooks/system/useJvxeMethods.ts';

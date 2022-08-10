@@ -5,23 +5,21 @@
   <LockModal @register="register" />
 </template>
 <script lang="ts">
-  import { defineComponent, computed } from 'vue';
+  import { defineComponent } from 'vue';
   import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
   import { Tooltip } from 'ant-design-vue';
   import { LockOutlined } from '@ant-design/icons-vue';
-  import Icon from '/@/components/Icon';
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useModal } from '/@/components/Modal';
 
   export default defineComponent({
     name: 'LockScreen',
-    inheritAttrs: false,
     components: {
-      Icon,
       Tooltip,
       LockOutlined,
       LockModal: createAsyncComponent(() => import('./lock/LockModal.vue')),
     },
+    inheritAttrs: false,
     setup() {
       const { t } = useI18n();
       const [register, { openModal }] = useModal();

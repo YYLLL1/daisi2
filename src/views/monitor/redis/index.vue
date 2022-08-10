@@ -12,12 +12,12 @@
       </a-row>
     </a-card>
 
-    <BasicTable @register="registerTable" :api="getInfo"></BasicTable>
+    <BasicTable @register="registerTable" :api="getInfo" />
   </div>
 </template>
 <script lang="ts" name="monitor-redis" setup>
   import { onMounted, ref, reactive, Ref } from 'vue';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { BasicTable, useTable } from '/@/components/Table';
   import { getInfo, getRedisInfo } from './redis.api';
   import moment from 'moment';
   import { columns } from './redis.data';
@@ -169,12 +169,12 @@
         //if (key.min < 0) this.key.min = 0;
 
         // 计算 Memory 最大最小值
-        //let memoryPole = getMaxAndMin(memory.dataSource, 'y');
-        //memory.max = Math.floor(memoryPole[0]) + 100;
-        //memory.min = Math.floor(memoryPole[1]) - 100;
-        //if (memory.min < 0) memory.min = 0;
+        // let memoryPole = getMaxAndMin(memory.dataSource, 'y');
+        // memory.max = Math.floor(memoryPole[0]) + 100;
+        // memory.min = Math.floor(memoryPole[1]) - 100;
+        // if (memory.min < 0) memory.min = 0;
       })
-      .catch((e) => {
+      .catch(() => {
         //closeTimer()
       });
   }

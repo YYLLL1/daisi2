@@ -225,6 +225,7 @@
 
       .ant-badge-count {
         @badget-size: 16px;
+
         width: @badget-size;
         height: @badget-size;
         min-width: @badget-size;

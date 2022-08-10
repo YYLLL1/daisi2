@@ -1,7 +1,7 @@
 <template>
   <div>
     <b>键盘操作快捷键：</b>
-    <div style="border: 1px solid #cccccc; padding: 8px; width: 740px">
+    <div style="border: 1px solid #ccc; padding: 8px; width: 740px">
       <pre>
              F2 | 如果存在，激活单元格为编辑状态
             Esc | 如果存在，取消单元格编辑状态
@@ -16,7 +16,7 @@
       >
     </div>
 
-    <JVxeTable ref="tableRef" stripe toolbar rowNumber rowSelection keyboardEdit :columns="columns" :dataSource="dataSource"> </JVxeTable>
+    <JVxeTable ref="tableRef" stripe toolbar rowNumber rowSelection keyboardEdit :columns="columns" :dataSource="dataSource" />
   </div>
 </template>
 <script lang="ts">

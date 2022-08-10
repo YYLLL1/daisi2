@@ -34,7 +34,7 @@
       <SettingDrawer v-if="getShowSetting" :class="`${prefixCls}-action__item`" />
     </div>
   </Header>
-  <LoginSelect ref="loginSelectRef" @success="loginSelectOk"></LoginSelect>
+  <LoginSelect ref="loginSelectRef" @success="loginSelectOk" />
 </template>
 <script lang="ts">
   import { defineComponent, unref, computed, ref, onMounted, toRaw } from 'vue';

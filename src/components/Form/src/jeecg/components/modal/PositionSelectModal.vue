@@ -6,7 +6,7 @@
         <a-col :span="showSelected ? 18 : 24">
           <BasicTable
             :columns="columns"
-            :bordered="true"
+            bordered="true"
             :useSearchForm="true"
             :formConfig="formConfig"
             :api="getPositionList"
@@ -14,13 +14,13 @@
             :rowSelection="rowSelection"
             :indexColumnProps="indexColumnProps"
             v-bind="getBindValue"
-          ></BasicTable>
+          />
         </a-col>
         <a-col :span="showSelected ? 6 : 0">
           <BasicTable v-bind="selectedTable" :dataSource="selectRows" :useSearchForm="true" :formConfig="{ showActionButtonGroup: false, baseRowStyle: { minHeight: '40px' } }">
             <!--操作栏-->
             <template #action="{ record }">
-              <a href="javascript:void(0)" @click="handleDeleteSelected(record)"><Icon icon="ant-design:delete-outlined"></Icon></a>
+              <a href="javascript:void(0)" @click="handleDeleteSelected(record)"><Icon icon="ant-design:delete-outlined" /></a>
             </template>
           </BasicTable>
         </a-col>
@@ -55,7 +55,7 @@
       },
     },
     emits: ['register', 'getSelectResult'],
-    setup(props, { emit, refs }) {
+    setup(props, { emit }) {
       //注册弹框
       const [register, { closeModal }] = useModalInner();
       const attrs = useAttrs();
@@ -155,7 +155,7 @@
         indexColumnProps,
         columns,
         rowSelection,
-
+        searchInfo,
         selectedTable,
         selectRows,
         handleDeleteSelected,

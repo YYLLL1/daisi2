@@ -1,14 +1,14 @@
 <!--职务选择组件-->
 <template>
   <div>
-    <JSelectBiz @handleOpen="handleOpen" :loading="loadingEcho" v-bind="attrs"></JSelectBiz>
-    <PositionSelectModal @register="regModal" @getSelectResult="setValue" v-bind="getBindValue"></PositionSelectModal>
+    <JSelectBiz @handleOpen="handleOpen" :loading="loadingEcho" v-bind="attrs" />
+    <PositionSelectModal @register="regModal" @getSelectResult="setValue" v-bind="getBindValue" />
   </div>
 </template>
 <script lang="ts">
   import PositionSelectModal from './modal/PositionSelectModal.vue';
   import JSelectBiz from './base/JSelectBiz.vue';
-  import { defineComponent, ref, reactive, watchEffect, watch, provide, computed, unref } from 'vue';
+  import { defineComponent, ref, reactive, watchEffect, watch, provide, unref } from 'vue';
   import { useModal } from '/@/components/Modal';
   import { propTypes } from '/@/utils/propTypes';
   import { useRuleFormItem } from '/@/hooks/component/useFormItem';
@@ -38,7 +38,7 @@
       },
     },
     emits: ['options-change', 'change'],
-    setup(props, { emit, refs }) {
+    setup(props) {
       const emitData = ref<object>();
       //注册model
       const [regModal, { openModal }] = useModal();

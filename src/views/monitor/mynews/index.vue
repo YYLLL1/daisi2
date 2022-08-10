@@ -13,22 +13,22 @@
 </template>
 <script lang="ts" name="monitor-mynews" setup>
   import { ref } from 'vue';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { BasicTable, TableAction } from '/@/components/Table';
   import DetailModal from './DetailModal.vue';
   import { getMyNewsList, editCementSend, syncNotic, readAllMsg } from './mynews.api';
   import { columns, searchFormSchema } from './mynews.data';
   import { useMessage } from '/@/hooks/web/useMessage';
-  import { getToken } from '/@/utils/auth';
+  // import { getToken } from '/@/utils/auth';
   import { useModal } from '/@/components/Modal';
   import { useGlobSetting } from '/@/hooks/setting';
+  import { useListPage } from '/@/hooks/system/useListPage';
+  // import { getLogList } from '/@/views/monitor/log/log.api';
   const glob = useGlobSetting();
   const { createMessage } = useMessage();
   const checkedKeys = ref<Array<string | number>>([]);
   const content = ref({});
   const searchInfo = { logType: '1' };
   const [register, { openModal: openDetail }] = useModal();
-  import { useListPage } from '/@/hooks/system/useListPage';
-  import { getLogList } from '/@/views/monitor/log/log.api';
 
   const { prefixCls, tableContext } = useListPage({
     designScope: 'mynews-list',
@@ -61,7 +61,7 @@
    */
   function handleDetail(record) {
     let anntId = record.anntId;
-    editCementSend({ anntId: anntId }).then((res) => {
+    editCementSend({ anntId: anntId }).then(() => {
       reload();
       syncNotic({ anntId: anntId });
     });

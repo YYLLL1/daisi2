@@ -1,9 +1,9 @@
 <template>
-  <a-checkbox-group v-bind="attrs" v-model:value="checkboxArray" :options="checkOptions" @change="handleChange"></a-checkbox-group>
+  <a-checkbox-group v-bind="attrs" v-model:value="checkboxArray" :options="checkOptions" @change="handleChange" />
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, watch, watchEffect, ref, unref } from 'vue';
+  import { defineComponent, watchEffect, ref } from 'vue';
   import { propTypes } from '/@/utils/propTypes';
   import { useAttrs } from '/@/hooks/core/useAttrs';
   import { initDictOptions } from '/@/utils/dict/index';

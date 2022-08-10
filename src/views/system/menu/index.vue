@@ -30,8 +30,8 @@
   </div>
 </template>
 <script lang="ts" name="system-menu" setup>
-  import { nextTick, ref } from 'vue';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { ref } from 'vue';
+  import { BasicTable, TableAction } from '/@/components/Table';
   import { useListPage } from '/@/hooks/system/useListPage';
   import { useDrawer } from '/@/components/Drawer';
   import MenuDrawer from './MenuDrawer.vue';
@@ -170,10 +170,10 @@
    */
   function getDropDownAction(record) {
     return [
-      // {
-      //   label: '详情',
-      //   onClick: handleDetail.bind(null, record),
-      // },
+      {
+        label: '详情',
+        onClick: handleDetail.bind(null, record),
+      },
       {
         label: '添加下级',
         onClick: handleAddSub.bind(null, record),

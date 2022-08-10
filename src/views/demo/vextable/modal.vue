@@ -74,7 +74,7 @@
               </a-col>
               <a-col :span="2">
                 <a-form-item>
-                  <Icon icon="ant-design:minus-outlined" @click="delRowCustom(index)" style="fontsize: 20px" />
+                  <Icon icon="ant-design:minus-outlined" @click="delRowCustom(index)" style="font-size: 20px" />
                 </a-form-item>
               </a-col>
             </a-row>
@@ -109,7 +109,7 @@
             </a-col>
             <a-col :span="6">
               <a-form-item>
-                <Icon icon="ant-design:minus-outlined" @click="delRowTicket(index)" style="fontsize: 20px" />
+                <Icon icon="ant-design:minus-outlined" @click="delRowTicket(index)" style="font-size: 20px" />
               </a-form-item>
             </a-col>
           </a-row>
@@ -130,7 +130,7 @@
   import { orderCustomerList, orderTicketList } from './api';
 
   export default defineComponent({
-    name: 'tableModal',
+    name: 'TableModal',
     components: { BasicModal },
     emits: ['success', 'register'],
     setup(props, { emit }) {
@@ -256,6 +256,6 @@
 
   /** Tab页面行间距 */
   .ant-tabs-content .ant-form-item {
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 </style>

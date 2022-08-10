@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { inject, ref, unref, watch, computed, onMounted } from 'vue';
+  import { inject, unref, watch, computed, onMounted } from 'vue';
 
   import { ActionItem, BasicTable, TableAction } from '/@/components/Table';
   import { useModal } from '/@/components/Modal';

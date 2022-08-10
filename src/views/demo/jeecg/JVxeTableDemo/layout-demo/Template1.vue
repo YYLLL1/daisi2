@@ -37,8 +37,7 @@
           :pagination="table2.pagination"
           @pageChange="handleTable2PageChange"
           @selectRowChange="handleTable2SelectRowChange"
-        >
-        </JVxeTable>
+        />
       </a-col>
       <!-- 这里是孙级节点 -->
       <a-col :span="12">
@@ -52,8 +51,7 @@
           :dataSource="table3.dataSource"
           :pagination="table3.pagination"
           @pageChange="handleTable3PageChange"
-        >
-        </JVxeTable>
+        />
       </a-col>
     </a-row>
   </a-card>
@@ -100,7 +98,7 @@
               width: '180px',
               // 如果加上了该属性，就代表当前单元格是可编辑的，type就是表单的类型，input就是简单的输入框
               type: JVxeTypes.input,
-              formatter({ cellValue, row, column }) {
+              formatter({ cellValue, row }) {
                 let foo = '';
                 if (row.company === '佧伒侾佯有限公司') {
                   foo += '-233';
@@ -164,7 +162,7 @@
     // 监听器
     watch: {
       // 监听table1 【主表】选择的数据发生了变化
-      ['table1.lastRow'](row) {
+      ['table1.lastRow']() {
         this.loadTable2Data();
       },
       // 监听table2 【子表】选择的数据发生了变化

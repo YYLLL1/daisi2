@@ -28,7 +28,7 @@
       multiple: propTypes.bool.def(true),
     },
     emits: ['options-change', 'change', 'select', 'update:value'],
-    setup(props, { emit, refs }) {
+    setup(props, { emit }) {
       const emitData = ref<object>();
       //注册model
       const [regModal, { openModal }] = useModal();
@@ -79,7 +79,7 @@
        * 监听selectOptions变化
        */
       watch(selectOptions, () => {
-        if (selectOptions) {
+        if (selectOptions.value) {
           emit('select', toRaw(unref(selectOptions)), toRaw(unref(selectValues)));
         }
       });

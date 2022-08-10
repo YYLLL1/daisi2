@@ -5,13 +5,13 @@
       <a-row :gutter="6" v-if="dataVersionList" style="margin-left: 2px">
         <span style="margin-top: 5px; margin-right: 3px; margin-left: 4px">版本对比:</span>
         <a-select placeholder="版本号" @change="handleChange1" v-model:value="params.dataId1">
-          <a-select-option v-for="(log, logindex) in dataVersionList" :key="log.value" :value="log.value">
+          <a-select-option v-for="log in dataVersionList" :key="log.value" :value="log.value">
             {{ log.text }}
           </a-select-option>
         </a-select>
 
         <a-select placeholder="版本号" @change="handleChange2" style="padding-left: 10px" v-model:value="params.dataId2">
-          <a-select-option v-for="(log, logindex) in dataVersionList" :key="log.value" :value="log.value">
+          <a-select-option v-for="log in dataVersionList" :key="log.value" :value="log.value">
             {{ log.text }}
           </a-select-option>
         </a-select>
@@ -29,11 +29,11 @@
         :searchInfo="searchInfo"
         v-if="isUpdate"
       >
-        <template #dataVersionTitle1="{ record }"> <Icon icon="icon-park-outline:grinning-face" /> 版本:{{ dataVersion1Num }} </template>
-        <template #dataVersionTitle2="{ record }"> <Icon icon="icon-park-outline:grinning-face" /> 版本:{{ dataVersion2Num }} </template>
+        <template #dataVersionTitle1> <Icon icon="icon-park-outline:grinning-face" /> 版本:{{ dataVersion1Num }} </template>
+        <template #dataVersionTitle2> <Icon icon="icon-park-outline:grinning-face" /> 版本:{{ dataVersion2Num }} </template>
         <template #avatarslot="{ record }">
           <div class="anty-img-wrap" v-if="record.dataVersion1 != record.dataVersion2">
-            <Icon icon="mdi:arrow-right-bold" style="color: red"></Icon>
+            <Icon icon="mdi:arrow-right-bold" style="color: red" />
           </div>
         </template>
       </BasicTable>
@@ -41,7 +41,7 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, unref, ref, reactive, watch } from 'vue';
+  import { defineComponent, unref, ref, reactive } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { queryCompareList, queryDataVerList } from './datalog.api';
   import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
@@ -60,7 +60,7 @@
       ...selectProps,
     },
     emits: ['register', 'btnOk'],
-    setup(props, { emit, refs }) {
+    setup(props) {
       const { createMessage } = useMessage();
       const attrs = useAttrs();
       const getBindValue = Object.assign({}, unref(props), unref(attrs));
@@ -174,7 +174,7 @@
       }
       async function initDataVersionList() {
         queryDataVerList({ dataTable: dataTable.value, dataId: dataId.value }).then((res) => {
-          dataVersionList.value = res.map((value, key, arr) => {
+          dataVersionList.value = res.map((value) => {
             let item = {};
             item['text'] = value['dataVersion'];
             item['value'] = value['id'];

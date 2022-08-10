@@ -16,7 +16,7 @@
     >
       <template #title="{ slotTitle, ruleFlag }">
         {{ slotTitle }}
-        <Icon v-if="ruleFlag" icon="ant-design:align-left-outlined" style="margin-left: 5px; color: red"></Icon>
+        <Icon v-if="ruleFlag" icon="ant-design:align-left-outlined" style="margin-left: 5px; color: red" />
       </template>
     </BasicTree>
     <!--右下角按钮-->
@@ -29,9 +29,9 @@
   </BasicDrawer>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref, onMounted } from 'vue';
-  import { BasicDrawer, useDrawer, useDrawerInner } from '/src/components/Drawer';
-  import { BasicTree, TreeItem } from '/src/components/Tree';
+  import { ref, unref } from 'vue';
+  import { BasicDrawer, useDrawer, useDrawerInner } from '/@/components/Drawer';
+  import { BasicTree, TreeItem } from '/@/components/Tree';
   import { PopConfirmButton } from '/@/components/Button';
   import RoleDataRuleDrawer from './RoleDataRuleDrawer.vue';
   import { queryTreeListForRole, queryRolePermission, saveRolePermission } from '../role.api';

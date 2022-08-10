@@ -18,7 +18,7 @@ export function useJVxeUploadCell(props: JVxeComponent.Props, options?) {
 
   /** upload headers */
   const uploadHeaders = computed(() => {
-    let headers = {};
+    const headers = {};
     if ((originColumn.value.token ?? options?.token ?? false) === true) {
       headers['X-Access-Token'] = getToken();
     }
@@ -49,8 +49,8 @@ export function useJVxeUploadCell(props: JVxeComponent.Props, options?) {
   );
 
   function handleChangeUpload(info) {
-    let { file } = info;
-    let value = {
+    const { file } = info;
+    const value = {
       name: file.name,
       type: file.type,
       size: file.size,
@@ -88,7 +88,8 @@ export function useJVxeUploadCell(props: JVxeComponent.Props, options?) {
   }
 
   function handleClickDownloadFile() {
-    let { url, path } = innerFile.value || {};
+    let { url } = innerFile.value || {};
+    const { path } = innerFile.value || {};
     if (!url || url.length === 0) {
       if (path && path.length > 0) {
         url = getFileAccessHttpUrl(path.split(',')[0]);
@@ -125,8 +126,8 @@ export function fileGetValue(value) {
 
 export function fileSetValue(value) {
   if (value) {
-    let first = value.split(',')[0];
-    let name = first.substring(first.lastIndexOf('/') + 1);
+    const first = value.split(',')[0];
+    const name = first.substring(first.lastIndexOf('/') + 1);
     return {
       name: name,
       path: value,

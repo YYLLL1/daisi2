@@ -35,19 +35,19 @@
   </template>
 </template>
 <script lang="ts">
-  import { defineComponent, PropType, ref, reactive, watchEffect, computed, unref, watch, onMounted } from 'vue';
+  import { defineComponent, ref, watchEffect, computed, unref, watch } from 'vue';
   import { propTypes } from '/@/utils/propTypes';
   import { useAttrs } from '/@/hooks/core/useAttrs';
   import { initDictOptions } from '/@/utils/dict/index';
-  import { get, omit } from 'lodash-es';
+  import { omit } from 'lodash-es';
   import { useRuleFormItem } from '/@/hooks/component/useFormItem';
   import { CompTypeEnum } from '/@/enums/CompTypeEnum.ts';
   import { LoadingOutlined } from '@ant-design/icons-vue';
 
   export default defineComponent({
     name: 'JDictSelectTag',
-    inheritAttrs: false,
     components: { LoadingOutlined },
+    inheritAttrs: false,
     props: {
       value: propTypes.oneOfType([propTypes.string, propTypes.number, propTypes.array]),
       dictCode: propTypes.string,
@@ -63,12 +63,12 @@
       // 下拉项-online使用
       options: {
         type: Array,
-        default: [],
         required: false,
+        default: () => [],
       },
     },
     emits: ['options-change', 'change'],
-    setup(props, { emit, refs }) {
+    setup(props, { emit }) {
       const emitData = ref<any[]>([]);
       const dictOptions = ref<any[]>([]);
       const attrs = useAttrs();

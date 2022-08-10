@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ol style="border: 1px solid #cccccc; width: 600px; padding: 8px">
+    <ol style="border: 1px solid #ccc; width: 600px; padding: 8px">
       <li>1. 开启 dragSort 属性之后即可实现上下拖拽排序。</li>
       <li>2. 使用 sortKey 属性可以自定义排序保存的 key，默认为 orderNum。</li>
       <li>3. 使用 sortBegin 属性可以自定义排序的起始值，默认为 0。</li>

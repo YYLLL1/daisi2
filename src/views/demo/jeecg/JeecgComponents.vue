@@ -50,6 +50,7 @@
   import SuperQuery from '/@/components/jeecg/super/superquery/SuperQuery.vue';
 
   export default defineComponent({
+    name: 'JeecgComponents',
     components: {
       BasicForm,
       ApiSelect,
@@ -62,7 +63,6 @@
       BasicDragVerify,
       SuperQuery,
     },
-    name: 'JeecgComponents',
     setup() {
       const { isDisabledAuth } = usePermission();
       const check = ref(null);
@@ -118,10 +118,11 @@
   });
 </script>
 <style lang="less" scoped>
-  /**update-begin-author:taoyan date:20220324 for: VUEN-351【vue3】展示不全*/
+  /**  update-begin-author:taoyan date:20220324 for: VUEN-351【vue3】展示不全 */
   .jee-select-demo-form .ant-col-5 {
     flex: 0 0 159px;
     max-width: 159px;
   }
-  /**update-end-author:taoyan date:20220324 for: VUEN-351【vue3】展示不全*/
+
+  /**  update-end-author:taoyan date:20220324 for: VUEN-351【vue3】展示不全 */
 </style>

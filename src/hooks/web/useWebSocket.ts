@@ -22,7 +22,7 @@ export function connectWebSocket(url: string) {
   if (!unref(getIsOpen)) {
     state.server = url;
     //update-begin-author:taoyan date:2022-4-24 for: v2.4.6 的 websocket 服务端，存在性能和安全问题。 #3278
-    let token = (getToken() || '') as string;
+    const token = (getToken() || '') as string;
     result.value = $useWebSocket(state.server, {
       // 自动重连
       autoReconnect: true,

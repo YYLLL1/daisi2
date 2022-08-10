@@ -1,17 +1,17 @@
 <template>
   <div>
     <div class="jeecg-basic-table-form-container" v-if="showSearchFlag">
-      <a-form ref="formRef" :model="queryParam" :label-col="labelCol" :wrapper-col="wrapperCol" @keyup.enter.native="searchQuery">
+      <a-form ref="formRef" :model="queryParam" :label-col="labelCol" :wrapper-col="wrapperCol" @keyup.enter="searchQuery">
         <a-row :gutter="24">
-          <template v-for="(item, index) in queryInfo">
+          <template v-for="(item, index) in queryInfo" :key="index">
             <template v-if="item.hidden === '1'">
               <a-col :md="8" :sm="24" :key="'query' + index" v-show="toggleSearchStatus">
-                <SearchFormItem :formElRef="formRef" :queryParam="queryParam" :item="item" :dictOptions="dictOptions"></SearchFormItem>
+                <SearchFormItem :formElRef="formRef" :queryParam="queryParam" :item="item" :dictOptions="dictOptions" />
               </a-col>
             </template>
             <template v-else>
               <a-col :md="8" :sm="24" :key="'query' + index">
-                <SearchFormItem :formElRef="formRef" :queryParam="queryParam" :item="item" :dictOptions="dictOptions"></SearchFormItem>
+                <SearchFormItem :formElRef="formRef" :queryParam="queryParam" :item="item" :dictOptions="dictOptions" />
               </a-col>
             </template>
           </template>
@@ -74,7 +74,7 @@
     },
     props: ['multi', 'code', 'id', 'sorter', 'groupId', 'param', 'clickToRowSelect'],
     emits: ['ok', 'register'],
-    setup(props, { emit, refs }) {
+    setup(props) {
       const { createMessage } = useMessage();
       const labelCol = reactive({
         xs: { span: 24 },
@@ -168,7 +168,6 @@
 
       return {
         attrs,
-
         tableScroll,
         dataSource,
         pagination,
@@ -178,7 +177,6 @@
         loading,
         title,
         hrefComponent,
-
         clickThenCheck,
         loadData,
         combineRowKey,
@@ -204,7 +202,7 @@
 
 <style lang="less" scoped>
   .jeecg-basic-table-form-container {
-    padding: 0px;
+    padding: 0;
 
     .table-page-search-submitButtons {
       display: block;
@@ -213,7 +211,7 @@
     }
   }
 
-  :deep .jeecg-basic-table .ant-table-wrapper .ant-table-title {
+  ::v-deep(.jeecg-basic-table .ant-table-wrapper .ant-table-title) {
     min-height: 0;
   }
 </style>

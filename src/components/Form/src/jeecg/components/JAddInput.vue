@@ -2,7 +2,7 @@
   <div v-for="(param, index) in dynamicInput.params" :key="index" style="display: flex">
     <a-input placeholder="请输入参数key" v-model:value="param.label" style="width: 30%; margin-bottom: 5px" @input="emitChange" />
     <a-input placeholder="请输入参数value" v-model:value="param.value" style="width: 30%; margin: 0 0 5px 5px" @input="emitChange" />
-    <MinusCircleOutlined v-if="dynamicInput.params.length > min" class="dynamic-delete-button" @click="remove(param)" style="width: 50px"></MinusCircleOutlined>
+    <MinusCircleOutlined v-if="dynamicInput.params.length > min" class="dynamic-delete-button" @click="remove(param)" style="width: 50px" />
   </div>
   <div>
     <a-button type="dashed" style="width: 60%" @click="add">
@@ -13,10 +13,9 @@
 </template>
 <script lang="ts">
   import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons-vue';
-  import { defineComponent, reactive, ref, UnwrapRef, watchEffect } from 'vue';
+  import { defineComponent, reactive, UnwrapRef, watchEffect } from 'vue';
   import { propTypes } from '/@/utils/propTypes';
   import { isEmpty } from '/@/utils/is';
-  import { tryOnMounted, tryOnUnmounted } from '@vueuse/core';
   interface Params {
     label: string;
     value: string;
@@ -24,6 +23,10 @@
 
   export default defineComponent({
     name: 'JAddInput',
+    components: {
+      MinusCircleOutlined,
+      PlusOutlined,
+    },
     props: {
       value: propTypes.string.def(''),
       //update-begin---author:wangshuai ---date:20220516  for：[VUEN-1043]系统编码规则，最后一个输入框不能删除------------
@@ -90,10 +93,6 @@
         remove,
         add,
       };
-    },
-    components: {
-      MinusCircleOutlined,
-      PlusOutlined,
     },
   });
 </script>

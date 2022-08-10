@@ -65,8 +65,7 @@
                   :dropdown-style="{ maxHeight: '180px', overflow: 'auto' }"
                   @change="handleChangeField(item)"
                   :tree-data="fieldTreeData"
-                >
-                </a-tree-select>
+                />
               </a-form-item>
               <a-form-item :name="['values', index, 'rule']" style="width: 180px">
                 <a-select style="width: 100%" placeholder="请选择匹配规则" v-model:value="item.rule">
@@ -133,7 +132,7 @@
   <!-- 保存信息弹框 -->
   <a-modal title="请输入保存的名称" :visible="saveInfo.visible" @cancel="saveInfo.visible = false" @ok="doSaveQueryInfo">
     <div style="height: 80px; line-height: 75px; width: 100%; text-align: center">
-      <a-input v-model:value="saveInfo.title" style="width: 90%" placeholder="请输入保存的名称"></a-input>
+      <a-input v-model:value="saveInfo.title" style="width: 90%" placeholder="请输入保存的名称" />
     </div>
   </a-modal>
 </template>
@@ -149,16 +148,6 @@
 
   export default {
     name: 'OnlineSuperQuery',
-    props: {
-      config: {
-        type: Object,
-        default: [],
-      },
-      status: {
-        type: Boolean,
-        default: false,
-      },
-    },
     components: {
       BasicModal,
       MinusCircleOutlined,
@@ -168,6 +157,16 @@
       CloseCircleOutlined,
       AppstoreTwoTone,
       Divider,
+    },
+    props: {
+      config: {
+        type: Object,
+        default: () => {},
+      },
+      status: {
+        type: Boolean,
+        default: false,
+      },
     },
     emits: ['search'],
     setup(props, { emit }) {
@@ -238,7 +237,6 @@
         dynamicRowValues,
         matchType,
         registerModal,
-
         handleSave,
         doSaveQueryInfo,
         saveInfo,
@@ -286,15 +284,9 @@
         () => props.config,
         (val) => {
           if (val) {
-            console.log('123', val);
-            console.log('123', val);
-            console.log('123', val);
             Object.keys(val).map((k) => {
               console.log(k, val[k]);
             });
-            console.log('123', val);
-            console.log('123', val);
-            console.log('123', val);
             init(val);
           }
         },
@@ -335,67 +327,79 @@
 </script>
 
 <style scoped lang="less">
+  /* VUEN-1087 【移动端】高级查询显示不全 */
+  @media only screen and(max-width: 1050px) {
+    ::v-deep(.jee-super-query-form) {
+      .ant-space {
+        flex-direction: column;
+        gap: 0 !important;
+        margin-bottom: 16px !important;
+      }
+
+      .ant-space-item {
+        width: 100%;
+      }
+
+      .ant-form-item {
+        width: 100% !important;
+      }
+    }
+  }
+
   .jee-super-query-form .ant-form-item {
     margin-bottom: 9px;
   }
+
   .j-super-query-history-tree {
-    ::v-deep .ant-tree-switcher {
-      width: 0px;
+    ::v-deep(.ant-tree-switcher) {
+      width: 0;
     }
-    ::v-deep .ant-tree-node-content-wrapper {
+
+    ::v-deep(.ant-tree-node-content-wrapper) {
       width: 100%;
+
       &:hover {
         background-color: #e6f7ff !important;
         border-radius: 0;
       }
     }
-    ::v-deep .ant-tree-treenode-switcher-close {
+
+    ::v-deep(.ant-tree-treenode-switcher-close) {
       .ant-tree-title {
         display: inline-block;
         width: calc(100% - 30px);
+
         > div {
           display: flex;
           justify-content: space-between;
+
           .icon-cancle {
             display: none;
-            color: #666666;
+            color: #666;
+
             &:hover {
               color: black;
             }
           }
         }
       }
+
       &:hover {
         .icon-cancle {
           display: inline-block !important;
         }
       }
     }
-    ::v-deep .ant-card-body {
-      padding: 0;
-    }
-  }
-  .j-super-query-history-card {
-    ::v-deep .ant-card-body,
-    ::v-deep.ant-card-head-title {
+
+    ::v-deep(.ant-card-body) {
       padding: 0;
     }
   }
 
-  /*VUEN-1087 【移动端】高级查询显示不全 */
-  @media only screen and(max-width: 1050px) {
-    ::v-deep .jee-super-query-form {
-      .ant-space {
-        flex-direction: column;
-        gap: 0 !important;
-        margin-bottom: 16px !important;
-      }
-      .ant-space-item {
-        width: 100%;
-      }
-      .ant-form-item {
-        width: 100% !important;
-      }
+  .j-super-query-history-card {
+    ::v-deep(.ant-card-body),
+    ::v-deep(.ant-card-head-title) {
+      padding: 0;
     }
   }
 </style>

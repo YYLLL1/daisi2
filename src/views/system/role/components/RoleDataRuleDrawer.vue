@@ -10,7 +10,7 @@
 
             <a-col :span="24">
               <div style="width: 100%; margin-top: 15px">
-                <a-button @click="saveDataRuleForRole" type="primary" size="small"> <Icon icon="ant-design:save-outlined"></Icon>点击保存</a-button>
+                <a-button @click="saveDataRuleForRole" type="primary" size="small"> <Icon icon="ant-design:save-outlined" />点击保存</a-button>
               </div>
             </a-col>
           </a-row>
@@ -22,8 +22,8 @@
 </template>
 <script lang="ts" setup>
   import { ref, unref } from 'vue';
-  import { BasicDrawer, useDrawerInner } from '/src/components/Drawer';
-  import { useMessage } from '/src/hooks/web/useMessage';
+  import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
+  import { useMessage } from '/@/hooks/web/useMessage';
   import { queryDataRule, saveDataRule } from '../role.api';
   // 声明Emits
   const emit = defineEmits(['success', 'register']);

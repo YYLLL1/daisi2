@@ -3,7 +3,7 @@
     <a-row>
       <!-- 左侧文件树 -->
       <a-col :span="4" class="clName">
-        <a-tree :treeData="treeData" :defaultExpandAll="true" @select="onSelect" style="height: 500px; overflow-y: auto"> </a-tree>
+        <a-tree :treeData="treeData" :defaultExpandAll="true" @select="onSelect" style="height: 500px; overflow-y: auto" />
       </a-col>
       <!--右侧缩略图-->
       <a-col :span="18">
@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref, unref, onMounted } from 'vue';
+  import { defineComponent, ref, unref } from 'vue';
   import { useGlobSetting } from '/@/hooks/setting';
   import { getToken } from '/@/utils/auth';
 

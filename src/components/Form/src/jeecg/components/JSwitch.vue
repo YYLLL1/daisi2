@@ -69,7 +69,4 @@
 <style lang="less">
   //noinspection LessUnresolvedVariable
   @prefix-cls: ~'@{namespace}-j-switch';
-
-  .@{prefix-cls} {
-  }
 </style>

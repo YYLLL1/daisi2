@@ -4,7 +4,7 @@
       <template #tableTitle>
         <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd" style="margin-right: 5px">新增</a-button>
       </template>
-      <template #status="{ record, text }">
+      <template #status="{ text }">
         <a-tag color="pink" v-if="text == 0">禁用</a-tag>
         <a-tag color="#87d068" v-if="text == 1">正常</a-tag>
       </template>
@@ -18,7 +18,6 @@
 <script lang="ts" name="monitor-route" setup>
   import { ref } from 'vue';
   import { BasicTable, TableAction } from '/@/components/Table';
-  import { useModal } from '/@/components/Modal';
   import { getRouteList, deleteRoute } from './route.api';
   import { columns } from './route.data';
   import RouteModal from './RouteModal.vue';

@@ -22,7 +22,7 @@
           style="width: 100%"
           @click="!disabled && openModal(false)"
           v-bind="attrs"
-        ></a-select>
+        />
       </a-col>
       <a-col v-if="showButton" class="right">
         <a-button v-if="buttonIcon" :preIcon="buttonIcon" type="primary" @click="openModal(true)" :disabled="disabled">选择</a-button>
@@ -32,7 +32,7 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, ref, inject, reactive } from 'vue';
+  import { defineComponent, ref, inject } from 'vue';
   import { propTypes } from '/@/utils/propTypes';
   import { useAttrs } from '/@/hooks/core/useAttrs';
   import { LoadingOutlined } from '@ant-design/icons-vue';
@@ -61,7 +61,7 @@
       buttonIcon: propTypes.string.def(''),
     },
     emits: ['handleOpen', 'change'],
-    setup(props, { emit, refs }) {
+    setup(props, { emit }) {
       //接收下拉框选项
       const options = inject('selectOptions') || ref([]);
       //接收选择的值

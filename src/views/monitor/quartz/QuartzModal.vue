@@ -8,7 +8,8 @@
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { formSchema } from './quartz.data';
-  import { saveOrUpdateQuartz, getQuartzById } from './quartz.api';
+  import { saveOrUpdateQuartz } from './quartz.api';
+  // import { saveOrUpdateQuartz, getQuartzById } from './quartz.api';
   import { isJsonObjectString } from '/@/utils/is';
   // Emits声明
   const emit = defineEmits(['register', 'success']);
@@ -27,7 +28,7 @@
     isUpdate.value = !!data?.isUpdate;
     if (unref(isUpdate)) {
       //获取详情
-      //data.record = await getQuartzById({id: data.record.id});
+      // data.record = await getQuartzById({id: data.record.id});
       try {
         data.record.paramterType = isJsonObjectString(data?.record?.parameter) ? 'json' : 'string';
       } catch (e) {
@@ -42,7 +43,7 @@
   //设置标题
   const title = computed(() => (!unref(isUpdate) ? '新增任务' : '编辑任务'));
   //表单提交事件
-  async function handleSubmit(v) {
+  async function handleSubmit() {
     try {
       let values = await validate();
       setModalProps({ confirmLoading: true });

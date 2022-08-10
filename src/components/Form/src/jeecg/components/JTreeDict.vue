@@ -10,8 +10,7 @@
     style="width: 100%"
     v-bind="attrs"
     @change="onChange"
-  >
-  </TreeSelect>
+  />
 </template>
 
 <script lang="ts" setup>
@@ -135,7 +134,4 @@
 <style lang="less">
   //noinspection LessUnresolvedVariable
   @prefix-cls: ~'@{namespace}-j-tree-dict';
-
-  .@{prefix-cls} {
-  }
 </style>

@@ -141,7 +141,8 @@
           font-weight: 700;
         }
       }
-      /** 展开/关闭 评论图标样式*/
+
+      /** 展开/关闭 评论图标样式 */
       > span:nth-child(2) {
         &:hover {
           font-weight: 700;
@@ -157,7 +158,8 @@
         color: @primary-color;
       }
     }
-    /** 展开/关闭 评论图标样式*/
+
+    /** 展开/关闭 评论图标样式 */
     & span:nth-child(2) {
       display: inline-block;
       padding: 10px 10px 10px 0;

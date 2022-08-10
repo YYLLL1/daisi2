@@ -13,7 +13,7 @@
           :load-data="loadChildrenTreeData"
           v-model:expandedKeys="expandedKeys"
           @select="onSelect"
-        ></a-tree>
+        />
       </template>
       <a-empty v-else description="暂无数据" />
     </a-spin>
@@ -21,12 +21,11 @@
 </template>
 
 <script lang="ts" setup>
-  import { inject, nextTick, ref, unref, defineExpose } from 'vue';
+  import { nextTick, ref } from 'vue';
   import { queryDepartTreeSync } from '../address.api';
   import { searchByKeywords } from '/@/views/system/departUser/depart.user.api';
-  import { Popconfirm } from 'ant-design-vue';
 
-  const prefixCls = inject('prefixCls');
+  // const prefixCls = inject('prefixCls');
   const emit = defineEmits(['select', 'rootTreeData']);
 
   const loading = ref<boolean>(false);

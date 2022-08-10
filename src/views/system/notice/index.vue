@@ -9,14 +9,14 @@
           <template #overlay>
             <a-menu>
               <a-menu-item key="1" @click="batchHandleDelete">
-                <Icon icon="ant-design:delete-outlined"></Icon>
+                <Icon icon="ant-design:delete-outlined" />
                 删除
               </a-menu-item>
             </a-menu>
           </template>
           <a-button
             >批量操作
-            <Icon style="fontsize: 12px" icon="ant-design:down-outlined"></Icon>
+            <Icon icon="ant-design:down-outlined" />
           </a-button>
         </a-dropdown>
       </template>
@@ -34,7 +34,7 @@
   import { useModal } from '/@/components/Modal';
   import NoticeModal from './NoticeModal.vue';
   import DetailModal from './DetailModal.vue';
-  import { useMethods } from '/@/hooks/system/useMethods';
+  // import { useMethods } from '/@/hooks/system/useMethods';
   import { useGlobSetting } from '/@/hooks/setting';
   import { getToken } from '/@/utils/auth';
   import { columns, searchFormSchema } from './notice.data';

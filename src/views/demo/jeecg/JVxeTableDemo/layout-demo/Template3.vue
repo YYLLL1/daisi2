@@ -120,7 +120,7 @@
     // 监听器
     watch: {
       // 监听table1 【主表】选择的数据发生了变化
-      ['table1.lastRow'](row) {
+      ['table1.lastRow']() {
         this.loadTable2Data();
       },
     },

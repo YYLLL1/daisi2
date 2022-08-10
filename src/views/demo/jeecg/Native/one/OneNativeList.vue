@@ -3,28 +3,26 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" preIcon="ant-design:plus">新增</a-button>
-      <!--      <a-button type="primary" preIcon="ant-design:download" @click="handleExportExcel('单表原生列表')">导出</a-button>-->
-      <!--      <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="handleImportExcel">导入</j-upload-button>-->
+      <a-button type="primary" preIcon="ant-design:download" @click="handleExportExcel('单表原生列表')">导出</a-button>
+      <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="handleImportExcel">导入</j-upload-button>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <template #overlay>
           <a-menu>
             <a-menu-item key="1" @click="batchDel">
-              <Icon icon="ant-design:delete-outlined"></Icon>
+              <Icon icon="ant-design:delete-outlined" />
               删除
             </a-menu-item>
           </a-menu>
         </template>
-        <a-button
-          >批量操作
-          <Icon icon="mdi:chevron-down"></Icon>
-        </a-button>
+        <a-button>批量操作<Icon icon="mdi:chevron-down" /></a-button>
       </a-dropdown>
     </div>
 
     <!-- table区域-begin -->
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a
+        <i class="anticon anticon-info-circle ant-alert-icon"></i>
+        已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a
         >项
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>
@@ -43,7 +41,7 @@
         :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
         @change="handleTableChange"
       >
-        <template slot="htmlSlot" slot-scope="text">
+        <template #htmlSlot="text">
           <div v-html="text"></div>
         </template>
         <template #imgSlot="{ text, record }">
@@ -58,7 +56,7 @@
           <a-button v-else :ghost="true" type="primary" preIcon="ant-design:download" size="small" @click="downloadFile(text)"> 下载 </a-button>
         </template>
 
-        <template #action="{ text, record }">
+        <template #action="{ record }">
           <a @click="handleEdit(record)">编辑</a>
           <a-divider type="vertical" />
           <a-dropdown>
@@ -79,7 +77,7 @@
         </template>
       </a-table>
     </div>
-    <OneNativeModal ref="oneProtogenesisModal" @ok="handleSuccess"></OneNativeModal>
+    <OneNativeModal ref="oneProtogenesisModal" @ok="handleSuccess" />
   </a-card>
 </template>
 
@@ -92,7 +90,7 @@
   import { getAreaTextByCode } from '/@/components/Form/src/utils/Area';
   import OneNativeModal from './components/OneNativeModal.vue';
   import { Modal, Popconfirm } from 'ant-design-vue';
-  import { JSelectUserByDept, JDictSelectTag, JSelectDept, JSearchSelect } from '/@/components/Form';
+  // import { JSelectUserByDept, JDictSelectTag, JSelectDept, JSearchSelect } from '/@/components/Form';
   import { filterObj, getFileAccessHttpUrl } from '/@/utils/common/compUtils';
   import { loadCategoryData } from '/@/api/common/api';
   import { getToken } from '/@/utils/auth';
@@ -263,7 +261,7 @@
   function handleExportExcel(title) {
     let paramsForm = getQueryParams();
     if (selectedRowKeys.value && selectedRowKeys.value.length > 0) {
-      paramsForm['selections'] = selectedRowKeys.join(',');
+      paramsForm['selections'] = selectedRowKeys.value.join(',');
     }
     handleExportXls(title, Api.exportXls, filterObj(paramsForm));
   }
@@ -382,7 +380,7 @@
    * @param id
    */
   function handleDelete(id) {
-    defHttp.delete({ url: Api.delete, data: { ids: id } }, { joinParamsToUrl: true }).then((res) => {
+    defHttp.delete({ url: Api.delete, data: { ids: id } }, { joinParamsToUrl: true }).then(() => {
       handleSuccess();
     });
   }

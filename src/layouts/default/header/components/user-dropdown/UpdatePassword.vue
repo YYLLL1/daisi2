@@ -4,7 +4,7 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, unref, defineExpose } from 'vue';
+  import { ref, unref } from 'vue';
   import { rules } from '/@/utils/helper/validator';
   import { defHttp } from '/@/utils/http/axios';
   import { BasicModal, useModalInner } from '/@/components/Modal';

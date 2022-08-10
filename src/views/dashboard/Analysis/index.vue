@@ -1,24 +1,34 @@
 <template>
-  <IndexDef v-if="indexStyle === 0"></IndexDef>
-  <IndexChart v-if="indexStyle === 1"></IndexChart>
-  <IndexBdc v-if="indexStyle == 2"></IndexBdc>
-  <IndexTask v-if="indexStyle == 3"></IndexTask>
-  <div style="width: 100%; text-align: right; margin-top: 20px">
-    请选择首页样式：
-    <a-radio-group v-model:value="indexStyle">
-      <a-radio :value="0">默认</a-radio>
-      <a-radio :value="1">销量统计</a-radio>
-      <a-radio :value="2">业务统计</a-radio>
-      <a-radio :value="3">我的任务</a-radio>
-    </a-radio-group>
+  <div class="ly-container">
+    <IndexTop />
+    <IndexCenter />
+    <div class="gutter-example">
+      <a-row :gutter="16">
+        <a-col class="gutter-row" :span="12">
+          <IndexLeft />
+        </a-col>
+        <a-col class="gutter-row" :span="12">
+          <IndexRight />
+        </a-col>
+      </a-row>
+    </div>
   </div>
 </template>
 <script lang="ts" setup>
-  import { ref } from 'vue';
-  import IndexDef from './homePage/IndexDef.vue';
-  import IndexChart from './homePage/IndexChart.vue';
-  import IndexBdc from './homePage/IndexBdc.vue';
-  import IndexTask from './homePage/IndexTask.vue';
-
-  const indexStyle = ref(0);
+  import IndexTop from './components/indexTop.vue';
+  import IndexCenter from './components/indexCenter.vue';
+  import IndexLeft from './components/indexLeft.vue';
+  import IndexRight from './components/indexRight.vue';
 </script>
+<style lang="less" scoped>
+  @themeBg: #1890ff;
+  @themeFc: #fff;
+  @themeBg: #000;
+  .gutter-example {
+    margin-top: 20px;
+    :deep(.ant-row > div) {
+      background: transparent;
+      border: 0;
+    }
+  }
+</style>

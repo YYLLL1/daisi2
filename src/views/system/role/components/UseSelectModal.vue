@@ -1,12 +1,12 @@
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="用户选择列表" width="1000px" @ok="handleSubmit">
-    <BasicTable @register="registerTable" :rowSelection="rowSelection" style="padding: 0px" />
+    <BasicTable @register="registerTable" :rowSelection="rowSelection" style="padding: 0" />
   </BasicModal>
 </template>
 <script lang="ts" setup>
   import { ref, unref, toRaw } from 'vue';
-  import { BasicModal, useModalInner } from '/src/components/Modal';
-  import { BasicTable, useTable, TableAction } from '/src/components/Table';
+  import { BasicModal, useModalInner } from '/@/components/Modal';
+  import { BasicTable, useTable } from '/@/components/Table';
   import { userColumns, searchUserFormSchema } from '../role.data';
   import { list } from '../../user/user.api';
   // 声明Emits

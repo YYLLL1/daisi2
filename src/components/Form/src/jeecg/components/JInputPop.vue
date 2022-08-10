@@ -93,13 +93,10 @@
   @prefix-cls: ~'@{namespace}-j-input-popup';
 
   .@{prefix-cls} {
-    &-popover {
-    }
-
     &-input {
       .app-iconify {
         cursor: pointer;
-        color: #666666;
+        color: #666;
         transition: color 0.3s;
 
         &:hover {

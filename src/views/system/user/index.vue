@@ -15,22 +15,22 @@
           <template #overlay>
             <a-menu>
               <a-menu-item key="1" @click="batchHandleDelete">
-                <Icon icon="ant-design:delete-outlined"></Icon>
+                <Icon icon="ant-design:delete-outlined" />
                 删除
               </a-menu-item>
               <a-menu-item key="2" @click="batchFrozen(2)">
-                <Icon icon="ant-design:lock-outlined"></Icon>
+                <Icon icon="ant-design:lock-outlined" />
                 冻结
               </a-menu-item>
               <a-menu-item key="3" @click="batchFrozen(1)">
-                <Icon icon="ant-design:unlock-outlined"></Icon>
+                <Icon icon="ant-design:unlock-outlined" />
                 解冻
               </a-menu-item>
             </a-menu>
           </template>
           <a-button
             >批量操作
-            <Icon icon="mdi:chevron-down"></Icon>
+            <Icon icon="mdi:chevron-down" />
           </a-button>
         </a-dropdown>
       </template>
@@ -52,7 +52,7 @@
 
 <script lang="ts" name="system-user" setup>
   //ts语法
-  import { ref, computed, unref } from 'vue';
+  import { ref, unref } from 'vue';
   import { BasicTable, TableAction, ActionItem } from '/@/components/Table';
   import UserDrawer from './UserDrawer.vue';
   import UserRecycleBinModal from './UserRecycleBinModal.vue';
@@ -65,8 +65,8 @@
   import { useMessage } from '/@/hooks/web/useMessage';
   import { columns, searchFormSchema } from './user.data';
   import { list, deleteUser, batchDeleteUser, getImportUrl, getExportUrl, frozenBatch, syncUser } from './user.api';
-  // import { usePermission } from '/@/hooks/web/usePermission'
-  // const { hasPermission } = usePermission();
+  import { usePermission } from '/@/hooks/web/usePermission';
+  const { hasPermission } = usePermission();
 
   const { createMessage, createConfirm } = useMessage();
 

@@ -12,11 +12,10 @@
     :treeData="treeData"
     :multiple="multiple"
     @change="onChange"
-  >
-  </a-tree-select>
+  />
 </template>
 <script lang="ts">
-  import { defineComponent, ref, unref, watch } from 'vue';
+  import { defineComponent, ref, watch } from 'vue';
   import { useRuleFormItem } from '/@/hooks/component/useFormItem';
   import { propTypes } from '/@/utils/propTypes';
   import { useAttrs } from '/@/hooks/core/useAttrs';
@@ -72,7 +71,7 @@
       },
     },
     emits: ['options-change', 'change'],
-    setup(props, { emit, refs }) {
+    setup(props, { emit }) {
       console.info(props);
       const emitData = ref<any[]>([]);
       const treeData = ref<any[]>([]);

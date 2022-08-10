@@ -10,7 +10,7 @@
     props: {
       chartData: {
         type: Object as PropType<Object>,
-        default: () => [],
+        default: () => {},
       },
       option: {
         type: Object,

@@ -4,7 +4,7 @@
     <!--输入框-->
     <a-input @click="handleOpen" v-model:value="showText" :placeholder="placeholder" readOnly v-bind="attrs">
       <template #prefix>
-        <Icon icon="ant-design:cluster-outlined"></Icon>
+        <Icon icon="ant-design:cluster-outlined" />
       </template>
       <!-- update-begin-author:taoyan date:2022-5-31 for: VUEN-1157 popup 选中后，有两个清除图标；后边这个清除，只是把输入框中数据清除，实际值并没有清除 -->
       <!-- <template #suffix>
@@ -13,12 +13,12 @@
       <!-- update-begin-author:taoyan date:2022-5-31 for: VUEN-1157 popup 选中后，有两个清除图标；后边这个清除，只是把输入框中数据清除，实际值并没有清除 -->
     </a-input>
     <!--popup弹窗-->
-    <JPopupOnlReportModal @register="regModal" :code="code" :multi="multi" :sorter="sorter" :groupId="uniqGroupId" :param="param" @ok="callBack"></JPopupOnlReportModal>
+    <JPopupOnlReportModal @register="regModal" :code="code" :multi="multi" :sorter="sorter" :groupId="uniqGroupId" :param="param" @ok="callBack" />
   </div>
 </template>
 <script lang="ts">
   import JPopupOnlReportModal from './modal/JPopupOnlReportModal.vue';
-  import { defineComponent, ref, reactive, onMounted, watchEffect, watch, computed, unref } from 'vue';
+  import { defineComponent, ref, onMounted, watch, computed } from 'vue';
   import { useModal } from '/@/components/Modal';
   import { propTypes } from '/@/utils/propTypes';
   import { useAttrs } from '/@/hooks/core/useAttrs';
@@ -48,7 +48,7 @@
       },
     },
     emits: ['update:value', 'register'],
-    setup(props, { emit, refs }) {
+    setup(props) {
       const { createMessage } = useMessage();
       const attrs = useAttrs();
       //pop是否展示

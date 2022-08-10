@@ -47,13 +47,13 @@ export const columns: BasicColumn[] = [
 ];
 
 export function getBpmFormSchema(formData) {
-  const { isDisabledAuth, hasPermission } = usePermission(formData);
+  const { hasPermission } = usePermission(formData);
   const formSchema2: FormSchema[] = [
     {
       label: '订单号',
       field: 'orderCode',
       component: 'Input',
-      show: ({ values }) => {
+      show: () => {
         return hasPermission('order:orderCode');
       },
     },
@@ -94,13 +94,13 @@ export function getBpmFormSchema(formData) {
 }
 
 export function getOrderCustomerFormSchema(formData) {
-  const { isDisabledAuth, hasPermission } = usePermission(formData);
+  const { isDisabledAuth } = usePermission(formData);
   const formSchema2: FormSchema[] = [
     {
       label: '客户名',
       field: 'name',
       component: 'Input',
-      dynamicDisabled: ({ values }) => {
+      dynamicDisabled: () => {
         return isDisabledAuth('order:name');
       },
     },

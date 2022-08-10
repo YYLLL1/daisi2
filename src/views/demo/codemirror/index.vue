@@ -1,10 +1,6 @@
 <template>
   <div>
-    <textarea ref="textarea">
-白日依山尽，黄河入海流。
-欲穷千里目，更上一层楼。
-        </textarea
-    >
+    <textarea ref="textarea">白日依山尽，黄河入海流。欲穷千里目，更上一层楼。</textarea>
   </div>
 </template>
 

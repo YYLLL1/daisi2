@@ -1,5 +1,5 @@
 <template>
-  <Icon :icon="icon" :size="size"></Icon>
+  <Icon :icon="iicon" :size="size" />
 </template>
 
 <script lang="ts">
@@ -20,7 +20,7 @@
       theme: propTypes.any,
     },
     setup(props) {
-      const icon = computed(() => {
+      const iicon = computed(() => {
         if (props.icon && !isEmpty(props.icon)) {
           return props.icon;
         }
@@ -29,7 +29,7 @@
       });
 
       return {
-        icon,
+        iicon,
       };
     },
   });

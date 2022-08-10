@@ -9,14 +9,14 @@
           <template #overlay>
             <a-menu>
               <a-menu-item key="1" @click="batchHandleDelete">
-                <Icon icon="ant-design:delete-outlined"></Icon>
+                <Icon icon="ant-design:delete-outlined" />
                 删除
               </a-menu-item>
             </a-menu>
           </template>
           <a-button
             >批量操作
-            <Icon icon="ant-design:down-outlined"></Icon>
+            <Icon icon="ant-design:down-outlined" />
           </a-button>
         </a-dropdown>
       </template>
@@ -28,10 +28,9 @@
   </div>
 </template>
 <script lang="ts" name="system-position" setup>
-  import { ref } from 'vue';
   import { BasicTable, TableAction } from '/@/components/Table';
   import { useModal } from '/@/components/Modal';
-  import { getPositionList, deletePosition, batchDeletePosition, customUpload, getExportUrl, getImportUrl } from './position.api';
+  import { getPositionList, deletePosition, batchDeletePosition, getExportUrl, getImportUrl } from './position.api';
   import { columns, searchFormSchema } from './position.data';
   import PositionModal from './PositionModal.vue';
   import { useMessage } from '/@/hooks/web/useMessage';

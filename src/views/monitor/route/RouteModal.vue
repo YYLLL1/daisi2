@@ -15,7 +15,7 @@
       </a-form-item>
 
       <a-form-item name="predicates" label="路由条件">
-        <div v-for="(item, index) in router.predicates">
+        <div v-for="(item, index) in router.predicates" :key="index">
           <!--当name在noKeyRouter时不需要指定key-->
           <template v-if="noKeyRouter.includes(item.name)">
             <a-divider
@@ -23,7 +23,7 @@
               <DeleteOutlined size="22" @click="removePredicate(router, index)" />
             </a-divider>
             <div>
-              <template v-for="(tag, tagIndx) in item.args">
+              <template v-for="(tag, tagIndx) in item.args" :key="tagIndx">
                 <a-input
                   ref="inputRef2"
                   v-if="tagIndx == currentTagIndex && index == currentNameIndex"
@@ -50,7 +50,7 @@
                 @blur="handleInputConfirm(item)"
                 @keyup.enter="handleInputConfirm(item)"
               />
-              <a-tag v-else style="background: #fff; borderstyle: dashed; margin-bottom: 2px" @click="showInput(item, index)">
+              <a-tag v-else style="background: #fff; border-style: dashed; margin-bottom: 2px" @click="showInput(item, index)">
                 <PlusOutlined size="22" />
                 新建{{ item.name }}
               </a-tag>
@@ -63,7 +63,7 @@
               <DeleteOutlined size="22" @click="removePredicate(router, index)" />
             </a-divider>
             <div>
-              <template v-for="(value, key) in item.args">
+              <template v-for="(value, key) in item.args" :key="key">
                 <a-row>
                   <a-col :span="5" style="margin-top: 8px">
                     <span v-if="key == 'header'">Header名称</span>
@@ -94,7 +94,7 @@
         </p>
       </a-form-item>
       <a-form-item name="predicates" label="过滤器">
-        <div v-for="(item, index) in router.filters">
+        <div v-for="(item, index) in router.filters" :key="index">
           <a-divider
             >{{ item.name }}
             <DeleteOutlined size="22" @click="removeFilter(router, index)" />
@@ -380,7 +380,7 @@
   }
 
   //关闭弹窗
-  function handleCancel() {}
+  // function handleCancel() {}
 
   /**
    * 提交

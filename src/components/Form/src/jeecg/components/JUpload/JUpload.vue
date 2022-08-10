@@ -368,11 +368,12 @@
           }
         }
 
-        /* update-begin-author:taoyan date:2022-5-24 for:VUEN-1093详情界面 图片下载按钮显示不全*/
+        /* update-begin-author:taoyan date:2022-5-24 for:VUEN-1093详情界面 图片下载按钮显示不全 */
         .upload-download-handler {
           right: 6px !important;
         }
-        /* update-end-author:taoyan date:2022-5-24 for:VUEN-1093详情界面 图片下载按钮显示不全*/
+
+        /* update-end-author:taoyan date:2022-5-24 for:VUEN-1093详情界面 图片下载按钮显示不全 */
       }
 
       .ant-upload-list-item {

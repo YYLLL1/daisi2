@@ -40,7 +40,7 @@
       colProps: {
         span: 12,
       },
-      show: ({ values }) => {
+      show: () => {
         return hasPermission('test001');
       },
     },

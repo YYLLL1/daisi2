@@ -31,7 +31,7 @@
               <span>已选中 {{ selectRowKeys.length }} 条记录(可跨页)</span>
               <a-divider type="vertical" />
               <a @click="setSelectedRowKeys([])">清空</a>
-              <slot name="alertAfter" />
+              <slot name="alertAfter"></slot>
             </template>
             <template v-else>
               <span>未选中任何数据</span>
@@ -95,6 +95,39 @@
   @prefix-cls: ~'@{namespace}-basic-table-header';
 
   .@{prefix-cls} {
+    @media (max-width: @screen-lg) {
+      &__table-title-box {
+        align-items: flex-end;
+      }
+
+      &__toolbar {
+        width: 30px;
+        text-align: center;
+
+        > * {
+          margin-right: 0;
+        }
+
+        .table-settings > * {
+          margin-right: 0;
+          margin-bottom: 6px;
+        }
+
+        &-desktop {
+          display: none;
+        }
+
+        &-mobile {
+          display: block;
+
+          .table-settings > * {
+            margin-right: 6px;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
     &__toolbar {
       //flex: 1;
       width: 140px;
@@ -114,6 +147,7 @@
         display: none;
       }
     }
+
     &__tableTitle {
       flex: 1;
       display: flex;
@@ -123,37 +157,6 @@
       > * {
         margin-right: 4px;
         margin-bottom: 4px;
-      }
-    }
-
-    @media (max-width: @screen-lg) {
-      &__table-title-box {
-        align-items: flex-end;
-      }
-
-      &__toolbar {
-        width: 30px;
-        text-align: center;
-
-        > * {
-          margin-right: 0;
-        }
-
-        .table-settings > * {
-          margin-right: 0;
-          margin-bottom: 6px;
-        }
-        &-desktop {
-          display: none;
-        }
-
-        &-mobile {
-          display: block;
-          .table-settings > * {
-            margin-right: 6px;
-            margin-bottom: 0;
-          }
-        }
       }
     }
   }

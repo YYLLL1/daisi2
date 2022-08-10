@@ -1,11 +1,6 @@
 {
-  "name": "jeecgboot-vue3",
+  "name": "jeecg-vue3",
   "version": "3.3.0",
-  "author": {
-    "name": "jeecg",
-    "email": "jeecgos@163.com",
-    "url": "https://github.com/jeecgboot/jeecgboot-vue3"
-  },
   "scripts": {
     "bootstrap": "yarn install",
     "serve": "npm run dev --open",
@@ -34,8 +29,8 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@jeecg/online": "1.0.1",
     "@iconify/iconify": "^2.0.4",
+    "@jeecg/online": "1.0.1",
     "@vueuse/core": "^6.6.2",
     "@zxcvbn-ts/core": "^1.0.0-beta.0",
     "ant-design-vue": "2.2.8",
@@ -70,6 +65,7 @@
     "vue-cropperjs": "^5.0.0",
     "vue-i18n": "^9.1.9",
     "vue-infinite-scroll": "^2.0.2",
+    "vue-json-pretty": "^2.0.4",
     "vue-print-nb-jeecg": "^1.0.11",
     "vue-router": "^4.0.12",
     "vue-types": "^4.1.1",
@@ -77,7 +73,6 @@
     "vxe-table": "4.1.0",
     "vxe-table-plugin-antd": "^3.0.3",
     "xe-utils": "^3.3.1",
-    "vue-json-pretty": "^2.0.4",
     "xss": "^1.0.13"
   },
   "devDependencies": {
@@ -179,10 +174,12 @@
         "@ant-design/colors",
         "@ant-design/icons-vue",
         "@jeecg/online",
+        "@vue/reactivity",
         "@vueuse/core",
         "@vueuse/shared",
         "@zxcvbn-ts/core",
         "ant-design-vue",
+        "ant-design-vue/lib/menu",
         "axios",
         "china-area-data",
         "clipboard",
@@ -196,7 +193,10 @@
         "codemirror/addon/hint/show-hint.js",
         "codemirror/addon/selection/active-line.js",
         "codemirror/mode/clike/clike.js",
+        "codemirror/mode/css/css",
         "codemirror/mode/css/css.js",
+        "codemirror/mode/htmlmixed/htmlmixed",
+        "codemirror/mode/javascript/javascript",
         "codemirror/mode/javascript/javascript.js",
         "codemirror/mode/markdown/markdown.js",
         "codemirror/mode/python/python.js",
@@ -273,9 +273,11 @@
         "vite-plugin-theme/es/colorUtils",
         "vue",
         "vue-i18n",
+        "vue-json-pretty",
         "vue-print-nb-jeecg/src/printarea",
         "vue-router",
         "vue-types",
+        "vuedraggable",
         "vxe-table",
         "vxe-table-plugin-antd",
         "xe-utils",

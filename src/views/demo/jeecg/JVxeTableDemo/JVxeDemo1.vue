@@ -297,9 +297,9 @@
     }
   }
 
-  function handleValueChange(event) {
-    console.log('handleValueChange.event: ', event);
-  }
+  // function handleValueChange(event) {
+  //   console.log('handleValueChange.event: ', event);
+  // }
 
   /** 表单验证 */
   function handleTableCheck() {

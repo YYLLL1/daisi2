@@ -4,7 +4,7 @@
       <template v-if="desformList.length > 0">
         <a-checkbox-group v-model:value="designNameValue">
           <a-row>
-            <a-col :span="24" v-for="item of desformList">
+            <a-col :span="24" v-for="item of desformList" :key="item.id">
               <a-checkbox :value="item.id">{{ item.roleName }}</a-checkbox>
             </a-col>
           </a-row>

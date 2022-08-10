@@ -14,11 +14,11 @@
 <script lang="ts">
   import { addResizeListener, removeResizeListener } from '/@/utils/event';
   import componentSetting from '/@/settings/componentSetting';
-  const { scrollbar } = componentSetting;
   import { toObject } from './util';
   import { defineComponent, ref, onMounted, onBeforeUnmount, nextTick, provide, computed, unref } from 'vue';
   import Bar from './bar';
 
+  const { scrollbar } = componentSetting;
   export default defineComponent({
     name: 'Scrollbar',
     // inheritAttrs: false,

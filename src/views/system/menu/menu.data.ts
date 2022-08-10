@@ -5,7 +5,6 @@ import { Icon } from '/@/components/Icon';
 import { duplicateCheck } from '../user/user.api';
 import { ajaxGetDictItems } from './menu.api';
 import { render } from '/@/utils/common/renderUtils';
-import { Select } from 'ant-design-vue';
 import { rules } from '/@/utils/helper/validator';
 
 const isDir = (type) => type === 0;
@@ -194,7 +193,7 @@ export const formSchema: FormSchema[] = [
           required: false,
           validator: (_, value) => {
             return new Promise((resolve, reject) => {
-              let params = {
+              const params = {
                 tableName: 'sys_permission',
                 fieldName: 'perms',
                 fieldVal: value,
@@ -385,7 +384,7 @@ export const dataRuleFormSchema: FormSchema[] = [
       params: { code: 'rule_conditions' },
       labelField: 'text',
       valueField: 'value',
-      getPopupContainer: (node) => document.body,
+      getPopupContainer: () => document.body,
     },
   },
   {

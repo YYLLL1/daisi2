@@ -7,7 +7,7 @@
   </a-select>
 </template>
 <script lang="ts">
-  import { computed, defineComponent, onMounted, ref, nextTick, watch } from 'vue';
+  import { defineComponent, onMounted, ref, watch } from 'vue';
   import { useRuleFormItem } from '/@/hooks/component/useFormItem';
   import { propTypes } from '/@/utils/propTypes';
   import { useAttrs } from '/@/hooks/core/useAttrs';
@@ -61,7 +61,7 @@
       },
     },
     emits: ['options-change', 'change', 'input', 'update:value'],
-    setup(props, { emit, refs }) {
+    setup(props, { emit }) {
       //console.info(props);
       const emitData = ref<any[]>([]);
       const arrayValue = ref<any[]>(!props.value ? [] : props.value.split(props.spliter));

@@ -48,9 +48,9 @@
 
   export default defineComponent({
     name: 'JCodeEditor',
+    components: {},
     // 不将 attrs 的属性绑定到 html 标签上
     inheritAttrs: false,
-    components: {},
     props: {
       value: propTypes.string.def(''),
       height: propTypes.string.def('auto'),
@@ -91,7 +91,7 @@
         styleActiveLine: true,
         //代码格式化
         extraKeys: {
-          Tab: function autoFormat(editor) {
+          Tab: function autoFormat() {
             //var totalLines = editor.lineCount();
             //editor.autoFormatRange({line:0, ch:0}, {line:totalLines});
             setValue(innerValue, false);

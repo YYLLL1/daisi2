@@ -21,7 +21,6 @@
   list-style: none;
   font-feature-settings: 'tnum';
   position: relative;
-  outline: 0;
   display: block;
   background-color: #fff;
   border: 1px solid #d9d9d9;
@@ -121,7 +120,6 @@
   border-radius: 4px;
   outline: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-
   transition: opacity 0.15s, transform 0.3s !important;
   transform-origin: center top !important;
 }
@@ -169,7 +167,6 @@
   border-radius: 4px;
   outline: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-
   transition: opacity 0.15s, transform 0.3s !important;
   transform-origin: center top !important;
 }
@@ -217,7 +214,7 @@
   background-color: #efefef;
 }
 
-.cascader-menu-list .cascader-menu-option.cascader-menu-extensible:after {
+.cascader-menu-list .cascader-menu-option.cascader-menu-extensible::after {
   position: absolute;
   top: 50%;
   margin-top: -4px;
@@ -235,11 +232,11 @@
   background: transparent;
 }
 
-.area-selectable-list-wrap::-webkit-scrollbar-button:vertical:decremen,
+.area-selectable-list-wrap::-webkit-scrollbar-button:vertical:decrement,
 .area-selectable-list-wrap::-webkit-scrollbar-button:vertical:end:decrement,
 .area-selectable-list-wrap::-webkit-scrollbar-button:vertical:increment,
 .area-selectable-list-wrap::-webkit-scrollbar-button:vertical:start:increment,
-.cascader-menu-list::-webkit-scrollbar-button:vertical:decremen,
+.cascader-menu-list::-webkit-scrollbar-button:vertical:decrement,
 .cascader-menu-list::-webkit-scrollbar-button:vertical:end:decrement,
 .cascader-menu-list::-webkit-scrollbar-button:vertical:increment,
 .cascader-menu-list::-webkit-scrollbar-button:vertical:start:increment {

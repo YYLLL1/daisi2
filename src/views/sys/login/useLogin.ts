@@ -3,7 +3,6 @@ import type { RuleObject } from 'ant-design-vue/lib/form/interface';
 import { ref, computed, unref, Ref } from 'vue';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { checkOnlyUser } from '/@/api/sys/user';
-import { defHttp } from '/@/utils/http/axios';
 
 export enum LoginStateEnum {
   LOGIN,
@@ -138,7 +137,7 @@ function createRegisterAccountRule(type) {
   ];
 }
 
-function checkUsername(rule, value, callback) {
+function checkUsername(rule, value) {
   const { t } = useI18n();
   if (!value) {
     return Promise.reject(t('sys.login.accountPlaceholder'));
@@ -150,9 +149,9 @@ function checkUsername(rule, value, callback) {
     });
   }
 }
-async function checkPhone(rule, value, callback) {
-  const { t } = useI18n();
-  var reg = /^1[3456789]\d{9}$/;
+async function checkPhone(rule, value) {
+  // const { t } = useI18n();
+  const reg = /^1[3456789]\d{9}$/;
   if (!reg.test(value)) {
     return Promise.reject(new Error('请输入正确手机号'));
   } else {

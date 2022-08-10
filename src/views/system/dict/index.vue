@@ -13,14 +13,14 @@
         <template #overlay>
           <a-menu>
             <a-menu-item key="1" @click="batchHandleDelete">
-              <Icon icon="ant-design:delete-outlined"></Icon>
+              <Icon icon="ant-design:delete-outlined" />
               删除
             </a-menu-item>
           </a-menu>
         </template>
         <a-button
           >批量操作
-          <Icon icon="ant-design:down-outlined"></Icon>
+          <Icon icon="ant-design:down-outlined" />
         </a-button>
       </a-dropdown>
     </template>
@@ -39,25 +39,24 @@
 
 <script lang="ts" name="system-dict" setup>
   //ts语法
-  import { ref, computed, unref } from 'vue';
-  import { BasicTable, TableAction } from '/src/components/Table';
-  import { useDrawer } from '/src/components/Drawer';
-  import { useModal } from '/src/components/Modal';
+  import { BasicTable, TableAction } from '/@/components/Table';
+  import { useDrawer } from '/@/components/Drawer';
+  import { useModal } from '/@/components/Modal';
   import DictItemList from './components/DictItemList.vue';
   import DictModal from './components/DictModal.vue';
   import DictRecycleBinModal from './components/DictRecycleBinModal.vue';
-  import { useMessage } from '/src/hooks/web/useMessage';
-  import { removeAuthCache, setAuthCache } from '/src/utils/auth';
+  import { useMessage } from '/@/hooks/web/useMessage';
+  import { removeAuthCache, setAuthCache } from '/@/utils/auth';
   import { columns, searchFormSchema } from './dict.data';
   import { list, deleteDict, batchDeleteDict, getExportUrl, getImportUrl, refreshCache, queryAllDictItems } from './dict.api';
-  import { DB_DICT_DATA_KEY } from '/src/enums/cacheEnum';
+  import { DB_DICT_DATA_KEY } from '/@/enums/cacheEnum';
+  import { useListPage } from '/@/hooks/system/useListPage';
 
   const { createMessage } = useMessage();
   //字典model
   const [registerModal, { openModal }] = useModal();
   //字典配置drawer
   const [registerDrawer, { openDrawer }] = useDrawer();
-  import { useListPage } from '/@/hooks/system/useListPage';
 
   //回收站model
   const [registerModal1, { openModal: openRecycleModal }] = useModal();
@@ -165,6 +164,10 @@
    */
   function getTableAction(record) {
     return [
+      {
+        label: '详情',
+        onClick: handleDetail.bind(null, record),
+      },
       {
         label: '编辑',
         onClick: handleEdit.bind(null, record),

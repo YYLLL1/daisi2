@@ -13,17 +13,17 @@
       @visible-change="visibleChange"
     >
       <div class="jeecg-basic-table-form-container" v-if="showSearchFlag">
-        <a-form ref="formRef" :model="queryParam" :label-col="labelCol" :wrapper-col="wrapperCol" @keyup.enter.native="searchQuery">
+        <a-form ref="formRef" :model="queryParam" :label-col="labelCol" :wrapper-col="wrapperCol" @keyup.enter="searchQuery">
           <a-row :gutter="24">
-            <template v-for="(item, index) in queryInfo">
+            <template v-for="(item, index) in queryInfo" :key="index">
               <template v-if="item.hidden === '1'">
                 <a-col :md="8" :sm="24" :key="'query' + index" v-show="toggleSearchStatus">
-                  <SearchFormItem :formElRef="formRef" :queryParam="queryParam" :item="item" :dictOptions="dictOptions"></SearchFormItem>
+                  <SearchFormItem :formElRef="formRef" :queryParam="queryParam" :item="item" :dictOptions="dictOptions" />
                 </a-col>
               </template>
               <template v-else>
                 <a-col :md="8" :sm="24" :key="'query' + index">
-                  <SearchFormItem :formElRef="formRef" :queryParam="queryParam" :item="item" :dictOptions="dictOptions"></SearchFormItem>
+                  <SearchFormItem :formElRef="formRef" :queryParam="queryParam" :item="item" :dictOptions="dictOptions" />
                 </a-col>
               </template>
             </template>
@@ -84,7 +84,7 @@
     },
     props: ['multi', 'code', 'sorter', 'groupId', 'param'],
     emits: ['ok', 'register'],
-    setup(props, { emit, refs }) {
+    setup(props, { emit }) {
       const { createMessage } = useMessage();
       const labelCol = reactive({
         xs: { span: 24 },
@@ -254,7 +254,8 @@
       white-space: nowrap;
     }
   }
-  :deep .jeecg-basic-table .ant-table-wrapper .ant-table-title {
+
+  ::v-deep(.jeecg-basic-table .ant-table-wrapper .ant-table-title) {
     min-height: 0;
   }
 </style>

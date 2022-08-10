@@ -178,7 +178,7 @@
           ...attrs,
           customRow,
           //树列表展开使用AntDesignVue默认的加减图标 author:scott date:20210914
-          //expandIcon: slots.expandIcon ? null : expandIcon(),
+          expandIcon: slots.expandIcon ? null : expandIcon(),
           ...unref(getProps),
           ...unref(getHeaderProps),
           scroll: unref(getScrollRef),
@@ -396,6 +396,7 @@
       background-color: #f3f3f3;
       border-color: #e3e3e3;
     }
+
     &--inset {
       .ant-table-wrapper {
         padding: 0;

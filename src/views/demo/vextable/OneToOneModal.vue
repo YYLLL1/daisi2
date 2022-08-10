@@ -180,6 +180,6 @@
 
   /** Tab页面行间距 */
   .ant-tabs-content .ant-form-item {
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 </style>

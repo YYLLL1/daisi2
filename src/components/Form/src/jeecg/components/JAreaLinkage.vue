@@ -2,7 +2,7 @@
   <Cascader v-bind="attrs" :value="state" :options="getOptions" @change="handleChange" />
 </template>
 <script lang="ts">
-  import { defineComponent, PropType, ref, reactive, watchEffect, computed, unref, watch, onMounted } from 'vue';
+  import { defineComponent, ref, watchEffect, computed } from 'vue';
   import { Cascader } from 'ant-design-vue';
   import { provinceAndCityData, regionData, provinceAndCityDataPlus, regionDataPlus } from '../../utils/areaDataUtil';
   import { useRuleFormItem } from '/@/hooks/component/useFormItem';
@@ -22,21 +22,18 @@
       showAll: propTypes.bool.def(false),
     },
     emits: ['options-change', 'change'],
-    setup(props, { emit, refs }) {
+    setup(props) {
       const emitData = ref<any[]>([]);
       const attrs = useAttrs();
       const [state] = useRuleFormItem(props, 'value', 'change', emitData);
       const getOptions = computed(() => {
         if (props.showArea && props.showAll) {
           return regionDataPlus;
-        }
-        if (props.showArea && !props.showAll) {
+        } else if (props.showArea && !props.showAll) {
           return regionData;
-        }
-        if (!props.showArea && !props.showAll) {
+        } else if (!props.showArea && !props.showAll) {
           return provinceAndCityData;
-        }
-        if (!props.showArea && props.showAll) {
+        } else {
           return provinceAndCityDataPlus;
         }
       });

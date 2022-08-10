@@ -20,15 +20,15 @@
         <TableAction :actions="getAction(record)" :dropDownActions="getDropDownActions(record)" />
       </template>
     </BasicTable>
-    <!--        <TableDrawer @register="registerDrawer" @success="handleSuccess" />-->
+    <TableDrawer @register="registerDrawer" @success="handleSuccess" />
     <TableModal @register="registerModal" @success="handleSuccess" />
-    <JVxeTableModal @register="registerVexTableModal" @success="handleSuccess"></JVxeTableModal>
-    <OneToOneModal @register="registerOneToOneModal" @success="handleSuccess"></OneToOneModal>
+    <JVxeTableModal @register="registerVexTableModal" @success="handleSuccess" />
+    <OneToOneModal @register="registerOneToOneModal" @success="handleSuccess" />
   </div>
 </template>
 <script lang="ts" setup>
   import { ref } from 'vue';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { BasicTable, TableAction } from '/@/components/Table';
   import TableDrawer from './drawer.vue';
   import TableModal from './modal.vue';
   import VexTableModal from './VexTableModal.vue';

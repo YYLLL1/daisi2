@@ -1,9 +1,9 @@
 <template>
-  <a-input v-bind="getBindValue" v-model:value="showText" @input="backValue"></a-input>
+  <a-input v-bind="getBindValue" v-model:value="showText" @input="backValue" />
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType, ref, watchEffect, unref, watch } from 'vue';
+  import { defineComponent, ref, unref, watch } from 'vue';
   import { useAttrs } from '/@/hooks/core/useAttrs';
   import { propTypes } from '/@/utils/propTypes';
   import { JInputTypeEnum } from '/@/enums/jeecgEnum.ts';

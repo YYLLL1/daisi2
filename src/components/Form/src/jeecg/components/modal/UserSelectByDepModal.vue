@@ -15,13 +15,13 @@
             :selectedKeys="selectedDepIds"
             :expandedKeys="expandedKeys"
             :clickRowToExpand="false"
-          ></BasicTree>
+          />
         </a-card>
       </a-col>
       <a-col :md="17" :sm="24">
         <a-card :style="{ minHeight: '613px', overflow: 'auto' }">
           <!--用户列表-->
-          <BasicTable ref="tableRef" v-bind="getBindValue" :searchInfo="searchInfo" :api="getTableList" :rowSelection="rowSelection"></BasicTable>
+          <BasicTable ref="tableRef" v-bind="getBindValue" :searchInfo="searchInfo" :api="getTableList" :rowSelection="rowSelection" />
         </a-card>
       </a-col>
     </a-row>
@@ -56,11 +56,11 @@
       },
     },
     emits: ['register', 'getSelectResult'],
-    setup(props, { emit, refs }) {
+    setup(props, { emit }) {
       const tableRef = ref();
       const treeRef = ref();
       //注册弹框
-      const [register, { closeModal }] = useModalInner(async (data) => {
+      const [register, { closeModal }] = useModalInner(async () => {
         await queryDepartTree();
       });
       const attrs = useAttrs();

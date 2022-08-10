@@ -208,10 +208,10 @@ export const usePermissionStore = defineStore({
         case PermissionModeEnum.BACK:
           const { createMessage, createWarningModal } = useMessage();
           // 菜单加载提示
-          // createMessage.loading({
-          //   content: t('sys.app.menuLoading'),
-          //   duration: 1,
-          // });
+          createMessage.loading({
+            content: t('sys.app.menuLoading'),
+            duration: 1,
+          });
 
           // 从后台获取权限码，
           // 这个函数可能只需要执行一次，并且实际的项目可以在正确的时间被放置
@@ -220,9 +220,9 @@ export const usePermissionStore = defineStore({
             this.changePermissionCode();
             routeList = (await getMenuList()) as AppRouteRecordRaw[];
             // update-begin----author:sunjianlei---date:20220315------for: 判断是否是 vue3 版本的菜单 ---
-            let hasIndex: boolean = false;
-            let hasIcon: boolean = false;
-            for (let menuItem of routeList) {
+            let hasIndex = false;
+            let hasIcon = false;
+            for (const menuItem of routeList) {
               // 条件1：判断组件是否是 layouts/default/index
               if (!hasIndex) {
                 hasIndex = menuItem.component === 'layouts/default/index';

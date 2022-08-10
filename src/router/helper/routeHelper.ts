@@ -1,7 +1,7 @@
 import type { AppRouteModule, AppRouteRecordRaw } from '/@/router/types';
 import type { Router, RouteRecordNormalized } from 'vue-router';
 
-import { getParentLayout, LAYOUT, EXCEPTION_COMPONENT } from '/@/router/constant';
+import { getParentLayout, LAYOUT } from '/@/router/constant';
 import { cloneDeep, omit } from 'lodash-es';
 import { warn } from '/@/utils/log';
 import { createRouter, createWebHashHistory } from 'vue-router';
@@ -44,8 +44,8 @@ function asyncImportRoute(routes: AppRouteRecordRaw[] | undefined) {
     }
     // @ts-ignore 添加是否缓存路由配置
     item.meta.ignoreKeepAlive = !item?.meta.keepAlive;
-    let token = getToken();
-    let tenantId = getTenantId();
+    const token = getToken();
+    const tenantId = getTenantId();
     // URL支持{{ window.xxx }}占位符变量
     //update-begin---author:wangshuai ---date:20220711  for：[VUEN-1638]菜单tenantId需要动态生成------------
     item.component = (item.component || '')
@@ -74,8 +74,8 @@ function asyncImportRoute(routes: AppRouteRecordRaw[] | undefined) {
     if (!item.component && item.meta?.frameSrc) {
       item.component = 'IFRAME';
     }
-    let { component, name } = item;
-    const { children } = item;
+    let { component } = item;
+    const { children, name } = item;
     if (component) {
       const layoutFound = LayoutMap.get(component.toUpperCase());
       if (layoutFound) {
@@ -215,7 +215,7 @@ function isMultipleRoute(routeModule: AppRouteModule) {
  */
 export function addSlashToRouteComponent(routeList: AppRouteRecordRaw[]) {
   routeList.forEach((route) => {
-    let component = route.component as string;
+    const component = route.component as string;
     if (component) {
       const layoutFound = LayoutMap.get(component);
       if (!layoutFound) {

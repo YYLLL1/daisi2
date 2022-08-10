@@ -260,10 +260,12 @@
 <style lang="less">
   .jeecg-comment-outer {
     border-left: 1px solid #f0f0f0;
+
     .ant-tabs-nav-wrap {
-      /*  text-align: center;*/
+      /*  text-align: center; */
     }
   }
+
   .jeecg-modal-content {
     > .scroll-container {
       padding: 14px;

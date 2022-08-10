@@ -19,7 +19,7 @@
           <div class="ant-upload-text">{{ text }}</div>
         </div>
         <a-button v-if="listType == 'picture'" :disabled="disabled">
-          <UploadOutlined></UploadOutlined>
+          <UploadOutlined />
           {{ text }}
         </a-button>
       </div>
@@ -30,7 +30,7 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, PropType, ref, reactive, watchEffect, computed, unref, watch, onMounted } from 'vue';
+  import { defineComponent, ref, computed, watch } from 'vue';
   import { LoadingOutlined, UploadOutlined } from '@ant-design/icons-vue';
   import { useRuleFormItem } from '/@/hooks/component/useFormItem';
   import { propTypes } from '/@/utils/propTypes';
@@ -80,7 +80,7 @@
       },
     },
     emits: ['options-change', 'change', 'update:value'],
-    setup(props, { emit, refs }) {
+    setup(props, { emit }) {
       const emitData = ref<any[]>([]);
       const attrs = useAttrs();
       const [state] = useRuleFormItem(props, 'value', 'change', emitData);
@@ -122,7 +122,7 @@
        */
       watch(
         () => props.value,
-        (val, prevCount) => {
+        (val) => {
           if (val instanceof Array) {
             val = val.join(',');
           }
@@ -171,7 +171,7 @@
       /**
        * 文件上传结果回调
        */
-      function handleChange({ file, fileList, event }) {
+      function handleChange({ file, fileList }) {
         initTag.value = false;
         uploadFileList.value = fileList;
         if (file.status === 'error') {
@@ -211,8 +211,8 @@
       }
 
       function getAvatarView() {
-        if (uploadFileList.length > 0) {
-          let url = uploadFileList[0].url;
+        if (uploadFileList.value.length > 0) {
+          let url = uploadFileList.value[0].url;
           return getFileAccessHttpUrl(url, null);
         }
       }

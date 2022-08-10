@@ -3,11 +3,10 @@
 </template>
 
 <script lang="ts">
-  import { ref, defineComponent } from 'vue';
+  import { ref, defineComponent, watch } from 'vue';
   import JVxeReloadEffect from '../JVxeReloadEffect';
   import { JVxeComponent } from '/@/components/jeecg/JVxeTable/types';
   import { useJVxeComponent, useJVxeCompProps } from '/@/components/jeecg/JVxeTable/hooks';
-  import { watch } from 'vue';
 
   export default defineComponent({
     name: 'JVxeNormalCell',

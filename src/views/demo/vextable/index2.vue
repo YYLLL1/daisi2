@@ -7,10 +7,10 @@
     </vxe-toolbar>
 
     <vxe-table :align="allAlign" :data="tableData1">
-      <vxe-table-column type="seq" width="60"></vxe-table-column>
-      <vxe-table-column field="name" title="Name"></vxe-table-column>
-      <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-      <vxe-table-column field="age" title="Age"></vxe-table-column>
+      <vxe-table-column type="seq" width="60" />
+      <vxe-table-column field="name" title="Name" />
+      <vxe-table-column field="sex" title="Sex" />
+      <vxe-table-column field="age" title="Age" />
     </vxe-table>
   </div>
 </template>
@@ -21,7 +21,7 @@
   export default defineComponent({
     components: { CollapseContainer },
     setup() {
-      const allAlign = ref(null);
+      const allAlign = ref('');
       const tableData1 = ref([
         { id: 10001, name: 'Test1', role: 'Develop', sex: 'Man', age: 28, address: 'vxe-table 从入门到放弃' },
         { id: 10002, name: 'Test2', role: 'Test', sex: 'Women', age: 22, address: 'Guangzhou' },

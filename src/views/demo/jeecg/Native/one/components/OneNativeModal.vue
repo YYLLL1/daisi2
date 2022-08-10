@@ -1,11 +1,11 @@
 <template>
   <a-modal :title="title" :width="width" :visible="visible" @ok="handleOk" :okButtonProps="{ class: { 'jee-hidden': disableSubmit } }" @cancel="handleCancel" cancelText="关闭">
-    <OneNativeForm ref="realForm" @ok="submitCallback" :disabled="disableSubmit"></OneNativeForm>
+    <OneNativeForm ref="realForm" @ok="submitCallback" :disabled="disableSubmit" />
   </a-modal>
 </template>
 
 <script lang="ts" setup>
-  import { ref, nextTick, defineExpose } from 'vue';
+  import { ref, nextTick } from 'vue';
   import OneNativeForm from './OneNativeForm.vue';
 
   const title = ref<string>('');
@@ -52,7 +52,7 @@
 </script>
 
 <style>
-  /**隐藏样式-modal确定按钮 */
+  /** 隐藏样式-modal确定按钮 */
   .jee-hidden {
     display: none !important;
   }
