@@ -8,10 +8,10 @@ import { primaryColor } from '../../build/config/themeConfig';
 // ! 改动后需要清空浏览器缓存
 const setting: ProjectConfig = {
   // 是否显示SettingButton
-  showSettingButton: true,
+  showSettingButton: false,
 
   // 是否显示主题切换按钮
-  showDarkModeToggle: true,
+  showDarkModeToggle: false,
 
   // 设置按钮位置 可选项
   // SettingButtonPositionEnum.AUTO: 自动选择
@@ -65,15 +65,15 @@ const setting: ProjectConfig = {
     // 主题
     theme: ThemeEnum.LIGHT,
     // 开启锁屏功能
-    useLockPage: true,
+    useLockPage: false,
     // 显示全屏按钮
-    showFullScreen: true,
+    showFullScreen: false,
     // 显示文档按钮
-    showDoc: true,
+    showDoc: false,
     // 显示消息中心按钮
-    showNotice: true,
+    showNotice: false,
     // 显示菜单搜索按钮
-    showSearch: true,
+    showSearch: false,
   },
 
   // 菜单配置
@@ -159,10 +159,10 @@ const setting: ProjectConfig = {
   lockTime: 0,
 
   // 显示面包屑
-  showBreadCrumb: true,
+  showBreadCrumb: false,
 
   // 显示面包屑图标
-  showBreadCrumbIcon: true,
+  showBreadCrumbIcon: false,
 
   // 是否使用全局错误捕获
   useErrorHandle: false,

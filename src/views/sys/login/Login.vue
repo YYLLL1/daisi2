@@ -12,10 +12,10 @@
           <AppLogo class="-enter-x" />
           <div class="my-auto">
             <img :alt="title" src="../../../assets/svg/login-box-bg.svg" class="w-1/2 -mt-16 -enter-x" />
-            <div class="mt-10 font-medium text-white -enter-x">
+            <div class="mt-10 font-medium -enter-x">
               <span class="inline-block mt-4 text-3xl"> {{ t('sys.login.signInTitle') }}</span>
             </div>
-            <div class="mt-5 font-normal text-white text-md dark:text-gray-500 -enter-x">
+            <div class="mt-5 font-normal text-md text-2xl dark:text-gray-500 -enter-x">
               {{ t('sys.login.signInDesc') }}
             </div>
           </div>
@@ -103,7 +103,9 @@
       box-shadow: inherit !important;
     }
   }
-
+  .jeecg-login-form {
+    background-color: #fff;
+  }
   .@{prefix-cls} {
     min-height: 100%;
     overflow: hidden;
@@ -118,14 +120,15 @@
     &::before {
       position: absolute;
       top: 0;
-      left: 0;
+      right: 0;
       width: 100%;
       height: 100%;
-      margin-left: -48%;
+      margin-right: -36%;
       background-image: url(/@/assets/svg/login-bg.svg);
       background-position: 100%;
       background-repeat: no-repeat;
       background-size: auto 100%;
+      transform: rotate(180deg);
       content: '';
       @media (max-width: @screen-xl) {
         display: none;
@@ -139,7 +142,7 @@
 
       &__title {
         font-size: 16px;
-        color: #fff;
+        // color: #fff;
       }
 
       img {
@@ -155,11 +158,11 @@
 
         &__title {
           font-size: 24px;
-          color: #fff;
+          // color: #fff;
         }
 
         img {
-          width: 48px;
+          width: 150px;
         }
       }
     }
