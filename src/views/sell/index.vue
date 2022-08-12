@@ -5,10 +5,12 @@
         <SellLeft :ticketData="data.ticketData" @ticketSelect="ticketSelect" />
       </a-col>
       <a-col class="gutter-row" :span="10">
-        <SellRight :selectData="data.selectData" @reduce="reduce" @add="add" @remove="remove" @submit="submit" />
+        <SellRight :selectData="data.selectData" @reduce="reduce" @add="add" @remove="remove" @openPaymentModal="openPaymentModal" />
       </a-col>
     </a-row>
     <SellBottom @returnHandel="returnHandel" @rentHandel="rentHandel" />
+    <SellSuccess :successData="data.successData" :successVisible="data.successVisible" @closeSuccessModal="closeSuccessModal" @close="close" />
+    <SellPayment :selectData="data.selectData" :paymentVisible="data.paymentVisible" @closePaymentModal="closePaymentModal" @close="close" />
   </div>
 </template>
 
@@ -16,6 +18,8 @@
   import SellLeft from './components/sellLeft.vue';
   import SellRight from './components/sellRight.vue';
   import SellBottom from './components/sellBottom.vue';
+  import SellPayment from './components/sellPayment.vue';
+  import SellSuccess from './components/sellSuccess.vue';
   import { onMounted, reactive } from 'vue';
   import { list, save } from './api';
   import { message } from 'ant-design-vue';
@@ -23,6 +27,11 @@
   const data = reactive({
     ticketData: [],
     selectData: [],
+    paymentData: [],
+    sysOrder: {},
+    successData: {},
+    successVisible: false,
+    paymentVisible: false,
   });
 
   //初始化票种类
@@ -61,6 +70,7 @@
         item.quantity += 1;
       }
     });
+    console.log(data.selectData);
   };
 
   //删除票种
@@ -78,8 +88,22 @@
     console.log(id);
   };
 
+  //关闭弹出窗
+  const close = (type) => {
+    if (type == 'payment') {
+      data.paymentVisible = false;
+    } else {
+      data.successVisible = false;
+    }
+  };
+
   //结账
-  const submit = async ({ name, phone }) => {
+  const submit = async () => {
+    await save(data.sysOrder, openSuccessModal);
+  };
+
+  // 打开支付弹窗
+  const openPaymentModal = ({ name, phone }) => {
     let sysOrderTicketList = [];
     data.selectData?.forEach((item) => {
       let sysTicked = {
@@ -88,17 +112,34 @@
       };
       sysOrderTicketList.push(sysTicked);
     });
-    let sysOrder = {
+    data.sysOrder = {
       sysOrderTicketList,
       sysOrderCustomerList: [{ name: name || '', phone: phone || '' }],
     };
-    await save(sysOrder, handleSuccess);
+    //打开支付弹窗
+    data.paymentVisible = true;
+  };
+  //支付弹窗确认提交
+  const closePaymentModal = () => {
+    submit();
   };
 
-  // 成功回调
-  function handleSuccess() {
+  // 打开支付成功弹窗
+  const openSuccessModal = (res) => {
+    data.paymentVisible = false;
+    data.successVisible = true;
+    data.successData = res;
+  };
+
+  // 关闭支付成功弹窗
+  const closeSuccessModal = (isShow: boolean) => {
     data.selectData = [];
-  }
+    data.paymentData = [];
+    data.sysOrder = {};
+    data.successData = {};
+    data.successVisible = isShow;
+    data.paymentVisible = isShow;
+  };
 </script>
 
 <style lang="less" scoped>

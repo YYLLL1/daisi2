@@ -13,16 +13,8 @@ enum Api {
  */
 export const list = () => defHttp.get({ url: Api.list });
 
-// /**
-//  * 删除单个
-//  */
-// export const deleteOne = (params, handleSuccess) => {
-//   return defHttp.delete({ url: Api.deleteOne, params }, { joinParamsToUrl: true }).then(() => {
-//     handleSuccess();
-//   });
-// };
 /**
- * 批量删除
+ * 添加成功
  * @param params
  */
 export const save = (params, handleSuccess) => {
@@ -33,18 +25,9 @@ export const save = (params, handleSuccess) => {
     okText: '确认',
     cancelText: '取消',
     onOk: () => {
-      return defHttp.post({ url: Api.save, data: params }, { joinParamsToUrl: true }).then(() => {
-        // console.log(res);
-        handleSuccess();
+      return defHttp.post({ url: Api.save, data: params }, { joinParamsToUrl: true }).then((res) => {
+        handleSuccess(res);
       });
     },
   });
 };
-// /**
-//  * 保存或者更新
-//  * @param params
-//  */
-// export const saveOrUpdate = (params, isUpdate) => {
-//   const url = isUpdate ? Api.edit : Api.save;
-//   return defHttp.post({ url: url, params });
-// };

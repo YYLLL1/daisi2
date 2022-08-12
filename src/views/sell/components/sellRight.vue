@@ -48,10 +48,11 @@
 
 <script lang="ts" setup>
   import { computed, ref } from 'vue';
+  import { message } from 'ant-design-vue';
   const props = defineProps({
     selectData: { type: Array },
   });
-  const emit = defineEmits(['reduce', 'add', 'remove', 'submit']);
+  const emit = defineEmits(['reduce', 'add', 'remove', 'openPaymentModal']);
   const total = computed((): number => {
     let tal: any = 0;
     props.selectData?.forEach((item) => {
@@ -63,7 +64,11 @@
   const sellPhone = ref<number>();
 
   const sellSubmit = () => {
-    emit('submit', { name: sellName.value, phone: sellPhone.value });
+    if (props.selectData?.length == 0) {
+      message.warning('未添加票种！');
+      return;
+    }
+    emit('openPaymentModal', { name: sellName.value, phone: sellPhone.value });
   };
   const reduceQuantity = (id) => {
     emit('reduce', id);
