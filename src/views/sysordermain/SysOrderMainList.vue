@@ -1,5 +1,5 @@
 <template>
-  <a-card v-show="false">
+  <div>
     <!--引用表格-->
     <BasicTable @register="registerTable" :rowSelection="rowSelection">
       <!--插槽:table标题-->
@@ -40,77 +40,25 @@
       </template>
     </BasicTable>
     <!-- 表单区域 -->
-    <SysVenueModal @register="registerModal" @success="handleSuccess" />
-  </a-card>
-  <a-card class="ly-card" title="场馆管理">
-    <div class="ly-venue-edit" @click="handleEdit(venueList.data)">编辑设置</div>
-    <div class="ly-card-container">
-      <div class="ly-venue-header">
-        <a-row :gutter="16">
-          <a-col class="gutter-row" :span="6">
-            <img :src="venueList.venueImage[0]" alt="" />
-          </a-col>
-          <a-col class="gutter-row" :span="18">
-            <h3 class="ly-venue-title">{{ venueList.data.venueName }}</h3>
-            <p class="ly-venue-status">状态：<span class="c-blue">营业中</span></p>
-            <p class="ly-venue-address">地址：深圳市南山区</p>
-            <p class="ly-venue-introduce">简介：{{ venueList.data.venueIntroduction }}</p>
-          </a-col>
-        </a-row>
-      </div>
-      <div class="ly-venue-gallery">
-        <h3>场馆图片</h3>
-        <ul>
-          <li v-for="(item, index) of venueList.venueImage" :key="index">
-            <img :src="item" alt="" />
-          </li>
-        </ul>
-      </div>
-      <div class="ly-venue-item">
-        <h3>详细介绍</h3>
-        <p class="ly-item-content">
-          {{ venueList.data.venueIntroduction }}
-        </p>
-      </div>
-      <div class="ly-venue-item">
-        <h3>场馆电话</h3>
-        <p class="ly-item-content">
-          {{ venueList.data.venueTel }}
-        </p>
-      </div>
-      <div class="ly-venue-item">
-        <h3>运营时间</h3>
-        <p class="ly-item-content">
-          {{ venueList.data.venueTime }}
-        </p>
-      </div>
-      <div class="ly-venue-item">
-        <h3>入场须知</h3>
-        <p class="ly-item-content">
-          {{ venueList.data.venueNotice }}
-        </p>
-      </div>
-    </div>
-  </a-card>
+    <SysOrderMainModal @register="registerModal" @success="handleSuccess" />
+  </div>
 </template>
 
-<script lang="ts" name="sysvenue-sysVenue" setup>
+<script lang="ts" name="sysordermain-sysOrderMain" setup>
   import { BasicTable, TableAction } from '/@/components/Table';
-  import { getAreaTextByCode } from '/@/components/Form/src/utils/Area';
-  import { useModal } from '/@/components/Modal';
   import { useListPage } from '/@/hooks/system/useListPage';
-  import SysVenueModal from './components/SysVenueModal.vue';
-  import { columns, searchFormSchema } from './SysVenue.data';
-  import { list, deleteOne, batchDelete, getImportUrl, getExportUrl } from './SysVenue.api';
+  import { useModal } from '/@/components/Modal';
+  import SysOrderMainModal from './components/SysOrderMainModal.vue';
+  import { getAreaTextByCode } from '/@/components/Form/src/utils/Area';
+  import { columns, searchFormSchema } from './SysOrderMain.data';
+  import { list, deleteOne, batchDelete, getImportUrl, getExportUrl } from './SysOrderMain.api';
   import { downloadFile } from '/@/utils/common/renderUtils';
-  import { onMounted, reactive } from 'vue';
-  import { getFileAccessHttpUrl } from '/@/utils/common/compUtils';
   //注册model
   const [registerModal, { openModal }] = useModal();
   //注册table数据
   const { tableContext, onExportXls, onImportXls } = useListPage({
     tableProps: {
-      title: '场馆',
+      title: '售票订单',
       api: list,
       columns,
       canResize: false,
@@ -128,7 +76,7 @@
       },
     },
     exportConfig: {
-      name: '场馆',
+      name: '售票订单',
       url: getExportUrl,
     },
     importConfig: {
@@ -139,29 +87,15 @@
 
   const [registerTable, { reload }, { rowSelection, selectedRowKeys }] = tableContext;
 
-  let venueList = reactive({
-    data: {},
-    venueImage: [],
-  });
-  async function handleList() {
-    let { records } = await list();
-    let arr = [];
-    records[0].venuePhotos.split(',').forEach((item) => arr.push(getFileAccessHttpUrl(item)));
-    venueList.data = records[0];
-    venueList.venueImage = arr;
+  /**
+   * 新增事件
+   */
+  function handleAdd() {
+    openModal(true, {
+      isUpdate: false,
+      showFooter: true,
+    });
   }
-  onMounted(() => {
-    handleList();
-  }),
-    /**
-     * 新增事件
-     */
-    function handleAdd() {
-      openModal(true, {
-        isUpdate: false,
-        showFooter: true,
-      });
-    };
   /**
    * 编辑事件
    */
@@ -211,6 +145,7 @@
       },
     ];
   }
+
   /**
    * 下拉操作栏
    */
@@ -231,45 +166,4 @@
   }
 </script>
 
-<style lang="less" scoped>
-  @themFc: #1890ff;
-  .ly-venue-edit {
-    position: absolute;
-    top: 16px;
-    right: 24px;
-    color: @themFc;
-    z-index: 10;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-  }
-  .ly-card {
-    width: calc(100% - 40px);
-    height: calc(100% - 40px);
-    margin: 20px;
-    .ly-venue-gallery img {
-      height: 100%;
-      max-height: 100px;
-    }
-  }
-  .ly-card-container {
-    & > div {
-      margin-bottom: 20px;
-    }
-    .c-blue {
-      color: @themFc;
-    }
-    .c-red {
-      color: red;
-    }
-
-    h3 {
-      font-size: 20px;
-      font-weight: 700;
-      color: rgba(0, 0, 0, 1);
-    }
-    p {
-      font-size: 14px;
-    }
-  }
-</style>
+<style scoped></style>

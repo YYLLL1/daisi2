@@ -138,15 +138,15 @@
     .@{logo-prefix-cls} {
       position: absolute;
       top: 12px;
-      height: 30px;
+      // height: 30px;
 
       &__title {
         font-size: 16px;
-        // color: #fff;
+        color: #ddd;
       }
 
       img {
-        width: 32px;
+        width: 150px;
       }
     }
 

@@ -4,28 +4,41 @@ import { useMessage } from '/@/hooks/web/useMessage';
 const { createConfirm } = useMessage();
 
 enum Api {
-  list = '/sysvenue/sysVenue/list',
-  save = '/sysvenue/sysVenue/add',
-  edit = '/sysvenue/sysVenue/edit',
-  deleteOne = '/sysvenue/sysVenue/delete',
-  deleteBatch = '/sysvenue/sysVenue/deleteBatch',
-  importExcel = '/sysvenue/sysVenue/importExcel',
-  exportXls = '/sysvenue/sysVenue/exportXls',
+  list = '/sysordermain/sysOrderMain/list',
+  save = '/sysordermain/sysOrderMain/add',
+  edit = '/sysordermain/sysOrderMain/edit',
+  deleteOne = '/sysordermain/sysOrderMain/delete',
+  deleteBatch = '/sysordermain/sysOrderMain/deleteBatch',
+  importExcel = '/sysordermain/sysOrderMain/importExcel',
+  exportXls = '/sysordermain/sysOrderMain/exportXls',
+  sysOrderTicketList = '/sysordermain/sysOrderMain/querySysOrderTicketByMainId',
+  sysOrderCustomerList = '/sysordermain/sysOrderMain/querySysOrderCustomerByMainId',
 }
 /**
  * 导出api
  * @param params
  */
 export const getExportUrl = Api.exportXls;
+
 /**
  * 导入api
  */
 export const getImportUrl = Api.importExcel;
 /**
+ * 查询子表数据
+ * @param params
+ */
+export const sysOrderTicketList = Api.sysOrderTicketList;
+/**
+ * 查询子表数据
+ * @param params
+ */
+export const sysOrderCustomerList = Api.sysOrderCustomerList;
+/**
  * 列表接口
  * @param params
  */
-export const list = (params?) => defHttp.get({ url: Api.list, params });
+export const list = (params) => defHttp.get({ url: Api.list, params });
 
 /**
  * 删除单个
