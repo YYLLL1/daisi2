@@ -22,7 +22,6 @@
   import SellSuccess from './components/sellSuccess.vue';
   import { onMounted, reactive } from 'vue';
   import { list, save } from './api';
-  import { message } from 'ant-design-vue';
 
   const data = reactive({
     ticketData: [],
@@ -46,12 +45,13 @@
   //获取选中的票种
   const ticketSelect = (item) => {
     if (data.selectData.indexOf(item) != -1) {
-      message.warning('已添加该类型票种');
-      return;
+      item.quantity++;
+      item.zongPrice = item.quantity * item.price;
+    } else {
+      item.quantity = 1;
+      item.zongPrice = 0;
+      data.selectData.push(item);
     }
-    item.quantity = 1;
-    item.zongPrice = 0;
-    data.selectData.push(item);
   };
 
   //减少票数
@@ -144,6 +144,6 @@
 
 <style lang="less" scoped>
   .gutter-row {
-    height: 500px;
+    min-height: 500px;
   }
 </style>

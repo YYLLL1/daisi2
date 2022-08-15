@@ -24,31 +24,67 @@
       </div>
       <div class="ly-card-footer">
         <div class="ly-footer-info">
-          <ul class="ly-info-content">
-            <li class="name">
-              <span>购票人姓名:</span>
-              <a-input v-model:value="sellName" placeholder="请输入姓名" />
-            </li>
-            <li class="phone">
-              <span>手机号:</span>
-              <a-input v-model:value="sellPhone" placeholder="请输入手机号" />
-            </li>
-          </ul>
-          <div class="ly-info-total">
-            <h3>
-              总计：<span>{{ total }}</span> 元
-            </h3>
-          </div>
+          <a-form
+            class="ly-info-content"
+            :label-col="{ span: 6 }"
+            :wrapper-col="{ span: 18 }"
+            :model="formState"
+            :rules="formRules"
+            name="basic"
+            autocomplete="off"
+            @finish="onFinish"
+            @finishFailed="onFinishFailed"
+          >
+            <a-form-item label="购票人姓名:" name="name" :wrapper-col="{ offset: 1, span: 23 }">
+              <a-input v-model:value="formState.name" placeholder="请输入姓名" />
+            </a-form-item>
+
+            <a-form-item label="手机号:" name="phone" :rules="formRules.phone" :wrapper-col="{ offset: 1, span: 23 }">
+              <a-input v-model:value="formState.phone" placeholder="请输入手机号" />
+            </a-form-item>
+
+            <a-form-item class="sell-submit">
+              <a-button type="primary" html-type="submit" block>结账</a-button>
+            </a-form-item>
+          </a-form>
+          <h3 class="ly-info-total">
+            总计：<span>{{ total }}</span> 元
+          </h3>
         </div>
-        <a-button class="sell-submit" type="primary" @click="sellSubmit" block>结账</a-button>
       </div>
     </div>
   </a-card>
 </template>
-
+<script lang="ts">
+  interface FormState {
+    name: string;
+    phone: string;
+  }
+</script>
 <script lang="ts" setup>
-  import { computed, ref } from 'vue';
+  import { computed, reactive, ref } from 'vue';
   import { message } from 'ant-design-vue';
+
+  const formState = reactive<FormState>({
+    name: '',
+    phone: '1',
+  });
+  const formRules = reactive({
+    phone: {
+      // pattern: /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/,
+      required: true,
+      message: '请输入正确手机号！',
+    },
+  });
+  const onFinish = (values: any) => {
+    console.log('Success:', values);
+    sellSubmit();
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
+
   const props = defineProps({
     selectData: { type: Array },
   });
@@ -158,31 +194,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: relative;
+      padding-bottom: 80px;
       .ly-info-content,
       .ly-info-total {
         width: 100%;
         margin-bottom: 0;
-      }
-      .ly-info-content {
-        li {
-          display: flex;
-          align-items: center;
-          flex-wrap: wrap;
-          margin-bottom: 10px;
-          span {
-            width: 70px;
-            font-weight: 700;
-            margin-right: 10px;
-            font-size: 12px;
-            text-align: justify;
-            text-align-last: justify;
-            display: inline-block;
-          }
-          input {
-            width: calc(100% - 120px);
-            padding: 2px 5px;
-          }
-        }
       }
       .ly-info-total {
         text-align: center;
@@ -198,10 +215,21 @@
       }
     }
     .sell-submit {
-      height: 80px;
-      font-size: 20px;
-      font-weight: 700;
-      color: #fff;
+      position: absolute;
+      width: 100%;
+      left: 0;
+      z-index: 10;
+      bottom: 0;
+      margin: 0;
+      ::v-deep(.ant-col) {
+        max-width: 100%;
+      }
+      button {
+        height: 80px;
+        font-size: 20px;
+        font-weight: 700;
+        color: #fff;
+      }
     }
   }
 </style>

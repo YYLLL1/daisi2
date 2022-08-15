@@ -1,6 +1,6 @@
 <template>
   <a-modal :width="1000" :visible="props.successVisible" title="支付成功！" @ok="handleOk" @cancel="closeModal">
-    <a-table :columns="columns" :data-source="data.sysOrderTicketList" :pagination="false">
+    <a-table :columns="columns" :data-source="data.sysOrderTicketList" :pagination="false" rowKey="id">
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'phone'">
           <div>
@@ -37,18 +37,18 @@
     },
     {
       title: '掌静脉',
-      key: 'palm',
-      dataIndex: 'palm',
+      key: 'sysPalmarveinId',
+      dataIndex: 'sysPalmarveinId',
     },
     {
       title: '人脸信息',
-      key: 'face',
-      dataIndex: 'face',
+      key: 'sysHumanfaceId',
+      dataIndex: 'sysHumanfaceId',
     },
     {
       title: '手环租赁',
-      key: 'bracelet',
-      dataIndex: 'bracelet',
+      key: 'sysBraceletId',
+      dataIndex: 'sysBraceletId',
     },
     {
       title: '支付押金',

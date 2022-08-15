@@ -25,6 +25,11 @@
 </script>
 
 <style lang="less" scoped>
+  .ly-card {
+    height: 100%;
+    max-height: 600px;
+    overflow-y: auto;
+  }
   .ly-card-container {
     display: flex;
     flex-wrap: wrap;
