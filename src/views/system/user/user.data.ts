@@ -167,6 +167,30 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
   },
   {
+    label: '入职时间',
+    field: 'joinDate',
+    required: false,
+    component: 'DatePicker',
+  },
+  {
+    label: '离职时间',
+    field: 'leaveDate',
+    required: false,
+    component: 'DatePicker',
+  },
+  {
+    label: '组织ID',
+    field: 'organizationId',
+    required: false,
+    component: 'Input',
+  },
+  {
+    label: '区域ID',
+    field: 'areaId',
+    required: false,
+    component: 'Input',
+  },
+  {
     label: '工号',
     field: 'workNo',
     required: true,
