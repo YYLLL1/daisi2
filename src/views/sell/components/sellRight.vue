@@ -64,18 +64,25 @@
 <script lang="ts" setup>
   import { computed, reactive, ref } from 'vue';
   import { message } from 'ant-design-vue';
+  const props = defineProps({
+    selectData: { type: Array, default: () => [] },
+  });
+  const emit = defineEmits(['reduce', 'add', 'remove', 'openPaymentModal']);
+  let sellName = ref<string>();
+  let sellPhone = ref<number>();
 
   const formState = reactive<FormState>({
     name: '',
-    phone: '1',
+    phone: '',
   });
   const formRules = reactive({
     phone: {
-      // pattern: /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/,
+      pattern: /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/,
       required: true,
       message: '请输入正确手机号！',
     },
   });
+
   const onFinish = (values: any) => {
     console.log('Success:', values);
     sellSubmit();
@@ -85,10 +92,6 @@
     console.log('Failed:', errorInfo);
   };
 
-  const props = defineProps({
-    selectData: { type: Array },
-  });
-  const emit = defineEmits(['reduce', 'add', 'remove', 'openPaymentModal']);
   const total = computed((): number => {
     let tal: any = 0;
     props.selectData?.forEach((item) => {
@@ -96,8 +99,6 @@
     });
     return tal.toFixed(2);
   });
-  const sellName = ref<string>();
-  const sellPhone = ref<number>();
 
   const sellSubmit = () => {
     if (props.selectData?.length == 0) {
