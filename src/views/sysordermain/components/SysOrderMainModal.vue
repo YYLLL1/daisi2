@@ -30,7 +30,7 @@
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { JVxeTable } from '/@/components/jeecg/JVxeTable';
-  import { useJvxeMethod } from '/@/hooks/system/useJvxeMethods.ts';
+  import { useJvxeMethod } from '/@/hooks/system/useJvxeMethods';
   import SysOrderCustomerForm from './SysOrderCustomerForm.vue';
   import { formSchema, sysOrderTicketColumns } from '../SysOrderMain.data';
   import { saveOrUpdate, sysOrderTicketList, sysOrderCustomerList } from '../SysOrderMain.api';
@@ -96,7 +96,7 @@
   }
   //校验所有一对一子表表单
   function validateSubForm(allValues) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       Promise.all([sysOrderCustomerForm.value.validateForm(1)])
         .then(() => {
           resolve(allValues);

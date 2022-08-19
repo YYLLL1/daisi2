@@ -57,14 +57,12 @@
   let data = reactive({
     id: '',
     orderCode: '',
-    sysOrderTicket: {},
     sysOrderTicketList: [],
   });
   let sysOrderTicket = reactive<SysOrderTicket>({});
   watch(
     () => props.successData,
     () => {
-      console.log(props.successData);
       data.id = props.successData?.id || '';
       data.orderCode = props.successData?.orderCode || '';
       data.sysOrderTicketList = props.successData?.sysOrderTicketList || [];
@@ -82,14 +80,13 @@
     }, 1000);
   };
   const submitHandel = (recordId) => {
-    console.log(recordId);
     sysOrderTicket.id = recordId;
     save();
   };
 
   //提交绑定
   const save = async () => {
-    await saveBind(data.sysOrderTicket);
+    await saveBind(sysOrderTicket);
   };
 
   const emit = defineEmits(['closeSuccessModal', 'close']);

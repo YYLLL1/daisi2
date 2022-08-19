@@ -23,6 +23,7 @@ export const columns: BasicColumn[] = [
     title: '售卖状态',
     align: 'center',
     dataIndex: 'sellStatus_dictText',
+    slots: { customRender: 'sellStatus_dictText' },
   },
   {
     title: '人数',

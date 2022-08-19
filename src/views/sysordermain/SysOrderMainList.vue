@@ -38,6 +38,10 @@
         <span v-if="!text" style="font-size: 12px; font-style: italic">无文件</span>
         <a-button v-else :ghost="true" type="primary" preIcon="ant-design:download-outlined" size="small" @click="downloadFile(text)">下载</a-button>
       </template>
+      <template #orderStatus_dictText="{ record }">
+        <span v-if="record.orderStatus_dictText == '已完成'" style="color: green">{{ record.orderStatus_dictText }}</span>
+        <span v-else style="color: red">{{ record.orderStatus_dictText }}</span>
+      </template>
     </BasicTable>
     <!-- 表单区域 -->
     <SysOrderMainModal @register="registerModal" @success="handleSuccess" />

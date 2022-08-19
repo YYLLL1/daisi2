@@ -29,6 +29,7 @@ export const columns: BasicColumn[] = [
     title: '订单状态	',
     align: 'center',
     dataIndex: 'orderStatus_dictText',
+    slots: { customRender: 'orderStatus_dictText' },
   },
   {
     title: '类目	',

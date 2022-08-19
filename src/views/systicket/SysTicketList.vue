@@ -38,6 +38,10 @@
         <span v-if="!text" style="font-size: 12px; font-style: italic">无文件</span>
         <a-button v-else :ghost="true" type="primary" preIcon="ant-design:download-outlined" size="small" @click="downloadFile(text)">下载</a-button>
       </template>
+      <template #sellStatus_dictText="{ record }">
+        <span v-if="record.sellStatus_dictText == '已上架'" style="color: green">{{ record.sellStatus_dictText }}</span>
+        <span v-else style="color: red">{{ record.sellStatus_dictText }}</span>
+      </template>
     </BasicTable>
     <!-- 表单区域 -->
     <SysTicketModal @register="registerModal" @success="handleSuccess" />
@@ -45,19 +49,19 @@
 </template>
 
 <script lang="ts" name="systicket-sysTicket" setup>
-  import { ref } from 'vue';
   import { BasicTable, TableAction } from '/@/components/Table';
   import { useModal } from '/@/components/Modal';
   import { useListPage } from '/@/hooks/system/useListPage';
   import SysTicketModal from './components/SysTicketModal.vue';
+  import { getAreaTextByCode } from '/@/components/Form/src/utils/Area';
   import { columns, searchFormSchema } from './SysTicket.data';
   import { list, deleteOne, batchDelete, getImportUrl, getExportUrl } from './SysTicket.api';
   import { downloadFile } from '/@/utils/common/renderUtils';
-  const checkedKeys = ref<Array<string | number>>([]);
+
   //注册model
   const [registerModal, { openModal }] = useModal();
   //注册table数据
-  const { prefixCls, tableContext, onExportXls, onImportXls } = useListPage({
+  const { tableContext, onExportXls, onImportXls } = useListPage({
     tableProps: {
       title: '门票类型',
       api: list,
