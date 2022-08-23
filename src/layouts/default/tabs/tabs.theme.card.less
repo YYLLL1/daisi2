@@ -22,7 +22,7 @@ html[data-theme='light'] {
 }
 
 .@{prefix-cls-theme-card} {
-  @tabHeight: calc(@multiple-card-height - 10px);
+  @tabHeight: @multiple-card-height;
 
   z-index: 10;
   height: @multiple-card-height;
@@ -44,7 +44,6 @@ html[data-theme='light'] {
 
       .ant-tabs-nav-container {
         height: @tabHeight;
-        margin-top: 4px;
         padding-top: 0;
       }
 
@@ -157,7 +156,7 @@ html[data-theme='light'] {
 
   .ant-tabs-extra-content {
     position: relative;
-    top: -12px;
+    top: 0;
     line-height: @multiple-card-height !important;
   }
 

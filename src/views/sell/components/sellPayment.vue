@@ -25,7 +25,7 @@
         </h3>
       </div>
       <div class="ly-sell-payment-confirm">
-        <a-form :model="formState" name="basic" layout="vertical" autocomplete="off" @finish="onFinish" @finishFailed="onFinishFailed">
+        <a-form :model="formState" name="basic" layout="vertical" autocomplete="off" @finish="onFinish">
           <a-form-item name="remember" label="收款方式">
             <a-radio-group v-model:value="formState.remember" size="large" button-style="solid">
               <a-radio-button value="a">微信/支付宝/云闪付</a-radio-button>
@@ -61,7 +61,7 @@
     selectData: { type: Array },
   });
 
-  const emit = defineEmits(['reduce', 'add', 'remove', 'closePaymentModal', 'close']);
+  const emit = defineEmits(['closePaymentModal', 'close']);
   const total = computed((): number => {
     let tal: any = 0;
     props.selectData?.forEach((item) => {
@@ -83,9 +83,6 @@
     emit('closePaymentModal');
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
   const close = () => {
     emit('close', 'payment');
   };

@@ -85,7 +85,7 @@
 
   const onFinish = (values: any) => {
     console.log('Success:', values);
-    sellSubmit();
+    sellSubmit(values);
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -100,12 +100,12 @@
     return tal.toFixed(2);
   });
 
-  const sellSubmit = () => {
+  const sellSubmit = (list) => {
     if (props.selectData?.length == 0) {
       message.warning('未添加票种！');
       return;
     }
-    emit('openPaymentModal', { name: sellName.value, phone: sellPhone.value });
+    emit('openPaymentModal', list);
   };
   const reduceQuantity = (id) => {
     emit('reduce', id);

@@ -19,19 +19,19 @@
       <template #sysPalmarveinId="{ record, index }">
         <div class="ly-table-input">
           <a-input :ref="'sysPalmarveinId' + index" readonly v-model:value="record.sysPalmarveinId" placeholder="扫描掌静脉" block />
-          <a-button type="primary" @click="inputHandel('sysPalmarveinId', index)" preIcon="ant-design:form-outlined" title="点击录入" />
+          <a-button type="primary" @click="inputHandel('sysPalmarveinId', index)" preIcon="ant-design:scan-outlined" title="点击录入" />
         </div>
       </template>
       <template #sysHumanfaceId="{ record, index }">
         <div class="ly-table-input">
           <a-input :ref="'sysHumanfaceId' + index" readonly v-model:value="record.sysHumanfaceId" placeholder="扫描人脸识别" block />
-          <a-button type="primary" @click="inputHandel('sysHumanfaceId', index)" preIcon="ant-design:form-outlined" title="点击录入" />
+          <a-button type="primary" @click="inputHandel('sysHumanfaceId', index)" preIcon="ant-design:scan-outlined" title="点击录入" />
         </div>
       </template>
       <template #sysBraceletId="{ record, index }">
         <div class="ly-table-input">
           <a-input :ref="'sysBraceletId' + index" readonly v-model:value="record.sysBraceletId" placeholder="扫描手环" block />
-          <a-button type="primary" @click="inputHandel('sysBraceletId', index)" preIcon="ant-design:form-outlined" title="点击录入" />
+          <a-button type="primary" @click="bracelet('sysBraceletId', index, record.sysTicketId)" preIcon="ant-design:scan-outlined" title="点击录入" />
         </div>
       </template>
       <template #deposit="{ record, index }">
@@ -40,7 +40,7 @@
         </div>
       </template>
       <template #operation="{ record }">
-        <a-button class="ly-table-button" type="primary" @click="submitHandel(record.id)" block>确定</a-button>
+        <a-button class="ly-table-button" type="primary" @click="submitHandel(record)" block>确定</a-button>
       </template>
     </a-table>
   </a-modal>
@@ -79,8 +79,20 @@
       sysOrderTicket[`${inputRefs}`] = refsI + '测试数据';
     }, 1000);
   };
-  const submitHandel = (recordId) => {
-    sysOrderTicket.id = recordId;
+  //测试手环提交
+  const bracelet = (inputRefs, index, id) => {
+    const refsI = inputRefs + index;
+    const { $refs } = proxy;
+    $refs[refsI].stateValue = '等待数据录入...';
+    setTimeout(() => {
+      $refs[refsI].stateValue = id + '1';
+      sysOrderTicket[`${inputRefs}`] = id + '1';
+    }, 1000);
+  };
+  const submitHandel = (record) => {
+    sysOrderTicket.id = record.id;
+    sysOrderTicket.phone = record.phoneValue;
+    sysOrderTicket.deposit = record.deposit;
     save();
   };
 

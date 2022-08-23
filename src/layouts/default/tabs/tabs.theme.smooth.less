@@ -18,7 +18,7 @@ html[data-theme='light'] {
 }
 
 .@{prefix-cls-theme-smooth} {
-  @tabHeight: calc(@multiple-smooth-height - 12px);
+  @tabHeight: @multiple-smooth-height;
 
   z-index: 10;
   height: @multiple-smooth-height;
@@ -40,7 +40,6 @@ html[data-theme='light'] {
 
       .ant-tabs-nav-container {
         height: @tabHeight;
-        margin-top: 12px;
       }
 
       .ant-tabs-tab {
@@ -164,7 +163,7 @@ html[data-theme='light'] {
 
   .ant-tabs-extra-content {
     position: relative;
-    top: -12px;
+    top: 0;
     line-height: @multiple-smooth-height !important;
   }
 
