@@ -17,8 +17,16 @@ enum Api {
  * 测试接口
  * @param params
  */
-export const editCabinetRent = (params?) => defHttp.post({ url: Api.editCabinetRent, params });
-export const editCabinetOut = (params?) => defHttp.post({ url: Api.editCabinetOut, params });
+export const editCabinetRent = (params, handleSuccess) => {
+  return defHttp.post({ url: Api.editCabinetRent, params }, { joinParamsToUrl: true }).then(() => {
+    handleSuccess;
+  });
+};
+export const editCabinetOut = (params, handleSuccess) => {
+  return defHttp.post({ url: Api.editCabinetOut, params }, { joinParamsToUrl: true }).then(() => {
+    handleSuccess;
+  });
+};
 
 /**
  * tab接口

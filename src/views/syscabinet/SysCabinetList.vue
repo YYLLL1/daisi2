@@ -64,12 +64,10 @@
   // 测试点击
   const sysBraceletId = ref('');
   const cabinetRent = async () => {
-    let result = await editCabinetRent({ sysBraceletId: sysBraceletId.value });
-    console.log(sysBraceletId.value, result);
+    await editCabinetRent({ sysBraceletId: sysBraceletId.value }, getList(key.value));
   };
   const cabinetOut = async () => {
-    let result = await editCabinetOut({ sysBraceletId: sysBraceletId.value });
-    console.log(sysBraceletId.value, result);
+    await editCabinetOut({ sysBraceletId: sysBraceletId.value }, getList(key.value));
   };
 
   const APagination = Pagination;
