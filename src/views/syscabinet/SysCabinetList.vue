@@ -3,7 +3,7 @@
     <div class="ly-card-container">
       <div class="ly-card-tool">
         <p v-for="(state, index) of cabinetList.statistics" :key="index">{{ state.cabinetstate }}：{{ state.cabinetcount }}</p>
-        <a-button type="primary">新增更衣柜</a-button>
+        <a-button type="primary" @click="add">新增更衣柜</a-button>
       </div>
       <div class="ly-card-content">
         <a-row :gutter="16" class="ly-card-list">
@@ -15,7 +15,8 @@
                 <span>{{ item.lockerNo }}</span>
               </div>
               <div class="ly-cabinet-edit">
-                <a-button type="primary" preIcon="ant-design:edit-outlined" size="small" title="编辑" @click="edit(item)" />
+                <a-button type="primary" preIcon="ant-design:edit-filled" size="small" title="编辑" @click="edit(item)" />
+                <a-button style="margin-left: 10px" type="primary" preIcon="ant-design:delete-filled" size="small" title="删除" danger @click="deleteCabinet(item.id)" />
               </div>
             </div>
           </a-col>
@@ -40,22 +41,26 @@
       <a-button type="primary" @click="cabinetOut">退柜子</a-button>
     </div>
   </a-card>
-  <SysCabinetListModal
+  <SysCabinetListEdit
     @submitModal="submitModal"
     @closeSuccessModal="closeSuccessModal"
-    :cabinetVisible="modalList.cabinetVisible"
+    :cabinetEditVisible="modalList.cabinetEditVisible"
     :cabinetTitle="modalList.cabinetTitle"
     :cabinetForm="modalList.cabinetForm"
   />
+  <SysCabinetListAdd @submitModal="submitModal" @closeSuccessModal="closeSuccessModal" :cabinetAddVisible="modalList.cabinetAddVisible" />
 </template>
 
 <script lang="ts" setup>
   import { onMounted, reactive, ref } from 'vue';
   import { Pagination } from 'ant-design-vue';
-  import { tab, list, listStatistics, editList, editCabinetOut, editCabinetRent } from './SysCabinetList.api';
+  import { tab, list, listStatistics, editList, editCabinetOut, editCabinetRent, deleteList, addList } from './SysCabinetList.api';
   import { IPosition } from './SysCabinetList.data';
-  import SysCabinetListModal from './components/SysCabinetListModal.vue';
+  import SysCabinetListEdit from './components/SysCabinetListEdit.vue';
+  import SysCabinetListAdd from './components/SysCabinetListAdd.vue';
+  import { useMessage } from '/@/hooks/web/useMessage';
 
+  const { createConfirm } = useMessage();
   // 测试点击
   const sysBraceletId = ref('');
   const cabinetRent = async () => {
@@ -80,13 +85,13 @@
     statistics: [],
   });
   let modalList = reactive<any>({
-    cabinetVisible: false,
+    cabinetEditVisible: false,
+    cabinetAddVisible: false,
     cabinetTitle: '',
     cabinetForm: {},
   });
-
+  //获取tab列表
   const getTab = async () => {
-    //获取tab列表
     let { records } = await tab();
     records.forEach((item) => {
       position.push({
@@ -96,8 +101,8 @@
     });
     key.value = records[0].itemValue;
   };
+  //获取分页数据
   const getList = async (pos, pageNo = 1, pageSize = 40) => {
-    //获取list列表
     let listData = await list({ position: pos, pageNo, pageSize });
     cabinetList.records = listData.records;
     cabinetList.pages = listData.pages;
@@ -110,9 +115,29 @@
     let result = await listStatistics();
     cabinetList.statistics = result;
   };
+  //提交编辑
   const editCabinet = async (params) => {
-    //提交编辑
-    await editList(params);
+    await editList(params, getList(key.value));
+  };
+  //删除
+  const deleteCabinet = (id) => {
+    createConfirm({
+      iconType: 'warning',
+      title: '确认删除',
+      content: '是否删除选中柜子',
+      okText: '确认',
+      cancelText: '取消',
+      onOk: () => {
+        return deleteData(id);
+      },
+    });
+  };
+  const deleteData = async (id) => {
+    await deleteList({ id }, getList(key.value));
+  };
+  //新增
+  const addCabinet = async (params) => {
+    await addList(params, getList(key.value));
   };
 
   onMounted(() => {
@@ -151,19 +176,27 @@
   };
 
   const edit = (item) => {
-    modalList.cabinetVisible = true;
+    modalList.cabinetEditVisible = true;
     modalList.cabinetTitle = `编辑：${item.lockerNo} 号柜`;
     modalList.cabinetForm = item;
   };
+  const add = () => {
+    modalList.cabinetAddVisible = true;
+  };
   // 关闭弹窗
   const closeSuccessModal = (isShow: boolean) => {
-    modalList.cabinetVisible = isShow;
+    modalList.cabinetEditVisible = isShow;
+    modalList.cabinetAddVisible = isShow;
     modalList.cabinetTitle = '';
     modalList.cabinetForm = {};
   };
 
-  const submitModal = (data) => {
-    editCabinet(data);
+  const submitModal = (type, data) => {
+    if (type == '编辑') {
+      editCabinet(data);
+    } else {
+      addCabinet(data);
+    }
     closeSuccessModal(false);
     getList(key.value);
   };
@@ -211,8 +244,8 @@
     position: relative;
     .test-click {
       position: absolute;
-      right: 0;
-      top: 0;
+      right: 12px;
+      top: 8px;
       height: 40px;
       display: flex;
       justify-content: space-between;

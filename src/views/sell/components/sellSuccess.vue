@@ -31,7 +31,7 @@
       <template #sysBraceletId="{ record, index }">
         <div class="ly-table-input">
           <a-input :ref="'sysBraceletId' + index" readonly v-model:value="record.sysBraceletId" placeholder="扫描手环" block />
-          <a-button type="primary" @click="bracelet('sysBraceletId', index, record.sysTicketId)" preIcon="ant-design:scan-outlined" title="点击录入" />
+          <a-button type="primary" @click="bracelet('sysBraceletId', index, record.ticketNumber)" preIcon="ant-design:scan-outlined" title="点击录入" />
         </div>
       </template>
       <template #deposit="{ record, index }">

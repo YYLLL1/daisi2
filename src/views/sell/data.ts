@@ -14,7 +14,7 @@ export interface Select {
 }
 
 export const sellColumns = [
-  { title: '票号', dataIndex: 'sysTicketId', key: 'sysTicketId', fixed: 'left', align: 'center', width: 190 },
+  { title: '票号', dataIndex: 'ticketNumber', key: 'ticketNumber', fixed: 'left', align: 'center', width: 190 },
   { title: '票种', dataIndex: 'ticketName', key: 'ticketName', fixed: 'left', align: 'center', width: 100 },
   { title: '单价', key: 'price', dataIndex: 'price', align: 'center', width: 70 },
   { title: '手机号', key: 'phone', dataIndex: 'phone', slots: { customRender: 'phone' }, align: 'center', width: 150 },
