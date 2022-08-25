@@ -7,21 +7,23 @@
           <a-button type="primary" @click="add">新增更衣柜</a-button>
         </div>
         <div class="ly-card-content">
-          <a-row :gutter="16" class="ly-card-list">
-            <a-col v-for="item of cabinetList.records" :key="item.id" class="ly-card-item" :span="3">
-              <div class="cabinet" :class="cabinetState(item.cabinetState)">
-                <div class="ly-cabinet-info">
-                  <span>{{ item.cabinetState_dictText }}</span>
-                  <br />
-                  <span>{{ item.lockerNo }}</span>
+          <a-spin :spinning="spinning">
+            <a-row :gutter="16" class="ly-card-list">
+              <a-col v-for="item of cabinetList.records" :key="item.id" class="ly-card-item" :span="3">
+                <div class="cabinet" :class="cabinetState(item.cabinetState)">
+                  <div class="ly-cabinet-info">
+                    <span>{{ item.cabinetState_dictText }}</span>
+                    <br />
+                    <span>{{ item.lockerNo }}</span>
+                  </div>
+                  <div class="ly-cabinet-edit">
+                    <a-button type="primary" preIcon="ant-design:edit-filled" size="small" title="编辑" @click="edit(item)" />
+                    <a-button style="margin-left: 10px" type="primary" preIcon="ant-design:delete-filled" size="small" title="删除" danger @click="deleteCabinet(item.id)" />
+                  </div>
                 </div>
-                <div class="ly-cabinet-edit">
-                  <a-button type="primary" preIcon="ant-design:edit-filled" size="small" title="编辑" @click="edit(item)" />
-                  <a-button style="margin-left: 10px" type="primary" preIcon="ant-design:delete-filled" size="small" title="删除" danger @click="deleteCabinet(item.id)" />
-                </div>
-              </div>
-            </a-col>
-          </a-row>
+              </a-col>
+            </a-row>
+          </a-spin>
         </div>
         <div class="ly-card-pagination">
           <a-pagination
@@ -54,7 +56,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { onMounted, reactive, ref } from 'vue';
+  import { nextTick, onMounted, reactive, ref } from 'vue';
   import { Pagination } from 'ant-design-vue';
   import { tab, list, listStatistics, editList, editCabinetOut, editCabinetRent, deleteList, addList } from './SysCabinetList.api';
   import { IPosition } from './SysCabinetList.data';
@@ -62,6 +64,7 @@
   import SysCabinetListAdd from './components/SysCabinetListAdd.vue';
   import { useMessage } from '/@/hooks/web/useMessage';
 
+  const spinning = ref<boolean>(false);
   const { createConfirm } = useMessage();
   // 测试点击
   const sysBraceletId = ref('');
@@ -103,12 +106,16 @@
   };
   //获取分页数据
   const getList = async (pos, pageNo = 1, pageSize = 40) => {
+    spinning.value = true;
     let listData = await list({ position: pos, pageNo, pageSize });
     cabinetList.records = listData.records;
     cabinetList.pages = listData.pages;
     cabinetList.current = listData.current;
     cabinetList.size = listData.size;
     cabinetList.total = listData.total;
+    nextTick(() => {
+      spinning.value = false;
+    });
   };
   const getStatistics = async () => {
     //获取tab列表

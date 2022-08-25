@@ -5,40 +5,48 @@ export const columns: BasicColumn[] = [
   {
     title: '手环状态',
     align: 'center',
+    width: '100px',
     dataIndex: 'braceletStatu_dictText',
   },
   {
     title: '手环编号',
+    width: '200px',
     align: 'center',
     dataIndex: 'sysBraceletId',
   },
   {
     title: '使用者',
+    width: '200px',
     align: 'center',
     dataIndex: 'username',
   },
   {
     title: '手机号',
+    width: '150px',
     align: 'center',
     dataIndex: 'phone',
   },
   {
     title: '手环订单号',
+    width: '200px',
     align: 'center',
     dataIndex: 'braceletOrderCode',
   },
   {
     title: '已收押金',
+    width: '100px',
     align: 'center',
     dataIndex: 'deposit',
   },
   {
     title: '收款方式',
+    width: '100px',
     align: 'center',
     dataIndex: 'paymentMethod_dictText',
   },
   {
     title: '下单方式',
+    width: '100px',
     align: 'center',
     dataIndex: 'orderForm_dictText',
   },
@@ -50,11 +58,13 @@ export const columns: BasicColumn[] = [
   {
     title: '储柜状态',
     align: 'center',
+    width: '100px',
     dataIndex: 'cabinetStatu_dictText',
   },
   {
     title: '储柜动作',
     key: 'cabinet_action',
+    width: '110px',
     align: 'center',
     slots: { customRender: 'cabinet_action' },
   },

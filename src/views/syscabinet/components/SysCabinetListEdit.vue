@@ -25,8 +25,8 @@
         </a-select>
       </a-form-item>
       <a-form-item label="开合状态：" name="switchState">
-        <span v-if="formState.switchState == '开'" style="color: green">已打开</span>
-        <span v-if="formState.switchState == '关'" style="color: red">已关闭</span>
+        <span v-if="formState.switchControl" style="color: green">已打开</span>
+        <span v-else style="color: red">已关闭</span>
       </a-form-item>
       <a-form-item label="开合控制：" name="switchControl">
         <a-switch v-model:checked="formState.switchControl" checked-children="开" un-checked-children="关" @change="changeHandel" />

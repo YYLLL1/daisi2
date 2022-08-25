@@ -65,8 +65,8 @@
         <a-button v-else :ghost="true" type="primary" preIcon="ant-design:download-outlined" size="small" @click="downloadFile(text)">下载</a-button>
       </template>
       <template #cabinet_action="{ record }">
-        <a-button type="primary" v-if="record.cabinetStatu == '1'" @click="cabinetAction(record)">申请退柜</a-button>
-        <a-button v-if="record.cabinetStatu == '2'" @click="cabinetAction(record)">申请开柜</a-button>
+        <a-button type="primary" v-if="record.cabinetStatu == '1'" @click="cabinetAction(record)">申请开柜</a-button>
+        <a-button v-if="record.cabinetStatu == '2'" @click="cabinetAction(record)">申请退柜</a-button>
       </template>
     </BasicTable>
     <!-- 表单区域 -->
