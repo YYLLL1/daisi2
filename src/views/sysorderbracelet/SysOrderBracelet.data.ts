@@ -52,6 +52,12 @@ export const columns: BasicColumn[] = [
     align: 'center',
     dataIndex: 'cabinetStatu_dictText',
   },
+  {
+    title: '储柜动作',
+    key: 'cabinet_action',
+    align: 'center',
+    slots: { customRender: 'cabinet_action' },
+  },
 ];
 
 //查询数据

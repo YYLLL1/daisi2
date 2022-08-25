@@ -45,7 +45,7 @@
 </template>
 
 <script lang="ts" name="sysordermain-sysOrderMain" setup>
-  import { ref, reactive } from 'vue';
+  import { ref } from 'vue';
   import { BasicTable, TableAction } from '/@/components/Table';
   import { getAreaTextByCode } from '/@/components/Form/src/utils/Area';
   import { useListPage } from '/@/hooks/system/useListPage';
@@ -163,15 +163,6 @@
 
   /* ----------------------以下为原生查询需要添加的-------------------------- */
   const queryParam = ref<any>({});
-  // const toggleSearchStatus = ref<boolean>(false);
-  const labelCol = reactive({
-    xs: { span: 24 },
-    sm: { span: 7 },
-  });
-  const wrapperCol = reactive({
-    xs: { span: 24 },
-    sm: { span: 16 },
-  });
   /**
    * 重置
    */

@@ -255,12 +255,12 @@
     font-weight: 700;
     cursor: pointer;
   }
-  .ly-card {
-    .ly-venue-gallery img {
-      height: 100%;
-      max-height: 100px;
-    }
+
+  .ly-venue-gallery img {
+    height: 100%;
+    max-height: 100px;
   }
+
   .ly-card-container {
     & > div {
       margin-bottom: 20px;

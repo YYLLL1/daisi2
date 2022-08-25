@@ -39,7 +39,7 @@
       <div class="test-click">
         <a-input v-model:value="sysBraceletId" />
         <a-button type="primary" class="cabinet-rent" @click="cabinetRent">租柜子</a-button>
-        <a-button type="primary" @click="cabinetOut">退柜子</a-button>
+        <a-button @click="cabinetOut">退柜子</a-button>
       </div>
     </a-card>
     <SysCabinetListEdit

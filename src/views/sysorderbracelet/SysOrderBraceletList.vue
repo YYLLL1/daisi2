@@ -64,6 +64,10 @@
         <span v-if="!text" style="font-size: 12px; font-style: italic">无文件</span>
         <a-button v-else :ghost="true" type="primary" preIcon="ant-design:download-outlined" size="small" @click="downloadFile(text)">下载</a-button>
       </template>
+      <template #cabinet_action="{ record }">
+        <a-button type="primary" v-if="record.cabinetStatu == '1'" @click="cabinetAction(record)">申请退柜</a-button>
+        <a-button v-if="record.cabinetStatu == '2'" @click="cabinetAction(record)">申请开柜</a-button>
+      </template>
     </BasicTable>
     <!-- 表单区域 -->
     <SysOrderBraceletModal ref="registerModal" @success="handleSuccess" />
@@ -76,7 +80,7 @@
   import { getAreaTextByCode } from '/@/components/Form/src/utils/Area';
   import { useListPage } from '/@/hooks/system/useListPage';
   import { columns } from './SysOrderBracelet.data';
-  import { list, deleteOne, batchDelete, getImportUrl, getExportUrl } from './SysOrderBracelet.api';
+  import { list, deleteOne, batchDelete, getImportUrl, getExportUrl, cabinetRent, cabinetOut } from './SysOrderBracelet.api';
   import { downloadFile } from '/@/utils/common/renderUtils';
   import SysOrderBraceletModal from './components/SysOrderBraceletModal.vue';
   import JDictSelectTag from '/@/components/Form/src/jeecg/components/JDictSelectTag.vue';
@@ -117,6 +121,17 @@
     xs: { span: 24 },
     sm: { span: 16 },
   });
+
+  const cabinetAction = async (record) => {
+    switch (record.cabinetStatu) {
+      case '1':
+        await cabinetRent({ sysBraceletId: record.sysBraceletId }, handleSuccess);
+        break;
+      case '2':
+        await cabinetOut({ sysBraceletId: record.sysBraceletId }, handleSuccess);
+        break;
+    }
+  };
 
   /**
    * 新增事件
