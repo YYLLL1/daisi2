@@ -1,47 +1,39 @@
 <template>
-  <div>
+  <div class="ly-container">
     <!--查询区域-->
     <div class="jeecg-basic-table-form-container">
-      <a-form @keyup.enter.native="searchQuery" :model="queryParam" :label-col="labelCol" :wrapper-col="wrapperCol">
+      <a-form @keyup.enter="searchQuery" :model="queryParam" :label-col="labelCol" :wrapper-col="wrapperCol">
         <a-row :gutter="24">
-          <a-col :lg="8">
+          <a-col :lg="6">
             <a-form-item label="租柜状态">
               <j-dict-select-tag placeholder="请选择租柜状态" v-model:value="queryParam.rentCabinetStatus" dictCode="rent_cabinet_status" />
             </a-form-item>
           </a-col>
-          <a-col :lg="8">
+          <a-col :lg="6">
             <a-form-item label="手机号">
               <a-input placeholder="请输入手机号" v-model:value="queryParam.phone" />
             </a-form-item>
           </a-col>
-          <template v-if="toggleSearchStatus">
-            <a-col :lg="8">
-              <a-form-item label="柜子订单号">
-                <a-input placeholder="请输入柜子订单号" v-model:value="queryParam.cabinetOrderCode" />
-              </a-form-item>
-            </a-col>
-            <a-col :lg="8">
-              <a-form-item label="开柜时间">
-                <a-date-picker showTime valueFormat="YYYY-MM-DD HH:mm:ss" placeholder="请选择开柜时间" v-model:value="queryParam.openCabinetTime" />
-              </a-form-item>
-            </a-col>
-            <a-col :lg="8">
-              <a-form-item label="退柜时间">
-                <a-date-picker showTime valueFormat="YYYY-MM-DD HH:mm:ss" placeholder="请选择退柜时间" v-model:value="queryParam.returnCabinetTime" />
-              </a-form-item>
-            </a-col>
-          </template>
-          <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <span style="float: left; overflow: hidden" class="table-page-search-submitButtons">
-              <a-col :lg="6">
-                <a-button type="primary" preIcon="ant-design:search-outlined" @click="searchQuery">查询</a-button>
-                <a-button type="primary" preIcon="ant-design:reload-outlined" @click="searchReset" style="margin-left: 8px">重置</a-button>
-                <a @click="toggleSearchStatus = !toggleSearchStatus" style="margin-left: 8px">
-                  {{ toggleSearchStatus ? '收起' : '展开' }}
-                  <Icon :icon="toggleSearchStatus ? 'ant-design:up-outlined' : 'ant-design:down-outlined'" />
-                </a>
-              </a-col>
-            </span>
+          <a-col :lg="6">
+            <a-form-item label="柜子订单号">
+              <a-input placeholder="请输入柜子订单号" v-model:value="queryParam.cabinetOrderCode" />
+            </a-form-item>
+          </a-col>
+          <a-col :lg="6">
+            <a-form-item label="开柜时间">
+              <a-date-picker showTime valueFormat="YYYY-MM-DD HH:mm:ss" placeholder="请选择开柜时间" v-model:value="queryParam.openCabinetTime" />
+            </a-form-item>
+          </a-col>
+        </a-row>
+        <a-row :gutter="24">
+          <a-col :lg="6">
+            <a-form-item label="退柜时间">
+              <a-date-picker showTime valueFormat="YYYY-MM-DD HH:mm:ss" placeholder="请选择退柜时间" v-model:value="queryParam.returnCabinetTime" />
+            </a-form-item>
+          </a-col>
+          <a-col :lg="6">
+            <a-button type="primary" preIcon="ant-design:search-outlined" @click="searchQuery">查询</a-button>
+            <a-button type="primary" preIcon="ant-design:reload-outlined" @click="searchReset" style="margin-left: 8px">重置</a-button>
           </a-col>
         </a-row>
       </a-form>
@@ -62,8 +54,8 @@
               </a-menu-item>
             </a-menu>
           </template>
-          <a-button>
-            批量操作
+          <a-button
+            >批量操作
             <Icon icon="mdi:chevron-down" />
           </a-button>
         </a-dropdown>
@@ -92,7 +84,7 @@
 
 <script lang="ts" name="syscabinetlog-sysCabinetLog" setup>
   import { ref, reactive } from 'vue';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { BasicTable, TableAction } from '/@/components/Table';
   import { getAreaTextByCode } from '/@/components/Form/src/utils/Area';
   import { useListPage } from '/@/hooks/system/useListPage';
   import { columns } from './SysCabinetLog.data';
@@ -102,10 +94,9 @@
   import JDictSelectTag from '/@/components/Form/src/jeecg/components/JDictSelectTag.vue';
 
   const queryParam = ref<any>({});
-  const toggleSearchStatus = ref<boolean>(false);
   const registerModal = ref();
   //注册table数据
-  const { prefixCls, tableContext, onExportXls, onImportXls } = useListPage({
+  const { tableContext, onExportXls, onImportXls } = useListPage({
     tableProps: {
       title: '租柜记录',
       api: list,
@@ -129,7 +120,7 @@
       success: handleSuccess,
     },
   });
-  const [registerTable, { reload, collapseAll, updateTableDataRecord, findTableDataRecord, getDataSource }, { rowSelection, selectedRowKeys }] = tableContext;
+  const [registerTable, { reload }, { rowSelection, selectedRowKeys }] = tableContext;
   const labelCol = reactive({
     xs: { span: 24 },
     sm: { span: 7 },
@@ -235,11 +226,7 @@
 
 <style lang="less" scoped>
   .jeecg-basic-table-form-container {
-    .table-page-search-submitButtons {
-      display: block;
-      margin-bottom: 24px;
-      white-space: nowrap;
-    }
+    padding: 0;
     .query-group-cust {
       width: calc(50% - 15px);
       min-width: 100px !important;

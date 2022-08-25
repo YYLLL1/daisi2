@@ -3,13 +3,13 @@
     <a-form ref="formRef" class="antd-modal-form" :labelCol="labelCol" :wrapperCol="wrapperCol">
       <a-row>
         <a-col :span="24">
-          <a-form-item label="租柜状态" v-bind="validateInfos.rentCabinetStatus">
-            <j-dict-select-tag v-model:value="formData.rentCabinetStatus" dictCode="rent_cabinet_status" placeholder="请选择租柜状态" :disabled="props.disabled" />
+          <a-form-item label="手环状态" v-bind="validateInfos.braceletStatu">
+            <j-dict-select-tag v-model:value="formData.braceletStatu" dictCode="bracelet_statu" placeholder="请选择手环状态" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
-          <a-form-item label="更衣柜编号" v-bind="validateInfos.lockerNo">
-            <a-input v-model:value="formData.lockerNo" placeholder="请输入更衣柜编号" :disabled="props.disabled" />
+          <a-form-item label="手环编号" v-bind="validateInfos.sysBraceletId">
+            <a-input v-model:value="formData.sysBraceletId" placeholder="请输入手环编号" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
@@ -23,28 +23,33 @@
           </a-form-item>
         </a-col>
         <a-col :span="24">
-          <a-form-item label="柜子订单号" v-bind="validateInfos.cabinetOrderCode">
-            <a-input v-model:value="formData.cabinetOrderCode" placeholder="请输入柜子订单号" :disabled="props.disabled" />
+          <a-form-item label="手环订单号" v-bind="validateInfos.braceletOrderCode">
+            <a-input v-model:value="formData.braceletOrderCode" placeholder="请输入手环订单号" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
-          <a-form-item label="开柜方式" v-bind="validateInfos.openCabinetType">
-            <j-dict-select-tag v-model:value="formData.openCabinetType" dictCode="open_cabinet_type" placeholder="请选择开柜方式" :disabled="props.disabled" />
+          <a-form-item label="已收押金" v-bind="validateInfos.deposit">
+            <a-input-number v-model:value="formData.deposit" placeholder="请输入已收押金" style="width: 100%" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
-          <a-form-item label="绑定ID" v-bind="validateInfos.bindingId">
-            <a-input v-model:value="formData.bindingId" placeholder="请输入绑定ID" :disabled="props.disabled" />
+          <a-form-item label="收款方式" v-bind="validateInfos.paymentMethod">
+            <j-dict-select-tag v-model:value="formData.paymentMethod" dictCode="payment_method" placeholder="请选择收款方式" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
-          <a-form-item label="开柜时间" v-bind="validateInfos.openCabinetTime">
-            <a-date-picker placeholder="请选择开柜时间" v-model:value="formData.openCabinetTime" showTime value-format="YYYY-MM-DD HH:mm:ss" style="width: 100%" :disabled="props.disabled" />
+          <a-form-item label="下单方式" v-bind="validateInfos.orderForm">
+            <j-dict-select-tag v-model:value="formData.orderForm" dictCode="order_form" placeholder="请选择下单方式" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
-          <a-form-item label="退柜时间" v-bind="validateInfos.returnCabinetTime">
-            <a-date-picker placeholder="请选择退柜时间" v-model:value="formData.returnCabinetTime" showTime value-format="YYYY-MM-DD HH:mm:ss" style="width: 100%" :disabled="props.disabled" />
+          <a-form-item label="下单时间" v-bind="validateInfos.orderTime">
+            <a-date-picker placeholder="请选择下单时间" v-model:value="formData.orderTime" showTime value-format="YYYY-MM-DD HH:mm:ss" style="width: 100%" :disabled="props.disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item label="储柜状态" v-bind="validateInfos.cabinetStatu">
+            <j-dict-select-tag v-model:value="formData.cabinetStatu" dictCode="cabinet_statu" placeholder="请选择储柜状态" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
       </a-row>
@@ -57,7 +62,7 @@
   import { useMessage } from '/@/hooks/web/useMessage';
   import JDictSelectTag from '/@/components/Form/src/jeecg/components/JDictSelectTag.vue';
   import { getValueType } from '/@/utils';
-  import { saveOrUpdate } from '../SysCabinetLog.api';
+  import { saveOrUpdate } from '../SysOrderBracelet.api';
   import { Form } from 'ant-design-vue';
 
   const props = defineProps({
@@ -68,23 +73,25 @@
   const emit = defineEmits(['register', 'ok']);
   const formData = reactive<Record<string, any>>({
     id: '',
-    rentCabinetStatus: '',
+    braceletStatu: '',
     id: '',
-    lockerNo: '',
+    sysBraceletId: '',
     id: '',
     username: '',
     id: '',
     phone: '',
     id: '',
-    cabinetOrderCode: '',
+    braceletOrderCode: '',
     id: '',
-    openCabinetType: '',
+    deposit: undefined,
     id: '',
-    bindingId: '',
+    paymentMethod: '',
     id: '',
-    openCabinetTime: '',
+    orderForm: '',
     id: '',
-    returnCabinetTime: '',
+    orderTime: '',
+    id: '',
+    cabinetStatu: '',
   });
   const { createMessage } = useMessage();
   const labelCol = ref<any>({ xs: { span: 24 }, sm: { span: 5 } });

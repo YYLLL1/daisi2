@@ -4,13 +4,13 @@ import { useMessage } from '/@/hooks/web/useMessage';
 const { createConfirm } = useMessage();
 
 enum Api {
-  list = '/syscustomer/sysCustomer/list',
-  save = '/syscustomer/sysCustomer/add',
-  edit = '/syscustomer/sysCustomer/edit',
-  deleteOne = '/syscustomer/sysCustomer/delete',
-  deleteBatch = '/syscustomer/sysCustomer/deleteBatch',
-  importExcel = '/syscustomer/sysCustomer/importExcel',
-  exportXls = '/syscustomer/sysCustomer/exportXls',
+  list = '/sysorderbracelet/sysOrderBracelet/list',
+  save = '/sysorderbracelet/sysOrderBracelet/add',
+  edit = '/sysorderbracelet/sysOrderBracelet/edit',
+  deleteOne = '/sysorderbracelet/sysOrderBracelet/delete',
+  deleteBatch = '/sysorderbracelet/sysOrderBracelet/deleteBatch',
+  importExcel = '/sysorderbracelet/sysOrderBracelet/importExcel',
+  exportXls = '/sysorderbracelet/sysOrderBracelet/exportXls',
 }
 
 /**

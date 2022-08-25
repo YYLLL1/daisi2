@@ -20,27 +20,34 @@ enum Api {
  * @param params
  */
 export const getExportUrl = Api.exportXls;
+
 /**
  * 导入api
  * @param params
  */
 export const getImportUrl = Api.importExcel;
+
 /**
  * 列表接口
  * @param params
  */
 export const list = (params) => defHttp.get({ url: Api.list, params });
+
 /**
  * 删除
+ * @param params
+ * @param handleSuccess
  */
 export const deleteSysOrganization = (params, handleSuccess) => {
   return defHttp.delete({ url: Api.deleteSysOrganization, params }, { joinParamsToUrl: true }).then(() => {
     handleSuccess();
   });
 };
+
 /**
  * 批量删除
  * @param params
+ * @param handleSuccess
  */
 export const batchDeleteSysOrganization = (params, handleSuccess) => {
   createConfirm({
@@ -56,24 +63,29 @@ export const batchDeleteSysOrganization = (params, handleSuccess) => {
     },
   });
 };
+
 /**
  * 保存或者更新
  * @param params
+ * @param isUpdate
  */
 export const saveOrUpdateDict = (params, isUpdate) => {
   const url = isUpdate ? Api.edit : Api.save;
-  return defHttp.post({ url: url, params });
+  return defHttp.post({ url: url, params }, { isTransformResponse: false });
 };
+
 /**
  * 查询全部树形节点数据
  * @param params
  */
 export const loadTreeData = (params) => defHttp.get({ url: Api.loadTreeData, params });
+
 /**
  * 查询子节点数据
  * @param params
  */
 export const getChildList = (params) => defHttp.get({ url: Api.getChildList, params });
+
 /**
  * 批量查询子节点数据
  * @param params

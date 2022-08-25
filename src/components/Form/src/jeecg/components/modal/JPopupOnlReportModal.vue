@@ -246,7 +246,7 @@
 
 <style lang="less" scoped>
   .jeecg-basic-table-form-container {
-    padding: 5px;
+    padding: 0;
 
     .table-page-search-submitButtons {
       display: block;

@@ -1,7 +1,6 @@
 import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
-// import { rules} from '/@/utils/helper/validator';
-// import { render } from '/@/utils/common/renderUtils';
+
 //列表数据
 export const columns: BasicColumn[] = [
   {
@@ -23,7 +22,6 @@ export const columns: BasicColumn[] = [
     title: '售卖状态',
     align: 'center',
     dataIndex: 'sellStatus_dictText',
-    slots: { customRender: 'sellStatus_dictText' },
   },
   {
     title: '人数',
@@ -36,6 +34,7 @@ export const columns: BasicColumn[] = [
     dataIndex: 'special',
   },
 ];
+
 //查询数据
 export const searchFormSchema: FormSchema[] = [
   {
@@ -48,6 +47,7 @@ export const searchFormSchema: FormSchema[] = [
     colProps: { span: 6 },
   },
 ];
+
 //表单数据
 export const formSchema: FormSchema[] = [
   {

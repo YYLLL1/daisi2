@@ -288,6 +288,7 @@
 </script>
 <style lang="less" scoped>
   .jeecg-basic-table-form-container {
+    padding: 0;
     .table-page-search-submitButtons {
       display: block;
       margin-bottom: 24px;

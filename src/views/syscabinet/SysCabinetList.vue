@@ -1,54 +1,56 @@
 <template>
-  <a-card class="ly-card" :tab-list="position" :active-tab-key="key" @tabChange="(item) => onTabChange(item)">
-    <div class="ly-card-container">
-      <div class="ly-card-tool">
-        <p v-for="(state, index) of cabinetList.statistics" :key="index">{{ state.cabinetstate }}：{{ state.cabinetcount }}</p>
-        <a-button type="primary" @click="add">新增更衣柜</a-button>
-      </div>
-      <div class="ly-card-content">
-        <a-row :gutter="16" class="ly-card-list">
-          <a-col v-for="item of cabinetList.records" :key="item.id" class="ly-card-item" :span="3">
-            <div class="cabinet" :class="cabinetState(item.cabinetState)">
-              <div class="ly-cabinet-info">
-                <span>{{ item.cabinetState_dictText }}</span>
-                <br />
-                <span>{{ item.lockerNo }}</span>
+  <div class="ly-container">
+    <a-card class="ly-card" :tab-list="position" :active-tab-key="key" @tabChange="(item) => onTabChange(item)">
+      <div class="ly-card-container">
+        <div class="ly-card-tool">
+          <p v-for="(state, index) of cabinetList.statistics" :key="index">{{ state.cabinetstate }}：{{ state.cabinetcount }}</p>
+          <a-button type="primary" @click="add">新增更衣柜</a-button>
+        </div>
+        <div class="ly-card-content">
+          <a-row :gutter="16" class="ly-card-list">
+            <a-col v-for="item of cabinetList.records" :key="item.id" class="ly-card-item" :span="3">
+              <div class="cabinet" :class="cabinetState(item.cabinetState)">
+                <div class="ly-cabinet-info">
+                  <span>{{ item.cabinetState_dictText }}</span>
+                  <br />
+                  <span>{{ item.lockerNo }}</span>
+                </div>
+                <div class="ly-cabinet-edit">
+                  <a-button type="primary" preIcon="ant-design:edit-filled" size="small" title="编辑" @click="edit(item)" />
+                  <a-button style="margin-left: 10px" type="primary" preIcon="ant-design:delete-filled" size="small" title="删除" danger @click="deleteCabinet(item.id)" />
+                </div>
               </div>
-              <div class="ly-cabinet-edit">
-                <a-button type="primary" preIcon="ant-design:edit-filled" size="small" title="编辑" @click="edit(item)" />
-                <a-button style="margin-left: 10px" type="primary" preIcon="ant-design:delete-filled" size="small" title="删除" danger @click="deleteCabinet(item.id)" />
-              </div>
-            </div>
-          </a-col>
-        </a-row>
+            </a-col>
+          </a-row>
+        </div>
+        <div class="ly-card-pagination">
+          <a-pagination
+            size="small"
+            :total="cabinetList.total"
+            :page-size="cabinetList.size"
+            :current="cabinetList.current"
+            show-size-changer
+            show-quick-jumper
+            :show-total="(total) => `总共 ${total} 个`"
+            @change="handlePageChange"
+          />
+        </div>
       </div>
-      <div class="ly-card-pagination">
-        <a-pagination
-          size="small"
-          :total="cabinetList.total"
-          :page-size="cabinetList.size"
-          :current="cabinetList.current"
-          show-size-changer
-          show-quick-jumper
-          :show-total="(total) => `总共 ${total} 个`"
-          @change="handlePageChange"
-        />
+      <div class="test-click">
+        <a-input v-model:value="sysBraceletId" />
+        <a-button type="primary" class="cabinet-rent" @click="cabinetRent">租柜子</a-button>
+        <a-button type="primary" @click="cabinetOut">退柜子</a-button>
       </div>
-    </div>
-    <div class="test-click">
-      <a-input v-model:value="sysBraceletId" />
-      <a-button type="primary" class="cabinet-rent" @click="cabinetRent">租柜子</a-button>
-      <a-button type="primary" @click="cabinetOut">退柜子</a-button>
-    </div>
-  </a-card>
-  <SysCabinetListEdit
-    @submitModal="submitModal"
-    @closeSuccessModal="closeSuccessModal"
-    :cabinetEditVisible="modalList.cabinetEditVisible"
-    :cabinetTitle="modalList.cabinetTitle"
-    :cabinetForm="modalList.cabinetForm"
-  />
-  <SysCabinetListAdd @submitModal="submitModal" @closeSuccessModal="closeSuccessModal" :cabinetAddVisible="modalList.cabinetAddVisible" />
+    </a-card>
+    <SysCabinetListEdit
+      @submitModal="submitModal"
+      @closeSuccessModal="closeSuccessModal"
+      :cabinetEditVisible="modalList.cabinetEditVisible"
+      :cabinetTitle="modalList.cabinetTitle"
+      :cabinetForm="modalList.cabinetForm"
+    />
+    <SysCabinetListAdd @submitModal="submitModal" @closeSuccessModal="closeSuccessModal" :cabinetAddVisible="modalList.cabinetAddVisible" />
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -238,7 +240,6 @@
   }
 
   .ly-card {
-    margin: 20px;
     position: relative;
     .test-click {
       position: absolute;

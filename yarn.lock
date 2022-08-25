@@ -919,6 +919,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.5.5":
+  version "7.18.9"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.18.9.tgz#b4fcfce55db3d2e5e080d2490f608a3b9f407f4a"
+  integrity sha512-lkqXDcvlFT5rvEjiu6+QYO+1GXrEHRo2LOtS7E4GtX5ESIZOgepqsZBVIj6Pv+a6zqsya9VCgiK1KAK4BvJDAw==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/standalone@^7.15.7":
   version "7.15.8"
   resolved "https://registry.npmmirror.com/@babel/standalone/download/@babel/standalone-7.15.8.tgz#3cb40b81892a702968a3e0bba2bdd1115f034876"
@@ -1483,6 +1490,54 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
+"@jiaminghi/bezier-curve@*":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@jiaminghi/bezier-curve/-/bezier-curve-0.0.9.tgz#5196aca93c8b061a612b4c3eabcedf9490cef6ee"
+  integrity sha512-u9xJPOEl6Dri2E9FfmJoGxYQY7vYJkURNX04Vj64tdi535tPrpkuf9Sm0lNr3QTKdHQh0DdNRsaa62FLQNQEEw==
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+
+"@jiaminghi/c-render@^0.4.3":
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/@jiaminghi/c-render/-/c-render-0.4.3.tgz#982ebd8f71b443bb9507834227834973ebd9b6d8"
+  integrity sha512-FJfzj5hGj7MLqqqI2D7vEzHKbQ1Ynnn7PJKgzsjXaZpJzTqs2Yw5OSeZnm6l7Qj7jyPAP53lFvEQNH4o4j6s+Q==
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+    "@jiaminghi/bezier-curve" "*"
+    "@jiaminghi/color" "*"
+    "@jiaminghi/transition" "*"
+
+"@jiaminghi/charts@^0.2.18":
+  version "0.2.18"
+  resolved "https://registry.yarnpkg.com/@jiaminghi/charts/-/charts-0.2.18.tgz#63ded95200789fc1a1fd04b7fd9e56f58d22d90f"
+  integrity sha512-K+HXaOOeWG9OOY1VG6M4mBreeeIAPhb9X+khG651AbnwEwL6G2UtcAQ8GWCq6GzhczcLwwhIhuaHqRygwHC0sA==
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+    "@jiaminghi/c-render" "^0.4.3"
+
+"@jiaminghi/color@*":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@jiaminghi/color/-/color-0.1.1.tgz#bddf9012dfce6982d3829a983ffeb91ee9dda7b6"
+  integrity sha512-M09+Sb5HGqVim0zo+nG5gU1v+6gXT8ptr0BZR6dMGt83XmCJgnZtO8s7llTW4hLFFFM5co6geZvTekqLpSPAAQ==
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+
+"@jiaminghi/transition@*":
+  version "1.1.11"
+  resolved "https://registry.yarnpkg.com/@jiaminghi/transition/-/transition-1.1.11.tgz#576d8af092434b34201eba5eaecc79dd33c8ad8c"
+  integrity sha512-owBggipoHMikDHHDW5Gc7RZYlVuvxHADiU4bxfjBVkHDAmmck+fCkm46n2JzC3j33hWvP9nSCAeh37t6stgWeg==
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+
+"@kjgl77/datav-vue3@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@kjgl77/datav-vue3/-/datav-vue3-1.2.1.tgz#9785d790708eea562a13f7439bbca5c7d1051aa0"
+  integrity sha512-hiSodPvXkp6o8nyPPgDFcrb+M4h9dZd2hmuT3WqHY+sInEHCFtypCGrhvxRFT3oGlcIlLKSX9WVb117JksFROA==
+  dependencies:
+    "@jiaminghi/c-render" "^0.4.3"
+    "@jiaminghi/charts" "^0.2.18"
+    "@vueuse/core" "^9.1.0"
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.nlark.com/@nodelib/fs.scandir/download/@nodelib/fs.scandir-2.1.5.tgz?cache=0&sync_timestamp=1622792874919&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40nodelib%2Ffs.scandir%2Fdownload%2F%40nodelib%2Ffs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
@@ -1982,6 +2037,11 @@
   resolved "https://registry.nlark.com/@types/unist/download/@types/unist-2.0.6.tgz?cache=0&sync_timestamp=1629709560180&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Funist%2Fdownload%2F%40types%2Funist-2.0.6.tgz#250a7b16c3b91f672a24552ec64678eeb1d3a08d"
   integrity sha1-JQp7FsO5H2cqJFUuxkZ47rHToI0=
 
+"@types/web-bluetooth@^0.0.15":
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/@types/web-bluetooth/-/web-bluetooth-0.0.15.tgz#d60330046a6ed8a13b4a53df3813c44942ebdf72"
+  integrity sha512-w7hEHXnPMEZ+4nGKl/KDRVpxkwYxYExuHOYXyzIzCDzEZ9ZCGMAewulr9IqJu2LR4N37fcnb1XVeuZ09qgOxhA==
+
 "@types/yargs-parser@*":
   version "20.2.1"
   resolved "https://registry.nlark.com/@types/yargs-parser/download/@types/yargs-parser-20.2.1.tgz?cache=0&sync_timestamp=1629709992302&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fyargs-parser%2Fdownload%2F%40types%2Fyargs-parser-20.2.1.tgz#3b9ce2489919d9e4fea439b76916abc34b2df129"
@@ -2332,10 +2392,32 @@
     "@vueuse/shared" "6.7.4"
     vue-demi "*"
 
+"@vueuse/core@^9.1.0":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-9.1.1.tgz#a5c09c33ccee58cfd53bc3ec2d5a0d304155529e"
+  integrity sha512-QfuaNWRDMQcCUwXylCyYhPC3ScS9Tiiz4J0chdwr3vOemBwRToSywq8MP+ZegKYFnbETzRY8G/5zC+ca30wrRQ==
+  dependencies:
+    "@types/web-bluetooth" "^0.0.15"
+    "@vueuse/metadata" "9.1.1"
+    "@vueuse/shared" "9.1.1"
+    vue-demi "*"
+
+"@vueuse/metadata@9.1.1":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@vueuse/metadata/-/metadata-9.1.1.tgz#b3fe4b97e62096f7566cd8eb107c503998b2c9a6"
+  integrity sha512-XZ2KtSW+85LLHB/IdGILPAtbIVHasPsAW7aqz3BRMzJdAQWRiM/FGa1OKBwLbXtUw/AmjKYFlZJo7eOFIBXRog==
+
 "@vueuse/shared@6.7.4":
   version "6.7.4"
   resolved "https://registry.npmmirror.com/@vueuse/shared/download/@vueuse/shared-6.7.4.tgz#9aa2967d20863cf3253afd08a2e6e84a61d2c89b"
   integrity sha1-mqKWfSCGPPMlOv0IouboSmHSyJs=
+  dependencies:
+    vue-demi "*"
+
+"@vueuse/shared@9.1.1":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-9.1.1.tgz#811f47629e281a19013ae6dcdf11ed3e1e91e023"
+  integrity sha512-c+IfcOYmHiHqoEa3ED1Tbpue5GHmoUmTp8PtO4YbczthtY155Rt6DmWhjxMLXBF1Bcidagxljmp/7xtAzEHXLw==
   dependencies:
     vue-demi "*"
 

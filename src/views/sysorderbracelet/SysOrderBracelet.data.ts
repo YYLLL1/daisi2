@@ -3,14 +3,14 @@ import { FormSchema } from '/@/components/Table';
 //列表数据
 export const columns: BasicColumn[] = [
   {
-    title: '租柜状态',
+    title: '手环状态',
     align: 'center',
-    dataIndex: 'rentCabinetStatus_dictText',
+    dataIndex: 'braceletStatu_dictText',
   },
   {
-    title: '更衣柜编号',
+    title: '手环编号',
     align: 'center',
-    dataIndex: 'lockerNo',
+    dataIndex: 'sysBraceletId',
   },
   {
     title: '使用者',
@@ -23,40 +23,45 @@ export const columns: BasicColumn[] = [
     dataIndex: 'phone',
   },
   {
-    title: '柜子订单号',
+    title: '手环订单号',
     align: 'center',
-    dataIndex: 'cabinetOrderCode',
+    dataIndex: 'braceletOrderCode',
   },
   {
-    title: '开柜方式',
+    title: '已收押金',
     align: 'center',
-    dataIndex: 'openCabinetType_dictText',
+    dataIndex: 'deposit',
   },
   {
-    title: '绑定ID',
+    title: '收款方式',
     align: 'center',
-    dataIndex: 'bindingId',
+    dataIndex: 'paymentMethod_dictText',
   },
   {
-    title: '开柜时间',
+    title: '下单方式',
     align: 'center',
-    dataIndex: 'openCabinetTime',
+    dataIndex: 'orderForm_dictText',
   },
   {
-    title: '退柜时间',
+    title: '下单时间',
     align: 'center',
-    dataIndex: 'returnCabinetTime',
+    dataIndex: 'orderTime',
+  },
+  {
+    title: '储柜状态',
+    align: 'center',
+    dataIndex: 'cabinetStatu_dictText',
   },
 ];
 
 //查询数据
 export const searchFormSchema: FormSchema[] = [
   {
-    label: '租柜状态',
-    field: 'rentCabinetStatus',
+    label: '手环状态',
+    field: 'braceletStatu',
     component: 'JDictSelectTag',
     componentProps: {
-      dictCode: 'rent_cabinet_status',
+      dictCode: 'bracelet_statu',
     },
     colProps: { span: 6 },
   },
@@ -67,23 +72,8 @@ export const searchFormSchema: FormSchema[] = [
     colProps: { span: 6 },
   },
   {
-    label: '柜子订单号',
-    field: 'cabinetOrderCode',
-    component: 'Input',
-    colProps: { span: 6 },
-  },
-  {
-    label: '开柜时间',
-    field: 'openCabinetTime',
-    component: 'DatePicker',
-    componentProps: {
-      showTime: true,
-    },
-    colProps: { span: 6 },
-  },
-  {
-    label: '退柜时间',
-    field: 'returnCabinetTime',
+    label: '下单时间',
+    field: 'orderTime',
     component: 'DatePicker',
     componentProps: {
       showTime: true,
@@ -95,16 +85,16 @@ export const searchFormSchema: FormSchema[] = [
 //表单数据
 export const formSchema: FormSchema[] = [
   {
-    label: '租柜状态',
-    field: 'rentCabinetStatus',
+    label: '手环状态',
+    field: 'braceletStatu',
     component: 'JDictSelectTag',
     componentProps: {
-      dictCode: 'rent_cabinet_status',
+      dictCode: 'bracelet_statu',
     },
   },
   {
-    label: '更衣柜编号',
-    field: 'lockerNo',
+    label: '手环编号',
+    field: 'sysBraceletId',
     component: 'Input',
   },
   {
@@ -118,27 +108,34 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
   },
   {
-    label: '柜子订单号',
-    field: 'cabinetOrderCode',
+    label: '手环订单号',
+    field: 'braceletOrderCode',
     component: 'Input',
-    dynamicDisabled: true,
   },
   {
-    label: '开柜方式',
-    field: 'openCabinetType',
+    label: '已收押金',
+    field: 'deposit',
+    component: 'InputNumber',
+  },
+  {
+    label: '收款方式',
+    field: 'paymentMethod',
     component: 'JDictSelectTag',
     componentProps: {
-      dictCode: 'open_cabinet_type',
+      dictCode: 'payment_method',
     },
   },
   {
-    label: '绑定ID',
-    field: 'bindingId',
-    component: 'Input',
+    label: '下单方式',
+    field: 'orderForm',
+    component: 'JDictSelectTag',
+    componentProps: {
+      dictCode: 'order_form',
+    },
   },
   {
-    label: '开柜时间',
-    field: 'openCabinetTime',
+    label: '下单时间',
+    field: 'orderTime',
     component: 'DatePicker',
     componentProps: {
       showTime: true,
@@ -146,12 +143,11 @@ export const formSchema: FormSchema[] = [
     },
   },
   {
-    label: '退柜时间',
-    field: 'returnCabinetTime',
-    component: 'DatePicker',
+    label: '储柜状态',
+    field: 'cabinetStatu',
+    component: 'JDictSelectTag',
     componentProps: {
-      showTime: true,
-      valueFormat: 'YYYY-MM-DD HH:mm:ss',
+      dictCode: 'cabinet_statu',
     },
   },
   // TODO 主键隐藏字段，目前写死为ID

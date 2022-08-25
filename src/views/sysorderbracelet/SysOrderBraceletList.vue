@@ -5,8 +5,18 @@
       <a-form @keyup.enter="searchQuery" :model="queryParam" :label-col="labelCol" :wrapper-col="wrapperCol">
         <a-row :gutter="24">
           <a-col :lg="6">
-            <a-form-item label="售卖状态">
-              <j-dict-select-tag placeholder="请选择售卖状态" v-model:value="queryParam.sellStatus" dictCode="sell_status" />
+            <a-form-item label="手环状态">
+              <j-dict-select-tag placeholder="请选择手环状态" v-model:value="queryParam.braceletStatu" dictCode="bracelet_statu" />
+            </a-form-item>
+          </a-col>
+          <a-col :lg="6">
+            <a-form-item label="手机号">
+              <a-input placeholder="请输入手机号" v-model:value="queryParam.phone" />
+            </a-form-item>
+          </a-col>
+          <a-col :lg="6">
+            <a-form-item label="下单时间">
+              <a-date-picker showTime valueFormat="YYYY-MM-DD HH:mm:ss" placeholder="请选择下单时间" v-model:value="queryParam.orderTime" />
             </a-form-item>
           </a-col>
           <a-col :lg="6">
@@ -56,19 +66,19 @@
       </template>
     </BasicTable>
     <!-- 表单区域 -->
-    <SysTicketModal ref="registerModal" @success="handleSuccess" />
+    <SysOrderBraceletModal ref="registerModal" @success="handleSuccess" />
   </div>
 </template>
 
-<script lang="ts" name="systicket-sysTicket" setup>
+<script lang="ts" name="sysorderbracelet-sysOrderBracelet" setup>
   import { ref, reactive } from 'vue';
   import { BasicTable, TableAction } from '/@/components/Table';
   import { getAreaTextByCode } from '/@/components/Form/src/utils/Area';
   import { useListPage } from '/@/hooks/system/useListPage';
-  import { columns } from './SysTicket.data';
-  import { list, deleteOne, batchDelete, getImportUrl, getExportUrl } from './SysTicket.api';
+  import { columns } from './SysOrderBracelet.data';
+  import { list, deleteOne, batchDelete, getImportUrl, getExportUrl } from './SysOrderBracelet.api';
   import { downloadFile } from '/@/utils/common/renderUtils';
-  import SysTicketModal from './components/SysTicketModal.vue';
+  import SysOrderBraceletModal from './components/SysOrderBraceletModal.vue';
   import JDictSelectTag from '/@/components/Form/src/jeecg/components/JDictSelectTag.vue';
 
   const queryParam = ref<any>({});
@@ -76,7 +86,7 @@
   //注册table数据
   const { tableContext, onExportXls, onImportXls } = useListPage({
     tableProps: {
-      title: '门票类型',
+      title: '手环订单',
       api: list,
       columns,
       canResize: false,
@@ -90,7 +100,7 @@
       },
     },
     exportConfig: {
-      name: '门票类型',
+      name: '手环订单',
       url: getExportUrl,
     },
     importConfig: {

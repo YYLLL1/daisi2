@@ -11,6 +11,7 @@ enum Api {
   deleteBatch = '/sysordermain/sysOrderMain/deleteBatch',
   importExcel = '/sysordermain/sysOrderMain/importExcel',
   exportXls = '/sysordermain/sysOrderMain/exportXls',
+  queryDataById = '/sysordermain/sysOrderMain/queryById',
   sysOrderTicketList = '/sysordermain/sysOrderMain/querySysOrderTicketByMainId',
   sysOrderCustomerList = '/sysordermain/sysOrderMain/querySysOrderCustomerByMainId',
 }
@@ -24,16 +25,18 @@ export const getExportUrl = Api.exportXls;
  * 导入api
  */
 export const getImportUrl = Api.importExcel;
+
 /**
  * 查询子表数据
  * @param params
  */
-export const sysOrderTicketList = Api.sysOrderTicketList;
+export const querySysOrderTicketListByMainId = (id) => defHttp.get({ url: Api.sysOrderTicketList, params: { id } });
 /**
  * 查询子表数据
  * @param params
  */
-export const sysOrderCustomerList = Api.sysOrderCustomerList;
+export const querySysOrderCustomerListByMainId = (id) => defHttp.get({ url: Api.sysOrderCustomerList, params: { id } });
+
 /**
  * 列表接口
  * @param params
@@ -74,3 +77,9 @@ export const saveOrUpdate = (params, isUpdate) => {
   const url = isUpdate ? Api.edit : Api.save;
   return defHttp.post({ url: url, params });
 };
+
+/**
+ * 根据id查询数据
+ * @param params
+ */
+export const queryDataById = (id) => defHttp.get({ url: Api.queryDataById, params: { id } });

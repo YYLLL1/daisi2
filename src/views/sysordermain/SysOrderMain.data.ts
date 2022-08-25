@@ -1,7 +1,5 @@
 import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
-// import { rules } from '/@/utils/helper/validator';
-// import { render } from '/@/utils/common/renderUtils';
 import { JVxeTypes, JVxeColumn } from '/@/components/jeecg/JVxeTable/types';
 //列表数据
 export const columns: BasicColumn[] = [
@@ -29,7 +27,6 @@ export const columns: BasicColumn[] = [
     title: '订单状态	',
     align: 'center',
     dataIndex: 'orderStatus_dictText',
-    slots: { customRender: 'orderStatus_dictText' },
   },
   {
     title: '类目	',

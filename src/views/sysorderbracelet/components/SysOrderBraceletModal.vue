@@ -1,12 +1,12 @@
 <template>
   <a-modal :title="title" :width="width" :visible="visible" @ok="handleOk" :okButtonProps="{ class: { 'jee-hidden': disableSubmit } }" @cancel="handleCancel" cancelText="关闭">
-    <SysCustomerForm ref="registerForm" @ok="submitCallback" :disabled="disableSubmit" />
+    <SysOrderBraceletForm ref="registerForm" @ok="submitCallback" :disabled="disableSubmit" />
   </a-modal>
 </template>
 
 <script lang="ts" setup>
   import { ref, nextTick } from 'vue';
-  import SysCustomerForm from './SysCustomerForm.vue';
+  import SysOrderBraceletForm from './SysOrderBraceletForm.vue';
 
   const title = ref<string>('');
   const width = ref<number>(800);

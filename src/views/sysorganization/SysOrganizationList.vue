@@ -1,13 +1,43 @@
 <template>
-  <div>
+  <div class="ly-container">
+    <!--查询区域-->
+    <div class="jeecg-basic-table-form-container">
+      <a-form @keyup.enter="searchQuery" :model="queryParam" :label-col="labelCol" :wrapper-col="wrapperCol">
+        <a-row :gutter="24">
+          <a-col :lg="8">
+            <a-form-item label="组织名字">
+              <a-input placeholder="请输入组织名字" v-model:value="queryParam.orgname" />
+            </a-form-item>
+          </a-col>
+          <a-col :lg="8">
+            <a-form-item label="组织描述">
+              <a-input placeholder="请输入组织描述" v-model:value="queryParam.description" />
+            </a-form-item>
+          </a-col>
+          <a-col :lg="8">
+            <a-form-item label="父级节点">
+              <a-input placeholder="请输入父级节点" v-model:value="queryParam.pid" />
+            </a-form-item>
+          </a-col>
+        </a-row>
+        <a-row :gutter="24">
+          <a-col :lg="8">
+            <a-form-item label="租户ID">
+              <a-input placeholder="请输入租户ID" v-model:value="queryParam.tenantId" />
+            </a-form-item>
+          </a-col>
+          <a-col :lg="8">
+            <a-button type="primary" preIcon="ant-design:search-outlined" @click="searchQuery">查询</a-button>
+            <a-button type="primary" preIcon="ant-design:reload-outlined" @click="searchReset" style="margin-left: 8px">重置</a-button>
+          </a-col>
+        </a-row>
+      </a-form>
+    </div>
     <!--引用表格-->
     <BasicTable @register="registerTable" :rowSelection="rowSelection" :expandedRowKeys="expandedRowKeys" @expand="handleExpand" @fetch-success="onFetchSuccess">
       <!--插槽:table标题-->
       <template #tableTitle>
-        <a-button type="primary" @click="handleCreate" preIcon="ant-design:plus-outlined"> 新增</a-button>
-        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
-        <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">导入</j-upload-button>
-
+        <a-button type="primary" @click="handleAdd" preIcon="ant-design:plus-outlined"> 新增</a-button>
         <a-dropdown v-if="selectedRowKeys.length > 0">
           <template #overlay>
             <a-menu>
@@ -40,43 +70,38 @@
         <a-button v-else :ghost="true" type="primary" preIcon="ant-design:download-outlined" size="small" @click="downloadFile(text)">下载</a-button>
       </template>
     </BasicTable>
-    <!--字典弹窗-->
-    <SysOrganizationModal @register="registerModal" @success="handleSuccess" />
+    <!-- 表单区域 -->
+    <SysOrganizationModal ref="registerModal" @success="handleSuccess" />
   </div>
 </template>
 
 <script lang="ts" name="sysorganization-sysOrganization" setup>
-  //ts语法
-  import { ref, unref } from 'vue';
+  import { ref, reactive, unref } from 'vue';
   import { BasicTable, TableAction } from '/@/components/Table';
-  import { useModal } from '/@/components/Modal';
-  import { useListPage } from '/@/hooks/system/useListPage';
-  import SysOrganizationModal from './components/SysOrganizationModal.vue';
-  import { columns, searchFormSchema } from './SysOrganization.data';
-  import { downloadFile } from '/@/utils/common/renderUtils';
   import { getAreaTextByCode } from '/@/components/Form/src/utils/Area';
+  import { useListPage } from '/@/hooks/system/useListPage';
+  import { columns } from './SysOrganization.data';
   import { list, deleteSysOrganization, batchDeleteSysOrganization, getExportUrl, getImportUrl, getChildList, getChildListBatch } from './SysOrganization.api';
+  import { downloadFile } from '/@/utils/common/renderUtils';
+  import SysOrganizationModal from './components/SysOrganizationModal.vue';
+
   const expandedRowKeys = ref([]);
-  //字典model
-  const [registerModal, { openModal }] = useModal();
+  const queryParam = ref<any>({});
+  const registerModal = ref();
   //注册table数据
-  const { tableContext, onExportXls, onImportXls } = useListPage({
+  const { tableContext } = useListPage({
     tableProps: {
-      api: list,
       title: '组织结构',
+      api: list,
       columns,
       canResize: false,
-      formConfig: {
-        labelWidth: 120,
-        schemas: searchFormSchema,
-        autoSubmitOnEnter: true,
-        showAdvancedButton: true,
-        fieldMapToNumber: [],
-        fieldMapToTime: [],
-      },
+      useSearchForm: false,
       actionColumn: {
-        width: 240,
+        width: 120,
         fixed: 'right',
+      },
+      beforeFetch: (params) => {
+        return Object.assign(params, queryParam.value);
       },
     },
     exportConfig: {
@@ -85,47 +110,48 @@
     },
     importConfig: {
       url: getImportUrl,
-      success: importSuccess,
+      success: success,
     },
   });
-
   const [registerTable, { reload, updateTableDataRecord, findTableDataRecord, getDataSource }, { rowSelection, selectedRowKeys }] = tableContext;
+  const labelCol = reactive({
+    xs: { span: 24 },
+    sm: { span: 7 },
+  });
+  const wrapperCol = reactive({
+    xs: { span: 24 },
+    sm: { span: 16 },
+  });
 
   /**
    * 新增事件
    */
-  function handleCreate() {
-    openModal(true, {
-      isUpdate: false,
-    });
+  function handleAdd() {
+    registerModal.value.disableSubmit = false;
+    registerModal.value.add();
   }
 
   /**
    * 编辑事件
    */
   async function handleEdit(record) {
-    openModal(true, {
-      record,
-      isUpdate: true,
-    });
+    registerModal.value.disableSubmit = false;
+    registerModal.value.edit(record);
   }
 
   /**
    * 详情
    */
   async function handleDetail(record) {
-    openModal(true, {
-      record,
-      isUpdate: true,
-      hideFooter: true,
-    });
+    registerModal.value.disableSubmit = true;
+    registerModal.value.edit(record);
   }
 
   /**
    * 删除事件
    */
   async function handleDelete(record) {
-    await deleteSysOrganization({ id: record.id }, importSuccess);
+    await deleteSysOrganization({ id: record.id }, success);
   }
 
   /**
@@ -133,23 +159,24 @@
    */
   async function batchHandleDelete() {
     const ids = selectedRowKeys.value.filter((item) => !item.includes('loading'));
-    await batchDeleteSysOrganization({ id: ids }, importSuccess);
+    await batchDeleteSysOrganization({ id: ids }, success);
   }
+
   /**
-   * 导入
+   * 成功回调刷新页面
    */
-  function importSuccess() {
+  function success() {
     (selectedRowKeys.value = []) && reload();
   }
+
   /**
    * 添加下级
    */
   function handleAddSub(record) {
-    openModal(true, {
-      record,
-      isUpdate: false,
-    });
+    registerModal.value.disableSubmit = false;
+    registerModal.value.add(record);
   }
+
   /**
    * 成功回调
    */
@@ -181,6 +208,7 @@
   function onFetchSuccess(result) {
     getDataByResult(result.items) && loadDataByExpandedRows();
   }
+
   /**
    * 根据已展开的行查询数据（用于保存后刷新时异步加载子级的数据）
    */
@@ -217,6 +245,7 @@
       }
     }
   }
+
   /**
    * 处理数据集
    */
@@ -232,9 +261,10 @@
       });
     }
   }
+
   /**
    *树节点展开合并
-   * */
+   */
   async function handleExpand(expanded, record) {
     // 判断是否是展开状态，展开状态(expanded)并且存在子集(children)并且未加载过(isLoading)的就去查询子节点数据
     if (expanded) {
@@ -256,9 +286,10 @@
       }
     }
   }
+
   /**
-   *操作表格后处理树节点展开合并
-   * */
+   * 操作表格后处理树节点展开合并
+   */
   async function expandTreeNode(key) {
     let record = findTableDataRecord(key);
     expandedRowKeys.value.push(key);
@@ -271,6 +302,7 @@
     }
     updateTableDataRecord(key, record);
   }
+
   /**
    * 操作栏
    */
@@ -280,12 +312,9 @@
         label: '编辑',
         onClick: handleEdit.bind(null, record),
       },
-      {
-        label: '添加下级',
-        onClick: handleAddSub.bind(null, { pid: record.id }),
-      },
     ];
   }
+
   /**
    * 下拉操作栏
    */
@@ -296,6 +325,10 @@
         onClick: handleDetail.bind(null, record),
       },
       {
+        label: '添加下级',
+        onClick: handleAddSub.bind(null, { pid: record.id }),
+      },
+      {
         label: '删除',
         popConfirm: {
           title: '确定删除吗?',
@@ -304,6 +337,36 @@
       },
     ];
   }
+
+  /**
+   * 查询
+   */
+  function searchQuery() {
+    reload();
+  }
+
+  /**
+   * 重置
+   */
+  function searchReset() {
+    queryParam.value = {};
+    selectedRowKeys.value = [];
+    //刷新数据
+    reload();
+  }
 </script>
 
-<style scoped></style>
+<style lang="less" scoped>
+  .jeecg-basic-table-form-container {
+    padding: 0;
+    .query-group-cust {
+      width: calc(50% - 15px);
+      min-width: 100px !important;
+    }
+    .query-group-split-cust {
+      width: 30px;
+      display: inline-block;
+      text-align: center;
+    }
+  }
+</style>

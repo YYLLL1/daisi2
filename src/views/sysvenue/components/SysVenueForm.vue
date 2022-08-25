@@ -3,48 +3,33 @@
     <a-form ref="formRef" class="antd-modal-form" :labelCol="labelCol" :wrapperCol="wrapperCol">
       <a-row>
         <a-col :span="24">
-          <a-form-item label="租柜状态" v-bind="validateInfos.rentCabinetStatus">
-            <j-dict-select-tag v-model:value="formData.rentCabinetStatus" dictCode="rent_cabinet_status" placeholder="请选择租柜状态" :disabled="props.disabled" />
+          <a-form-item label="场馆名字" v-bind="validateInfos.venueName">
+            <a-input v-model:value="formData.venueName" placeholder="请输入场馆名字" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
-          <a-form-item label="更衣柜编号" v-bind="validateInfos.lockerNo">
-            <a-input v-model:value="formData.lockerNo" placeholder="请输入更衣柜编号" :disabled="props.disabled" />
+          <a-form-item label="场馆图片" v-bind="validateInfos.venuePhotos">
+            <j-image-upload v-model:value="formData.venuePhotos" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
-          <a-form-item label="使用者" v-bind="validateInfos.username">
-            <a-input v-model:value="formData.username" placeholder="请输入使用者" :disabled="props.disabled" />
+          <a-form-item label="场馆介绍" v-bind="validateInfos.venueIntroduction">
+            <a-input v-model:value="formData.venueIntroduction" placeholder="请输入场馆介绍" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
-          <a-form-item label="手机号" v-bind="validateInfos.phone">
-            <a-input v-model:value="formData.phone" placeholder="请输入手机号" :disabled="props.disabled" />
+          <a-form-item label="场馆电话" v-bind="validateInfos.venueTel">
+            <a-input v-model:value="formData.venueTel" placeholder="请输入场馆电话" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
-          <a-form-item label="柜子订单号" v-bind="validateInfos.cabinetOrderCode">
-            <a-input v-model:value="formData.cabinetOrderCode" placeholder="请输入柜子订单号" :disabled="props.disabled" />
+          <a-form-item label="运营时间" v-bind="validateInfos.venueTime">
+            <a-input v-model:value="formData.venueTime" placeholder="请输入运营时间" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
-          <a-form-item label="开柜方式" v-bind="validateInfos.openCabinetType">
-            <j-dict-select-tag v-model:value="formData.openCabinetType" dictCode="open_cabinet_type" placeholder="请选择开柜方式" :disabled="props.disabled" />
-          </a-form-item>
-        </a-col>
-        <a-col :span="24">
-          <a-form-item label="绑定ID" v-bind="validateInfos.bindingId">
-            <a-input v-model:value="formData.bindingId" placeholder="请输入绑定ID" :disabled="props.disabled" />
-          </a-form-item>
-        </a-col>
-        <a-col :span="24">
-          <a-form-item label="开柜时间" v-bind="validateInfos.openCabinetTime">
-            <a-date-picker placeholder="请选择开柜时间" v-model:value="formData.openCabinetTime" showTime value-format="YYYY-MM-DD HH:mm:ss" style="width: 100%" :disabled="props.disabled" />
-          </a-form-item>
-        </a-col>
-        <a-col :span="24">
-          <a-form-item label="退柜时间" v-bind="validateInfos.returnCabinetTime">
-            <a-date-picker placeholder="请选择退柜时间" v-model:value="formData.returnCabinetTime" showTime value-format="YYYY-MM-DD HH:mm:ss" style="width: 100%" :disabled="props.disabled" />
+          <a-form-item label="入场须知" v-bind="validateInfos.venueNotice">
+            <a-input v-model:value="formData.venueNotice" placeholder="请输入入场须知" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
       </a-row>
@@ -55,9 +40,9 @@
 <script lang="ts" setup>
   import { ref, reactive, nextTick, defineProps } from 'vue';
   import { useMessage } from '/@/hooks/web/useMessage';
-  import JDictSelectTag from '/@/components/Form/src/jeecg/components/JDictSelectTag.vue';
+  import JImageUpload from '/@/components/Form/src/jeecg/components/JImageUpload.vue';
   import { getValueType } from '/@/utils';
-  import { saveOrUpdate } from '../SysCabinetLog.api';
+  import { saveOrUpdate } from '../SysVenue.api';
   import { Form } from 'ant-design-vue';
 
   const props = defineProps({
@@ -68,23 +53,17 @@
   const emit = defineEmits(['register', 'ok']);
   const formData = reactive<Record<string, any>>({
     id: '',
-    rentCabinetStatus: '',
+    venueName: '',
     id: '',
-    lockerNo: '',
+    venuePhotos: '',
     id: '',
-    username: '',
+    venueIntroduction: '',
     id: '',
-    phone: '',
+    venueTel: '',
     id: '',
-    cabinetOrderCode: '',
+    venueTime: '',
     id: '',
-    openCabinetType: '',
-    id: '',
-    bindingId: '',
-    id: '',
-    openCabinetTime: '',
-    id: '',
-    returnCabinetTime: '',
+    venueNotice: '',
   });
   const { createMessage } = useMessage();
   const labelCol = ref<any>({ xs: { span: 24 }, sm: { span: 5 } });

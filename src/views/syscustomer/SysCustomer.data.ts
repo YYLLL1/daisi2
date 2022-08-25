@@ -1,7 +1,5 @@
 import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
-// import { rules } from '/@/utils/helper/validator';
-// import { render } from '/@/utils/common/renderUtils';
 //列表数据
 export const columns: BasicColumn[] = [
   {
@@ -55,6 +53,7 @@ export const columns: BasicColumn[] = [
     dataIndex: 'registerTime',
   },
 ];
+
 //查询数据
 export const searchFormSchema: FormSchema[] = [
   {
@@ -78,11 +77,11 @@ export const searchFormSchema: FormSchema[] = [
     component: 'DatePicker',
     componentProps: {
       showTime: true,
-      valueFormat: 'YYYY-MM-DD HH:mm:ss',
     },
     colProps: { span: 6 },
   },
 ];
+
 //表单数据
 export const formSchema: FormSchema[] = [
   {
