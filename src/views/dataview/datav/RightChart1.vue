@@ -1,49 +1,21 @@
 <template>
   <div class="right-chart-1">
-    <div class="rc1-header"> 赵六收费站 </div>
+    <div class="rc1-header"> 今日信息 </div>
 
     <div class="rc1-chart-container">
       <div class="left">
-        <div class="number"> 262 </div>
-        <div>设备运行总数</div>
+        <div class="number"> 262人 </div>
+        <div>今日客流量</div>
       </div>
-
-      <dv-capsule-chart class="right" :config="state.config" />
+      <div class="right">
+        <div class="number">15:44 周五</div>
+        <div class="number">2022年08月26日</div>
+      </div>
     </div>
   </div>
 </template>
 
-<script lang="ts" setup>
-  import { reactive } from 'vue';
-
-  const state = reactive({
-    config: {
-      data: [
-        {
-          name: '收费系统',
-          value: 25,
-        },
-        {
-          name: '通信系统',
-          value: 66,
-        },
-        {
-          name: '监控系统',
-          value: 123,
-        },
-        {
-          name: '供配电系统',
-          value: 72,
-        },
-        {
-          name: '其他',
-          value: 99,
-        },
-      ],
-      unit: '件',
-    },
-  });
-</script>
+<script lang="ts" setup></script>
 
 <style lang="less">
   .right-chart-1 {
@@ -74,7 +46,7 @@
 
       .number {
         font-size: 34px;
-        color: #096dd9;
+        color: #e57807;
         font-weight: bold;
         margin-bottom: 30px;
       }
@@ -85,6 +57,17 @@
       padding-bottom: 20px;
       padding-right: 20px;
       box-sizing: border-box;
+      font-size: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .number {
+        font-size: 34px;
+        color: #e57807;
+        font-weight: bold;
+        margin-bottom: 0;
+      }
     }
   }
 </style>

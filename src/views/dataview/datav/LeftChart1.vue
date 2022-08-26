@@ -1,7 +1,7 @@
 <template>
   <div class="left-chart-1">
-    <div class="lc1-header"> 张三收费站 </div>
-    <div class="lc1-details"> 设备运行总数<span>430</span> </div>
+    <div class="lc1-header"> 更衣室 </div>
+    <div class="lc1-details"> 当前运行总数<span>280</span> </div>
     <dv-capsule-chart class="lc1-chart" :config="state.config" />
     <dv-decoration-2 style="height: 10px" />
   </div>
@@ -14,24 +14,24 @@
     config: {
       data: [
         {
-          name: '收费系统',
+          name: '男更智能柜',
           value: 167,
         },
         {
-          name: '通信系统',
+          name: '女更智能柜',
           value: 67,
         },
         {
-          name: '监控系统',
-          value: 123,
+          name: '淋浴间',
+          value: 12,
         },
         {
-          name: '供配电系统',
-          value: 55,
+          name: '室内温度',
+          value: 26,
         },
         {
-          name: '其他',
-          value: 98,
+          name: '水温',
+          value: 45,
         },
       ],
       colors: ['#00baff', '#3de7c9', '#fff', '#ffc530', '#469f4b'],
@@ -66,7 +66,7 @@
       text-indent: 20px;
 
       span {
-        color: #096dd9;
+        color: #e57807;
         font-weight: bold;
         font-size: 35px;
         margin-left: 20px;

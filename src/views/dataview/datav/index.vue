@@ -51,20 +51,19 @@
   #data-view {
     width: 100%;
     height: 100%;
-    background-color: #030409;
+    background-color: #f7f8fc;
     color: #fff;
 
     #dv-full-screen-container {
-      background-image: url('./img/bg.png');
+      background-image: url('./img/bg.jpg');
       background-size: 100% 100%;
-      box-shadow: 0 0 3px blue;
+      background-color: #f7f8fc;
       display: flex;
+      height: 100vh !important;
       flex-direction: column;
     }
 
     .main-container {
-      height: calc(~'100% - 80px');
-
       .border-box-content {
         padding: 20px;
         box-sizing: border-box;
@@ -73,7 +72,7 @@
     }
 
     .left-chart-container {
-      width: 22%;
+      width: 20%;
       padding: 10px;
       box-sizing: border-box;
 
@@ -83,7 +82,7 @@
     }
 
     .right-main-container {
-      width: 78%;
+      width: 80%;
       padding-left: 5px;
       box-sizing: border-box;
     }
@@ -108,6 +107,12 @@
     .rmctc-chart-1,
     .rmctc-chart-2 {
       height: 50%;
+    }
+    .dv-water-pond-level canvas {
+      margin: 8px;
+    }
+    .dv-capsule-chart .capsule-item {
+      box-shadow: 0 0 3px #e57807;
     }
   }
 </style>

@@ -58,7 +58,7 @@
 
 <script lang="ts" setup>
   import { ref } from 'vue';
-  import { getData } from './chartdemo.data.ts';
+  import { getData } from './chartdemo.data';
   import Bar from '/@/components/chart/Bar.vue';
   import BarMulti from '/@/components/chart/BarMulti.vue';
   import Line from '/@/components/chart/Line.vue';

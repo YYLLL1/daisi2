@@ -4,8 +4,8 @@
     <div class="ly-card-container">
       <div class="rent ly-card-content">
         <label>租手环：</label>
-        <a-input v-model:value="rentBracelet" placeholder="读卡/手机号/为空表示散客" />
-        <a-button type="primary" @click="rentH">确定</a-button>
+        <a-input v-model:value="rentBracelet" placeholder="读卡/手机号/为空表示散客" disabled />
+        <a-button type="primary" @click="rentH" disabled title="暂未开放">确定</a-button>
       </div>
       <div class="return ly-card-content">
         <label>退手环：</label>
@@ -18,16 +18,19 @@
 
 <script lang="ts" setup>
   import { ref } from 'vue';
-  const emit = defineEmits(['rentHandel', 'returnHandel']);
+  import { cabinetOut } from '../api';
   const rentBracelet = ref<string>('');
   const returnBracelet = ref<string>('');
 
   const rentH = () => {
-    emit('rentHandel', rentBracelet.value);
+    console.log(rentBracelet.value);
   };
 
-  const returnH = () => {
-    emit('returnHandel', returnBracelet.value);
+  const returnH = async () => {
+    await cabinetOut({ sysBraceletId: returnBracelet.value }, res);
+  };
+  const res = () => {
+    returnBracelet.value = '';
   };
 </script>
 

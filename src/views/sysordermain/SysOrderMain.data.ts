@@ -1,8 +1,5 @@
-import { BasicColumn } from '/@/components/Table';
-import { FormSchema } from '/@/components/Table';
-import { JVxeTypes, JVxeColumn } from '/@/components/jeecg/JVxeTable/types';
 //列表数据
-export const columns: BasicColumn[] = [
+export const columns = [
   {
     title: '订单编码',
     align: 'center',
@@ -49,233 +46,61 @@ export const columns: BasicColumn[] = [
     dataIndex: 'orderForm_dictText',
   },
 ];
-//查询数据
-export const searchFormSchema: FormSchema[] = [];
-//表单数据
-export const formSchema: FormSchema[] = [
-  {
-    label: '订单编码',
-    field: 'orderCode',
-    component: 'Input',
-    dynamicDisabled: true,
-  },
-  {
-    label: '下单时间',
-    field: 'xdDate',
-    component: 'DatePicker',
-    componentProps: {
-      showTime: true,
-      valueFormat: 'YYYY-MM-DD HH:mm:ss',
-    },
-  },
-  {
-    label: '订单总额',
-    field: 'money',
-    component: 'InputNumber',
-  },
-  {
-    label: '备注',
-    field: 'remark',
-    component: 'Input',
-  },
-  {
-    label: '订单状态	',
-    field: 'orderStatus',
-    component: 'JDictSelectTag',
-    componentProps: {
-      dictCode: 'order_status',
-    },
-  },
-  {
-    label: '类目	',
-    field: 'category',
-    component: 'JDictSelectTag',
-    componentProps: {
-      dictCode: 'category',
-    },
-  },
-  {
-    label: '手机号码',
-    field: 'phone',
-    component: 'Input',
-  },
-  {
-    label: '收款方式',
-    field: 'paymentMethod',
-    component: 'JDictSelectTag',
-    componentProps: {
-      dictCode: 'payment_method',
-    },
-  },
-  {
-    label: '下单方式',
-    field: 'orderForm',
-    component: 'JDictSelectTag',
-    componentProps: {
-      dictCode: 'order_form',
-    },
-  },
-  // TODO 主键隐藏字段，目前写死为ID
-  {
-    label: '',
-    field: 'id',
-    component: 'Input',
-    show: false,
-  },
-];
-//子表单数据
-export const sysOrderCustomerFormSchema: FormSchema[] = [
-  {
-    label: '客户编码',
-    field: 'customerCode',
-    component: 'Input',
-    dynamicDisabled: true,
-  },
-  {
-    label: '名字',
-    field: 'name',
-    component: 'Input',
-  },
-  {
-    label: '性别',
-    field: 'sex',
-    component: 'Input',
-  },
-  {
-    label: '注册手机',
-    field: 'phone',
-    component: 'Input',
-  },
-  {
-    label: '客户类型',
-    field: 'customerType',
-    component: 'JDictSelectTag',
-    componentProps: {
-      dictCode: 'customer_type',
-    },
-  },
-  {
-    label: '充值金额',
-    field: 'recharge',
-    component: 'InputNumber',
-  },
-  {
-    label: '人脸信息存在',
-    field: 'isHumanface',
-    component: 'JDictSelectTag',
-    componentProps: {
-      dictCode: 'is_exist',
-    },
-  },
-  {
-    label: '掌静脉信息存在',
-    field: 'isPalmarvein',
-    component: 'JDictSelectTag',
-    componentProps: {
-      dictCode: 'is_exist',
-    },
-  },
-  {
-    label: '来源',
-    field: 'source',
-    component: 'JDictSelectTag',
-    componentProps: {
-      dictCode: 'order_form',
-    },
-  },
-  {
-    label: '注册时间',
-    field: 'registerTime',
-    component: 'DatePicker',
-    componentProps: {
-      showTime: true,
-      valueFormat: 'YYYY-MM-DD HH:mm:ss',
-    },
-  },
-  {
-    label: '订单ID',
-    field: 'sysOrderMainId',
-    component: 'Input',
-  },
-  {
-    label: '',
-    field: 'id',
-    component: 'Input',
-    show: false,
-  },
-];
 //子表表格配置
-export const sysOrderTicketColumns: JVxeColumn[] = [
+export const childrenColumn = [
   {
-    title: '门票ID',
-    key: 'sysTicketId',
-    type: JVxeTypes.input,
-    width: '200px',
-    placeholder: '请输入${title}',
-    defaultValue: '',
+    title: '状态',
+    align: 'center',
+    dataIndex: 'ticket_status',
+    key: 'ticket_status',
+    slots: { customRender: 'ticket_status' },
   },
   {
-    title: '价格',
-    key: 'price',
-    type: JVxeTypes.inputNumber,
-    width: '200px',
-    placeholder: '请输入${title}',
-    defaultValue: '',
+    title: '购票人',
+    align: 'center',
+    dataIndex: 'name',
   },
   {
-    title: '数量',
-    key: 'num',
-    type: JVxeTypes.inputNumber,
-    width: '200px',
-    placeholder: '请输入${title}',
-    defaultValue: '',
+    title: '手机号',
+    align: 'center',
+    dataIndex: 'phone',
   },
   {
-    title: '单票总价',
-    key: 'zongPrice',
-    type: JVxeTypes.inputNumber,
-    width: '200px',
-    placeholder: '请输入${title}',
-    defaultValue: '',
+    title: '订单号',
+    align: 'center',
+    dataIndex: 'ticket_number',
   },
   {
-    title: '订单ID',
-    key: 'sysOrderMainId',
-    type: JVxeTypes.input,
-    width: '200px',
-    placeholder: '请输入${title}',
-    defaultValue: '',
+    title: '实收款',
+    align: 'center',
+    dataIndex: 'actual_receipts',
   },
   {
-    title: '手环ID',
-    key: 'sysBraceletId',
-    type: JVxeTypes.input,
-    width: '200px',
-    placeholder: '请输入${title}',
-    defaultValue: '',
+    title: '收款方式',
+    align: 'center',
+    dataIndex: 'payment_method',
+    key: 'payment_method',
+    slots: { customRender: 'payment_method' },
   },
   {
-    title: '人脸ID',
-    key: 'sysHumanfaceId',
-    type: JVxeTypes.input,
-    width: '200px',
-    placeholder: '请输入${title}',
-    defaultValue: '',
+    title: '下单方式',
+    align: 'center',
+    dataIndex: 'order_form',
+    key: 'order_form',
+    slots: { customRender: 'order_form' },
   },
   {
-    title: '掌静脉ID',
-    key: 'sysPalmarveinId',
-    type: JVxeTypes.input,
-    width: '200px',
-    placeholder: '请输入${title}',
-    defaultValue: '',
+    title: '门票核销',
+    align: 'center',
+    dataIndex: 'ticket_write_off',
+    key: 'ticket_write_off',
+    slots: { customRender: 'ticket_write_off' },
   },
   {
-    title: '客户ID',
-    key: 'sysCustomerId',
-    type: JVxeTypes.input,
-    width: '200px',
-    placeholder: '请输入${title}',
-    defaultValue: '',
+    title: '出闸判断',
+    align: 'center',
+    dataIndex: 'ticket_access_gate',
+    key: 'ticket_access_gate',
+    slots: { customRender: 'ticket_access_gate' },
   },
 ];

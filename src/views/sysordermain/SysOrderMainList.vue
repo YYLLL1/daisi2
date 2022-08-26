@@ -1,176 +1,73 @@
 <template>
   <div class="ly-container">
-    <!--引用表格-->
-    <BasicTable @register="registerTable" :rowSelection="rowSelection">
-      <!--插槽:table标题-->
-      <template #tableTitle>
-        <a-button type="primary" @click="handleAdd" preIcon="ant-design:plus-outlined"> 新增</a-button>
-        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
-        <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">导入</j-upload-button>
-        <a-dropdown v-if="selectedRowKeys.length > 0">
-          <template #overlay>
-            <a-menu>
-              <a-menu-item key="1" @click="batchHandleDelete">
-                <Icon icon="ant-design:delete-outlined" />
-                删除
-              </a-menu-item>
-            </a-menu>
+    <a-table :columns="columns" :data-source="data.parentData" class="components-table-demo-nested" @expand="handel" rowKey="key">
+      <template #expandedRowRender="{ record }">
+        <a-table :columns="childrenColumn" :data-source="record.childrenData" :pagination="false" :rowKey="record.id">
+          <template #ticket_status="{ record }">
+            <span v-if="record.ticket_status == '1'">已付款</span>
+            <span v-if="record.ticket_status == '2'">使用中</span>
+            <span v-if="record.ticket_status == '3'">退款完成</span>
+            <span v-if="record.ticket_status == '4'">已完成</span>
           </template>
-          <a-button
-            >批量操作
-            <Icon icon="mdi:chevron-down" />
-          </a-button>
-        </a-dropdown>
+          <template #payment_method="{ record }">
+            <span v-if="record.payment_method == '1'">微信</span>
+            <span v-if="record.payment_method == '2'">支付宝</span>
+          </template>
+          <template #order_form="{ record }">
+            <span v-if="record.order_form == '1'">线上</span>
+            <span v-if="record.order_form == '2'">门店</span>
+            <span v-if="record.order_form == '3'">地推</span>
+          </template>
+          <template #ticket_write_off="{ record }">
+            <a-button size="small" type="primary" v-if="record.ticket_write_off == '1'">未核销</a-button>
+            <a-button size="small" v-if="record.ticket_write_off == '2'">已核销</a-button>
+          </template>
+          <template #ticket_access_gate="{ record }">
+            <a-button size="small" v-if="record.ticket_access_gate == '1'" @click="mockHandel(1, record.id)">未入闸</a-button>
+            <a-button size="small" type="primary" v-if="record.ticket_access_gate == '2'" @click="mockHandel(2, record.id)">申请出闸</a-button>
+            <a-button size="small" type="primary" v-if="record.ticket_access_gate == '3'" disabled>已出闸</a-button>
+          </template>
+        </a-table>
       </template>
-      <!--操作栏-->
-      <template #action="{ record }">
-        <TableAction :actions="getTableAction(record)" :dropDownActions="getDropDownAction(record)" />
-      </template>
-      <!--字段回显插槽-->
-      <template #htmlSlot="{ text }">
-        <div v-html="text"></div>
-      </template>
-      <!--省市区字段回显插槽-->
-      <template #pcaSlot="{ text }">
-        {{ getAreaTextByCode(text) }}
-      </template>
-      <template #fileSlot="{ text }">
-        <span v-if="!text" style="font-size: 12px; font-style: italic">无文件</span>
-        <a-button v-else :ghost="true" type="primary" preIcon="ant-design:download-outlined" size="small" @click="downloadFile(text)">下载</a-button>
-      </template>
-    </BasicTable>
-    <!-- 表单区域 -->
-    <SysOrderMainModal @register="registerModal" @success="handleSuccess" />
+    </a-table>
   </div>
 </template>
+<script lang="ts" setup>
+  import { onMounted, reactive } from 'vue';
+  import { columns, childrenColumn } from './SysOrderMain.data';
+  import { list, childrenList, entranceGate, exitGate } from './SysOrderMain.api';
 
-<script lang="ts" name="sysordermain-sysOrderMain" setup>
-  import { ref } from 'vue';
-  import { BasicTable, TableAction } from '/@/components/Table';
-  import { getAreaTextByCode } from '/@/components/Form/src/utils/Area';
-  import { useListPage } from '/@/hooks/system/useListPage';
-  import { useModal } from '/@/components/Modal';
-  import SysOrderMainModal from './components/SysOrderMainModal.vue';
-  import { columns } from './SysOrderMain.data';
-  import { list, deleteOne, batchDelete, getImportUrl, getExportUrl } from './SysOrderMain.api';
-  import { downloadFile } from '/@/utils/common/renderUtils';
-  //注册model
-  const [registerModal, { openModal }] = useModal();
-  //注册table数据
-  const { tableContext, onExportXls, onImportXls } = useListPage({
-    tableProps: {
-      title: '售票订单',
-      api: list,
-      columns,
-      canResize: false,
-      useSearchForm: false,
-      actionColumn: {
-        width: 120,
-        fixed: 'right',
-      },
-      beforeFetch: (params) => {
-        return Object.assign(params, queryParam.value);
-      },
-    },
-    exportConfig: {
-      name: '售票订单',
-      url: getExportUrl,
-    },
-    importConfig: {
-      url: getImportUrl,
-      success: handleSuccess,
-    },
+  const data = reactive({
+    id: '',
+    parentData: [],
   });
-
-  const [registerTable, { reload }, { rowSelection, selectedRowKeys }] = tableContext;
-
-  /**
-   * 新增事件
-   */
-  function handleAdd() {
-    openModal(true, {
-      isUpdate: false,
-      showFooter: true,
+  onMounted(() => {
+    getList();
+  });
+  const getList = async () => {
+    let { records } = await list();
+    data.parentData = records;
+  };
+  const handel = async (a, record) => {
+    data.id = record.id;
+    console.log(a);
+    let result = await childrenList({ sysOrderMainId: record.id });
+    let orderMainId = result[0].sys_order_main_id;
+    data.parentData.forEach((item) => {
+      if (item.id == orderMainId) {
+        item.childrenData = result;
+      }
     });
-  }
-  /**
-   * 编辑事件
-   */
-  function handleEdit(record: Recordable) {
-    openModal(true, {
-      record,
-      isUpdate: true,
-      showFooter: true,
-    });
-  }
-  /**
-   * 详情
-   */
-  function handleDetail(record: Recordable) {
-    openModal(true, {
-      record,
-      isUpdate: true,
-      showFooter: false,
-    });
-  }
-  /**
-   * 删除事件
-   */
-  async function handleDelete(record) {
-    await deleteOne({ id: record.id }, handleSuccess);
-  }
-  /**
-   * 批量删除事件
-   */
-  async function batchHandleDelete() {
-    await batchDelete({ ids: selectedRowKeys.value }, handleSuccess);
-  }
-  /**
-   * 成功回调
-   */
-  function handleSuccess() {
-    (selectedRowKeys.value = []) && reload();
-  }
-  /**
-   * 操作栏
-   */
-  function getTableAction(record) {
-    return [
-      {
-        label: '编辑',
-        onClick: handleEdit.bind(null, record),
-      },
-    ];
-  }
-  /**
-   * 下拉操作栏
-   */
-  function getDropDownAction(record) {
-    return [
-      {
-        label: '详情',
-        onClick: handleDetail.bind(null, record),
-      },
-      {
-        label: '删除',
-        popConfirm: {
-          title: '是否确认删除',
-          confirm: handleDelete.bind(null, record),
-        },
-      },
-    ];
-  }
+  };
 
-  /* ----------------------以下为原生查询需要添加的-------------------------- */
-  const queryParam = ref<any>({});
-  /**
-   * 重置
-   */
-  // function searchReset() {
-  //   queryParam.value = {};
-  //   selectedRowKeys.value = [];
-  //   //刷新数据
-  //   reload();
-  // }
+  const mockHandel = async (type, id) => {
+    switch (type) {
+      case 1:
+        await entranceGate({ id }, getList());
+        break;
+      case 2:
+        await exitGate({ id }, getList());
+        break;
+    }
+  };
 </script>
-<style lang="less" scoped></style>

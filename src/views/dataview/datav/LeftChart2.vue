@@ -1,43 +1,24 @@
 <template>
   <div class="left-chart-2">
-    <div class="lc2-header"> 李四收费站 </div>
+    <div class="lc2-header"> 设备运行总数 </div>
     <div class="lc2-details"> 设备运行总数<span>245</span> </div>
-    <dv-charts class="lc2-chart" :option="state.option" />
+    <BarMulti :chartData="state.config" :option="multiBarOption" />
     <dv-decoration-2 style="height: 10px" />
   </div>
 </template>
 
 <script lang="ts" setup>
   import { reactive } from 'vue';
-
+  import BarMulti from '/@/components/chart/BarMulti.vue';
+  const multiBarOption = {
+    title: { left: 'center' },
+  };
   const state = reactive({
-    option: {
-      series: [
-        {
-          type: 'pie',
-          data: [
-            { name: '收费系统', value: 93 },
-            { name: '通信系统', value: 32 },
-            { name: '监控系统', value: 65 },
-            { name: '供配电系统', value: 44 },
-            { name: '其他', value: 52 },
-          ],
-          radius: ['45%', '65%'],
-          insideLabel: {
-            show: false,
-          },
-          outsideLabel: {
-            labelLineEndLength: 10,
-            formatter: '{percent}%\n{name}',
-            style: {
-              fontSize: 14,
-              fill: '#fff',
-            },
-          },
-        },
-      ],
-      color: ['#00baff', '#3de7c9', '#fff', '#ffc530', '#469f4b'],
-    },
+    config: [
+      { name: '', value: 146, type: 2022.06 },
+      { name: '', value: 95, type: 2022.07 },
+      { name: '', value: 178, type: 2022.08 },
+    ],
   });
 </script>
 
@@ -64,7 +45,7 @@
       text-indent: 20px;
 
       span {
-        color: #096dd9;
+        color: #e57807;
         font-weight: bold;
         font-size: 35px;
         margin-left: 20px;

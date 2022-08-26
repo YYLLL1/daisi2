@@ -8,7 +8,7 @@
         <SellRight :selectData="data.selectData" @reduce="reduce" @add="add" @remove="remove" @openPaymentModal="openPaymentModal" />
       </a-col>
     </a-row>
-    <SellBottom @returnHandel="returnHandel" @rentHandel="rentHandel" />
+    <SellBottom />
     <SellSuccess :successData="data.successData" :successVisible="data.successVisible" @closeSuccessModal="closeSuccessModal" @close="close" />
     <SellPayment :selectData="data.selectData" :paymentVisible="data.paymentVisible" @closePaymentModal="closePaymentModal" @close="close" />
   </div>
@@ -76,16 +76,6 @@
   //删除票种
   const remove = (id) => {
     data.selectData = data.selectData.filter((item) => item.id != id);
-  };
-
-  //租手环
-  const rentHandel = (id) => {
-    console.log(id);
-  };
-
-  //退手环
-  const returnHandel = (id) => {
-    console.log(id);
   };
 
   //关闭弹出窗

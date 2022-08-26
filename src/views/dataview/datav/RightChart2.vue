@@ -1,11 +1,11 @@
 <template>
   <div class="right-chart-2">
-    <div class="rc1-header"> 孙七收费站 </div>
+    <div class="rc1-header"> 收入分类 </div>
 
     <div class="rc1-chart-container">
       <div class="left">
-        <div class="number"> 267 </div>
-        <div>设备运行总数</div>
+        <div class="number"> 8564 </div>
+        <div>总收入</div>
       </div>
 
       <dv-charts class="right" :option="state.option" />
@@ -22,10 +22,10 @@
         {
           type: 'pie',
           data: [
-            { name: '收费系统', value: 93 },
-            { name: '通信系统', value: 66 },
-            { name: '监控系统', value: 52 },
-            { name: '供配电系统', value: 34 },
+            { name: '培训', value: 93 },
+            { name: '门票', value: 66 },
+            { name: '会员卡', value: 52 },
+            { name: '餐饮', value: 34 },
             { name: '其他', value: 22 },
           ],
           radius: ['45%', '65%'],
@@ -76,7 +76,7 @@
 
       .number {
         font-size: 34px;
-        color: #096dd9;
+        color: #e57807;
         font-weight: bold;
         margin-bottom: 30px;
       }

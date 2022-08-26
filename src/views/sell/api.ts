@@ -7,7 +7,26 @@ enum Api {
   list = '/systicket/sysTicket/list',
   save = '/sysordermain/sysOrderMain/add',
   saveBind = '/sysordermain/sysOrderMain/bindingOrderTicket',
+
+  //测试接口
+  cabinetRent = '/sysordermain/sysOrderMain/bindingOrderTicket',
+  cabinetOut = '/sysordermain/sysOrderMain/unboundOrderTicket',
 }
+/**
+ * 测试接口
+ * @param params
+ */
+export const cabinetRent = (params, handleSuccess) => {
+  return defHttp.post({ url: Api.cabinetRent, params }, { joinParamsToUrl: true }).then(() => {
+    handleSuccess;
+  });
+};
+export const cabinetOut = (params, handleSuccess) => {
+  return defHttp.post({ url: Api.cabinetOut, params }, { joinParamsToUrl: true }).then(() => {
+    handleSuccess;
+  });
+};
+
 /**
  * 列表接口
  * @param params

@@ -2,12 +2,12 @@
   <div class="center-cmp">
     <div class="cc-header">
       <dv-decoration-1 style="width: 200px; height: 50px" />
-      <div>机电设备总数</div>
+      <div>人流量统计</div>
       <dv-decoration-1 style="width: 200px; height: 50px" />
     </div>
 
     <div class="cc-details">
-      <div>设备总数</div>
+      <div>总人数</div>
       <div class="card"> 2 </div>
       <div class="card"> 1 </div>
       <div class="card"> 3 </div>
@@ -16,14 +16,14 @@
 
     <div class="cc-main-container">
       <div class="ccmc-left">
-        <div class="station-info"> 收费站<span>1315</span> </div>
-        <div class="station-info"> 监控中心<span>415</span> </div>
+        <div class="station-info"> 成人<span>1315</span> </div>
+        <div class="station-info"> 老年人<span>415</span> </div>
       </div>
 
       <dv-active-ring-chart class="ccmc-middle" :config="state.config" />
 
       <div class="ccmc-right">
-        <div class="station-info"> <span>90</span>道路外场 </div>
+        <div class="station-info"> <span>90</span>儿童 </div>
         <div class="station-info"> <span>317</span>其他 </div>
       </div>
 
@@ -39,15 +39,15 @@
     config: {
       data: [
         {
-          name: '收费站',
+          name: '成人',
           value: 1315,
         },
         {
-          name: '监控中心',
+          name: '老年人',
           value: 415,
         },
         {
-          name: '道路外场',
+          name: '儿童',
           value: 90,
         },
         {
