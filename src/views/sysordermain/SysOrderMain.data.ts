@@ -23,12 +23,12 @@ export const columns = [
   {
     title: '订单状态	',
     align: 'center',
-    dataIndex: 'orderStatus_dictText',
+    dataIndex: 'orderStatus',
   },
   {
     title: '类目	',
     align: 'center',
-    dataIndex: 'category_dictText',
+    dataIndex: 'category',
   },
   {
     title: '手机号码',
@@ -38,12 +38,12 @@ export const columns = [
   {
     title: '收款方式',
     align: 'center',
-    dataIndex: 'paymentMethod_dictText',
+    dataIndex: 'paymentMethod',
   },
   {
     title: '下单方式',
     align: 'center',
-    dataIndex: 'orderForm_dictText',
+    dataIndex: 'orderForm',
   },
 ];
 //子表表格配置
@@ -51,9 +51,9 @@ export const childrenColumn = [
   {
     title: '状态',
     align: 'center',
-    dataIndex: 'ticket_status',
-    key: 'ticket_status',
-    slots: { customRender: 'ticket_status' },
+    dataIndex: 'ticketStatus',
+    key: 'ticketStatus',
+    slots: { customRender: 'ticketStatus' },
   },
   {
     title: '购票人',
@@ -68,39 +68,39 @@ export const childrenColumn = [
   {
     title: '订单号',
     align: 'center',
-    dataIndex: 'ticket_number',
+    dataIndex: 'ticketNumber',
   },
   {
     title: '实收款',
     align: 'center',
-    dataIndex: 'actual_receipts',
+    dataIndex: 'actualReceipts',
   },
   {
     title: '收款方式',
     align: 'center',
-    dataIndex: 'payment_method',
-    key: 'payment_method',
-    slots: { customRender: 'payment_method' },
+    dataIndex: 'paymentMethod',
+    key: 'paymentMethod',
+    slots: { customRender: 'paymentMethod' },
   },
   {
     title: '下单方式',
     align: 'center',
-    dataIndex: 'order_form',
-    key: 'order_form',
-    slots: { customRender: 'order_form' },
+    dataIndex: 'orderForm',
+    key: 'orderForm',
+    slots: { customRender: 'orderForm' },
   },
   {
     title: '门票核销',
     align: 'center',
-    dataIndex: 'ticket_write_off',
-    key: 'ticket_write_off',
-    slots: { customRender: 'ticket_write_off' },
+    dataIndex: 'ticketWriteOff',
+    key: 'ticketWriteOff',
+    slots: { customRender: 'ticketWriteOff' },
   },
   {
     title: '出闸判断',
     align: 'center',
-    dataIndex: 'ticket_access_gate',
-    key: 'ticket_access_gate',
-    slots: { customRender: 'ticket_access_gate' },
+    dataIndex: 'ticketAccessGate',
+    key: 'ticketAccessGate',
+    slots: { customRender: 'ticketAccessGate' },
   },
 ];

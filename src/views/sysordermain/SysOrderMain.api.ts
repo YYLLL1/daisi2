@@ -15,21 +15,15 @@ enum Api {
  */
 export const list = (params?) => defHttp.get({ url: Api.list, params });
 
-/**
- * 列表接口
- * @param params
- */
-export const childrenList = (params?) => defHttp.get({ url: Api.childrenList, params });
-
 // 模拟接口
-export const entranceGate = (params, handleSuccess?) => {
+export const entranceGate = (params, handleSuccess) => {
   return defHttp.get({ url: Api.entranceGate, params }, { joinParamsToUrl: true }).then(() => {
-    handleSuccess;
+    handleSuccess();
   });
 };
-export const exitGate = (params, handleSuccess?) => {
+export const exitGate = (params, handleSuccess) => {
   return defHttp.get({ url: Api.exitGate, params }, { joinParamsToUrl: true }).then(() => {
-    handleSuccess;
+    handleSuccess();
   });
 };
 

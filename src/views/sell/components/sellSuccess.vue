@@ -13,7 +13,7 @@
     <a-table class="ly-table" :columns="sellColumns" :data-source="data.sysOrderTicketList" :pagination="false" rowKey="id" :scroll="{ x: 1400, y: 300 }" bordered>
       <template #phone="{ record }">
         <div class="ly-table-input">
-          <a-input v-model:value="record.phoneValue" placeholder="输入手机号" block />
+          <a-input v-model:value="record.phone" placeholder="输入手机号" block />
         </div>
       </template>
       <template #sysPalmarveinId="{ record, index }">
