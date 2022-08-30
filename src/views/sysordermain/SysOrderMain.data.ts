@@ -3,11 +3,13 @@ export const columns = [
   {
     title: '订单编码',
     align: 'center',
+    key: 'orderCode',
     dataIndex: 'orderCode',
   },
   {
     title: '下单时间',
     align: 'center',
+    key: 'xdDate',
     dataIndex: 'xdDate',
   },
   {
@@ -18,32 +20,35 @@ export const columns = [
   {
     title: '备注',
     align: 'center',
+    key: 'remark',
     dataIndex: 'remark',
-  },
-  {
-    title: '订单状态	',
-    align: 'center',
-    dataIndex: 'orderStatus',
   },
   {
     title: '类目	',
     align: 'center',
     dataIndex: 'category',
+    key: 'category',
+    slots: { customRender: 'category' },
   },
   {
     title: '手机号码',
     align: 'center',
+    key: 'phone',
     dataIndex: 'phone',
   },
   {
     title: '收款方式',
     align: 'center',
     dataIndex: 'paymentMethod',
+    key: 'paymentMethod',
+    slots: { customRender: 'paymentMethod' },
   },
   {
     title: '下单方式',
     align: 'center',
     dataIndex: 'orderForm',
+    key: 'orderForm',
+    slots: { customRender: 'orderForm' },
   },
 ];
 //子表表格配置
@@ -58,21 +63,25 @@ export const childrenColumn = [
   {
     title: '购票人',
     align: 'center',
+    key: 'name',
     dataIndex: 'name',
   },
   {
     title: '手机号',
     align: 'center',
+    key: 'phone',
     dataIndex: 'phone',
   },
   {
     title: '订单号',
     align: 'center',
+    key: 'ticketNumber',
     dataIndex: 'ticketNumber',
   },
   {
     title: '实收款',
     align: 'center',
+    key: 'actualReceipts',
     dataIndex: 'actualReceipts',
   },
   {
