@@ -1,7 +1,7 @@
 <template>
   <div class="ly-container">
     <IndexTop :ticketCount="data.ticketCount" />
-    <IndexCenter :revenue="data.revenue" />
+    <IndexCenter :revenue="data.revenue" :ticketCount="data.ticketCount" />
     <div class="gutter-example">
       <a-row :gutter="16">
         <a-col class="gutter-row" :span="12">

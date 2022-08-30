@@ -14,7 +14,7 @@
     </a-col>
     <a-col class="ly-col" :span="4">
       <div class="ly-const">
-        <p>0</p>
+        <p>{{ props.ticketCount }}</p>
         <span>场馆售票</span>
       </div>
     </a-col>
