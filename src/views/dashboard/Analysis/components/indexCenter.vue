@@ -1,12 +1,11 @@
 <template>
   <div class="gutter-example">
     <a-row :gutter="16">
-      <a-col class="gutter-row" :span="6" v-for="(item, index) of indexCenter" :key="index">
+      <a-col class="gutter-row" :span="6" v-for="(item, index) of indexCenter.data" :key="index">
         <a-card class="gutter-box">
           <h4 v-if="item.title">{{ item.title }}</h4>
-          <h5 v-if="item.total">{{ item.total }}</h5>
+          <h5 v-if="item.total >= 0">{{ item.total }}</h5>
           <p v-if="item.footer">{{ item.footer }}</p>
-          <span v-if="item.footerTotal">{{ item.footerTotal }}</span>
         </a-card>
       </a-col>
     </a-row>
@@ -14,7 +13,42 @@
 </template>
 
 <script lang="ts" setup>
-  import { indexCenter } from '../data';
+  import { reactive, watch } from 'vue';
+
+  const props = defineProps({
+    revenue: { type: Number, default: 0 },
+  });
+  const indexCenter = reactive<any>({
+    data: [
+      {
+        title: '戴思乐深圳南山分馆',
+        icon: 'visit-count|svg',
+        footer: '深圳',
+      },
+      {
+        title: '',
+        icon: 'total-sales|svg',
+        total: 0,
+        footer: '今日营收（元）',
+      },
+      {
+        total: 0,
+        footer: '今日新增会员',
+        icon: 'download-count|svg',
+      },
+      {
+        total: 0,
+        footer: '当前客流量',
+        icon: 'transaction|svg',
+      },
+    ],
+  });
+  watch(
+    () => props.revenue,
+    () => {
+      indexCenter.data[1].total = props.revenue;
+    }
+  );
 </script>
 
 <style lang="less" scoped>
@@ -46,10 +80,6 @@
       font-size: 24px;
       color: @themBg;
       margin-bottom: 0;
-    }
-    span {
-      font-size: 12px;
-      color: #ddd;
     }
   }
 </style>

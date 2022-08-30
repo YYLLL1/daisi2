@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, reactive, nextTick, unref, defineProps } from 'vue';
+  import { ref, reactive, nextTick, unref } from 'vue';
   import { useMessage } from '/@/hooks/web/useMessage';
   import JTreeSelect from '/@/components/Form/src/jeecg/components/JTreeSelect.vue';
   import { getValueType } from '/@/utils';

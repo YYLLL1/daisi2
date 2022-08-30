@@ -1,16 +1,42 @@
 <template>
   <a-row class="ly-row" type="flex" justify="space-between" align="bottom">
-    <a-col class="ly-col" :span="4" v-for="(item, index) of indexTop" :key="index">
-      <div class="ly-const" :class="item.color == 'skyBlue' ? 'isShow' : ''">
-        <p>{{ item.total }}</p>
-        <span>{{ item.title }}</span>
+    <a-col class="ly-col" :span="4">
+      <div class="ly-const isShow">
+        <p>{{ props.ticketCount }}</p>
+        <span>今日售票</span>
+      </div>
+    </a-col>
+    <a-col class="ly-col" :span="4">
+      <div class="ly-const">
+        <p>0</p>
+        <span>网络售票</span>
+      </div>
+    </a-col>
+    <a-col class="ly-col" :span="4">
+      <div class="ly-const">
+        <p>0</p>
+        <span>场馆售票</span>
+      </div>
+    </a-col>
+    <a-col class="ly-col" :span="4">
+      <div class="ly-const">
+        <p>0</p>
+        <span>入闸总人数</span>
+      </div>
+    </a-col>
+    <a-col class="ly-col" :span="4">
+      <div class="ly-const">
+        <p>0</p>
+        <span>会员入闸</span>
       </div>
     </a-col>
   </a-row>
 </template>
 
 <script lang="ts" setup>
-  import { indexTop } from '../data';
+  const props = defineProps({
+    ticketCount: { type: Number, default: 0 },
+  });
 </script>
 
 <style lang="less" scoped>

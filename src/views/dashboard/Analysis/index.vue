@@ -1,11 +1,11 @@
 <template>
   <div class="ly-container">
-    <IndexTop />
-    <IndexCenter />
+    <IndexTop :ticketCount="data.ticketCount" />
+    <IndexCenter :revenue="data.revenue" />
     <div class="gutter-example">
       <a-row :gutter="16">
         <a-col class="gutter-row" :span="12">
-          <IndexLeft />
+          <IndexLeft :selectHomePage="data.ticketList" />
         </a-col>
         <a-col class="gutter-row" :span="12">
           <IndexRight />
@@ -19,6 +19,24 @@
   import IndexCenter from './components/indexCenter.vue';
   import IndexLeft from './components/indexLeft.vue';
   import IndexRight from './components/indexRight.vue';
+  import { getSelectHomePage } from './api';
+  import { onMounted, reactive } from 'vue';
+
+  const data = reactive({
+    revenue: 0,
+    ticketCount: 0,
+    ticketList: [],
+  });
+  const getSelectHomePageData = async () => {
+    let result = await getSelectHomePage();
+    data.ticketList = result[0].data;
+    data.revenue = result[0].revenue;
+    data.ticketCount = result[0].ticketCount;
+    console.log(result);
+  };
+  onMounted(() => {
+    getSelectHomePageData();
+  });
 </script>
 <style lang="less" scoped>
   @themeBg: #1890ff;
