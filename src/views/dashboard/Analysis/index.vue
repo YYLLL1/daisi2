@@ -32,7 +32,6 @@
     data.ticketList = result[0].data;
     data.revenue = result[0].revenue;
     data.ticketCount = result[0].ticketCount;
-    console.log(result);
   };
   onMounted(() => {
     getSelectHomePageData();

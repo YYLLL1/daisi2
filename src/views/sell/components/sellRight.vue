@@ -9,7 +9,7 @@
           <li class="total">小计</li>
         </ul>
         <div class="ly-card-content">
-          <ul v-for="item of props.selectData" :key="item.id">
+          <ul v-for="item of selectData" :key="item.id">
             <li class="name">{{ item.ticketType_dictText }}</li>
             <li class="quantity">
               <a-button type="primary" size="small" shape="circle" :disabled="item.quantity == 1" @click="reduceQuantity(item.id)"><Icon icon="ant-design:minus-outlined" /></a-button>
@@ -24,18 +24,8 @@
       </div>
       <div class="ly-card-footer">
         <div class="ly-footer-info">
-          <a-form
-            class="ly-info-content"
-            :label-col="{ span: 6 }"
-            :wrapper-col="{ span: 18 }"
-            :model="formState"
-            :rules="formRules"
-            name="basic"
-            autocomplete="off"
-            @finish="onFinish"
-            @finishFailed="onFinishFailed"
-          >
-            <a-form-item label="购票人姓名:" name="name" :wrapper-col="{ offset: 1, span: 23 }">
+          <a-form class="ly-info-content" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }" :model="formState" :rules="formRules" name="basic" autocomplete="off" @finish="onFinish">
+            <a-form-item label="购票姓名:" name="name" :wrapper-col="{ offset: 1, span: 23 }">
               <a-input v-model:value="formState.name" placeholder="请输入姓名" />
             </a-form-item>
 
@@ -55,21 +45,18 @@
     </div>
   </a-card>
 </template>
-<script lang="ts">
+
+<script lang="ts" setup>
+  import { computed, reactive } from 'vue';
+  import { message } from 'ant-design-vue';
   interface FormState {
     name: string;
     phone: string;
   }
-</script>
-<script lang="ts" setup>
-  import { computed, reactive, ref } from 'vue';
-  import { message } from 'ant-design-vue';
   const props = defineProps({
     selectData: { type: Array, default: () => [] },
   });
   const emit = defineEmits(['reduce', 'add', 'remove', 'openPaymentModal']);
-  let sellName = ref<string>();
-  let sellPhone = ref<number>();
 
   const formState = reactive<FormState>({
     name: '',
@@ -84,12 +71,7 @@
   });
 
   const onFinish = (values: any) => {
-    console.log('Success:', values);
     sellSubmit(values);
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
   };
 
   const total = computed((): number => {

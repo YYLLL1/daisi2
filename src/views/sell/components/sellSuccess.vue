@@ -31,7 +31,7 @@
       <template #sysBraceletId="{ record, index }">
         <div class="ly-table-input">
           <a-input :ref="'sysBraceletId' + index" readonly v-model:value="record.sysBraceletId" placeholder="扫描手环" block />
-          <a-button type="primary" @click="bracelet('sysBraceletId', index, record.ticketNumber)" preIcon="ant-design:scan-outlined" title="点击录入" />
+          <a-button type="primary" @click="bracelet('sysBraceletId', index)" preIcon="ant-design:scan-outlined" title="点击录入" />
         </div>
       </template>
       <template #deposit="{ record, index }">
@@ -39,8 +39,8 @@
           <a-input :ref="'deposit' + index" v-model:value="record.deposit" placeholder="输入押金" block />
         </div>
       </template>
-      <template #operation="{ record }">
-        <a-button class="ly-table-button" type="primary" @click="submitHandel(record)" block>确定</a-button>
+      <template #operation="{ record, index }">
+        <a-button class="ly-table-button" type="primary" @click="submitHandel(record, index)" block>确定</a-button>
       </template>
     </a-table>
   </a-modal>
@@ -48,8 +48,9 @@
 <script lang="ts" setup>
   import { getCurrentInstance, reactive, watch } from 'vue';
   import { sellColumns, SysOrderTicket } from '../data';
-  import { saveBind } from '../api';
-
+  import { saveBind, getBraceletNo } from '../api';
+  import { message } from 'ant-design-vue';
+  const { proxy } = getCurrentInstance();
   const props = defineProps({
     successData: { type: Object },
     successVisible: { type: Boolean },
@@ -69,7 +70,6 @@
     }
   );
 
-  const { proxy } = getCurrentInstance();
   const inputHandel = (inputRefs, index) => {
     const refsI = inputRefs + index;
     const { $refs } = proxy;
@@ -80,20 +80,30 @@
     }, 1000);
   };
   //测试手环提交
-  const bracelet = (inputRefs, index, id) => {
+  const bracelet = async (inputRefs, index) => {
     const refsI = inputRefs + index;
     const { $refs } = proxy;
     $refs[refsI].stateValue = '等待数据录入...';
-    setTimeout(() => {
-      $refs[refsI].stateValue = id + '1';
-      sysOrderTicket[`${inputRefs}`] = id + '1';
-    }, 1000);
+    let result = await getBraceletNo();
+    if (result) {
+      $refs[refsI].stateValue = result;
+      sysOrderTicket[`${inputRefs}`] = result;
+    } else {
+      $refs[refsI].stateValue = '';
+      message.error('未检测到手环数据！');
+    }
   };
-  const submitHandel = (record) => {
+  const submitHandel = (record, index) => {
     sysOrderTicket.id = record.id;
-    sysOrderTicket.phone = record.phoneValue;
+    sysOrderTicket.phone = record.phone;
     sysOrderTicket.deposit = record.deposit;
-    save();
+    if (record.deposit) {
+      save();
+    } else {
+      const { $refs } = proxy;
+      $refs['deposit' + index].focus();
+      message.error('请输入押金！');
+    }
   };
 
   //提交绑定
@@ -101,12 +111,12 @@
     await saveBind(sysOrderTicket);
   };
 
-  const emit = defineEmits(['closeSuccessModal', 'close']);
+  const emit = defineEmits(['closeSuccessModal']);
   const handleOk = () => {
     emit('closeSuccessModal', false);
   };
   const closeModal = () => {
-    emit('close', 'success');
+    emit('closeSuccessModal', false);
   };
 </script>
 <style lang="less" scoped>

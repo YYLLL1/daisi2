@@ -108,8 +108,7 @@
     data.parentData = records[0];
     data.isLoading = false;
   };
-  const onChange = (isCur) => {
-    console.log(isCur);
+  const onChange = (isCur: number) => {
     data.parentPagination.current = isCur;
     getList(isCur);
   };

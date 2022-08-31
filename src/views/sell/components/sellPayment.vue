@@ -74,8 +74,7 @@
     introduction: '',
     remember: 'a',
   });
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
+  const onFinish = () => {
     if (props.selectData?.length == 0) {
       message.warning('未添加票种！');
       return;

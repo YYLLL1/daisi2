@@ -7,6 +7,7 @@ enum Api {
   list = '/systicket/sysTicket/list',
   save = '/sysordermain/sysOrderMain/add',
   saveBind = '/sysordermain/sysOrderMain/bindingOrderTicket',
+  braceletNo = '/sysbracelet/sysBracelet/queryBraceletNo',
 
   //测试接口
   cabinetRent = '/sysordermain/sysOrderMain/bindingOrderTicket',
@@ -32,6 +33,11 @@ export const cabinetOut = (params, handleSuccess) => {
  * @param params
  */
 export const list = () => defHttp.get({ url: Api.list });
+/**
+ * 列表接口
+ * @param params
+ */
+export const getBraceletNo = () => defHttp.get({ url: Api.braceletNo });
 
 /**
  * 添加成功

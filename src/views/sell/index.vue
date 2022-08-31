@@ -9,7 +9,7 @@
       </a-col>
     </a-row>
     <SellBottom />
-    <SellSuccess :successData="data.successData" :successVisible="data.successVisible" @closeSuccessModal="closeSuccessModal" @close="close" />
+    <SellSuccess :successData="data.successData" :successVisible="data.successVisible" @closeSuccessModal="closeSuccessModal" />
     <SellPayment :selectData="data.selectData" :paymentVisible="data.paymentVisible" @closePaymentModal="closePaymentModal" @close="close" />
   </div>
 </template>
@@ -70,7 +70,6 @@
         item.quantity += 1;
       }
     });
-    console.log(data.selectData);
   };
 
   //删除票种
@@ -121,7 +120,7 @@
     data.successData = res;
   };
 
-  // 关闭支付成功弹窗
+  // // 关闭支付成功弹窗
   const closeSuccessModal = (isShow: boolean) => {
     data.selectData = [];
     data.paymentData = [];
