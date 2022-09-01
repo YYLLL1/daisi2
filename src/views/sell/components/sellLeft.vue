@@ -1,24 +1,41 @@
 <template>
   <a-card class="ly-card">
-    <div class="ly-card-container">
-      <template v-for="item of props.ticketData" :key="item.id">
-        <div class="sell-ticket" @click="isSelect(item)">
-          <div class="ticket-left"> {{ item.ticketType_dictText }} </div>
-          <div class="ticket-right">
-            <p class="ticket-price">￥{{ item.price.toFixed(2) }} </p>
-            <span class="ticket-name">{{ item.name }}</span>
+    <a-spin :spinning="spinning">
+      <div class="ly-card-container">
+        <template v-for="item of data.ticketData" :key="item.id">
+          <div class="sell-ticket" @click="isSelect(item)">
+            <div class="ticket-left"> {{ item.ticketType_dictText }} </div>
+            <div class="ticket-right">
+              <p class="ticket-price">￥{{ item.price.toFixed(2) }} </p>
+              <span class="ticket-name">{{ item.name }}</span>
+            </div>
           </div>
-        </div>
-      </template>
-    </div>
+        </template>
+      </div>
+    </a-spin>
   </a-card>
 </template>
 
 <script lang="ts" setup>
+  import { reactive, ref, watch } from 'vue';
+
   const props = defineProps({
-    ticketData: { type: Array },
+    ticketData: { type: Array, default: () => [] },
   });
   const emit = defineEmits(['ticketSelect']);
+  const data = reactive<any>({
+    ticketData: [],
+  });
+  const spinning = ref(true);
+
+  watch(
+    () => props.ticketData,
+    () => {
+      data.ticketData = props.ticketData;
+      spinning.value = false;
+    },
+    { deep: true }
+  );
   const isSelect = (item) => {
     emit('ticketSelect', item);
   };
@@ -28,12 +45,15 @@
   .ly-card {
     height: 100%;
     max-height: 600px;
+    min-height: 400px;
     overflow-y: auto;
   }
   .ly-card-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    width: 100%;
+    height: 100%;
     .sell-ticket {
       width: calc(50% - 20px);
       background-color: #1892d0;

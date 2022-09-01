@@ -3,7 +3,7 @@
     <a-card class="ly-card" :tab-list="position" :active-tab-key="key" @tabChange="(item) => onTabChange(item)">
       <div class="ly-card-container">
         <div class="ly-card-tool">
-          <p v-for="(state, index) of cabinetList.statistics" :key="index">{{ state.cabinetstate }}：{{ state.cabinetcount }}</p>
+          <p v-for="(state, index) of cabinetList.statistics" :key="index">{{ state.cabinetState }}：{{ state.cabinetCount }}</p>
           <a-button type="primary" @click="add">新增更衣柜</a-button>
         </div>
         <div class="ly-card-content">

@@ -6,7 +6,7 @@ export interface SysOrderTicket {
   sysBraceletId?: string;
   deposit?: string;
 }
-export interface Select {
+export interface selectData {
   id: string;
   ticketType_dictText: string;
   quantity?: string;

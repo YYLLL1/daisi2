@@ -3,7 +3,7 @@
     <a-card class="ly-card">
       <div class="ly-card-container">
         <div class="ly-card-tool">
-          <p v-for="(state, index) of braceletList.statistics" :key="index">{{ state.braceletstate }}：{{ state.braceletcount }}</p>
+          <p v-for="(state, index) of braceletList.statistics" :key="index">{{ state.braceletState }}：{{ state.braceletCount }}</p>
           <a-button type="primary" preIcon="ant-design:plus-outlined" @click="add">新增</a-button>
         </div>
         <div class="ly-card-content">
@@ -12,9 +12,12 @@
               <a-col v-for="item of braceletList.records" :key="item.id" class="ly-card-item" :span="3">
                 <div class="bracelet" :class="braceletState(item.braceletState)">
                   <div class="ly-bracelet-info">
-                    <span>{{ item.braceletState_dictText }}</span>
-                    <br />
-                    <span>{{ item.braceletNo }}</span>
+                    <Icon class="left" icon="ant-design:shake-outlined" />
+                    <div class="content">
+                      <span>{{ item.braceletState_dictText }}</span>
+                      <br />
+                      <span>{{ item.braceletNo }}</span>
+                    </div>
                   </div>
                   <div class="ly-bracelet-edit">
                     <a-button type="primary" preIcon="ant-design:edit-filled" size="small" title="编辑" @click="edit(item)" />
@@ -238,6 +241,13 @@
         .ly-bracelet-info {
           margin: 0;
           font-weight: 700;
+          display: flex;
+          align-items: center;
+          justify-content: space-evenly;
+          width: 50%;
+          .left {
+            font-size: 30px !important;
+          }
         }
 
         .ly-bracelet-edit {

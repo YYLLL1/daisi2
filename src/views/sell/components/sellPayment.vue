@@ -1,5 +1,5 @@
 <template>
-  <a-modal class="ly-modal" :visible="props.paymentVisible" title="结算" :footer="false" :width="1000" @cancel="close">
+  <a-modal class="ly-modal" :visible="paymentVisible" title="结算" :footer="false" :width="1000" @cancel="close">
     <div class="ly-sell-payment">
       <div class="ly-sell-payment-info ly-card-container">
         <div class="ly-card-header">
@@ -10,7 +10,7 @@
             <li class="total">小计</li>
           </ul>
           <div class="ly-card-content">
-            <ul v-for="item of props.selectData" :key="item.id">
+            <ul v-for="item of data.selectData" :key="item.id">
               <li class="name">{{ item.ticketType_dictText }}</li>
               <li class="quantity">
                 <p>{{ item.quantity }}</p>
@@ -55,27 +55,40 @@
 </script>
 <script lang="ts" setup>
   import { message } from 'ant-design-vue';
-  import { computed, reactive } from 'vue';
-  const props = defineProps({
-    paymentVisible: { type: Boolean },
-    selectData: { type: Array },
-  });
-
+  import { computed, reactive, watch } from 'vue';
   const emit = defineEmits(['closePaymentModal', 'close']);
-  const total = computed((): number => {
-    let tal: any = 0;
-    props.selectData?.forEach((item) => {
-      tal += item.quantity * item.price;
-    });
-    return tal.toFixed(2);
+  const props = defineProps({
+    paymentVisible: { type: Boolean, default: false },
+    selectData: { type: Array, default: () => [] },
+  });
+  const data = reactive<any>({
+    paymentVisible: true,
+    selectData: [],
   });
   const formState = reactive<FormState>({
     code: '',
     introduction: '',
     remember: 'a',
   });
+
+  watch(
+    () => props.selectData,
+    () => {
+      data.selectData = props.selectData;
+    },
+    { deep: true }
+  );
+
+  const total = computed((): number => {
+    let tal: any = 0;
+    data.selectData.forEach((item) => {
+      tal += item.quantity * item.price;
+    });
+    return tal.toFixed(2);
+  });
+
   const onFinish = () => {
-    if (props.selectData?.length == 0) {
+    if (data.selectData?.length == 0) {
       message.warning('未添加票种！');
       return;
     }
@@ -83,6 +96,7 @@
   };
 
   const close = () => {
+    data.selectData = [];
     emit('close', 'payment');
   };
 </script>

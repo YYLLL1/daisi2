@@ -9,7 +9,7 @@
           <li class="total">小计</li>
         </ul>
         <div class="ly-card-content">
-          <ul v-for="item of selectData" :key="item.id">
+          <ul v-for="item of data.selectData" :key="item.id">
             <li class="name">{{ item.ticketType_dictText }}</li>
             <li class="quantity">
               <a-button type="primary" size="small" shape="circle" :disabled="item.quantity == 1" @click="reduceQuantity(item.id)"><Icon icon="ant-design:minus-outlined" /></a-button>
@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, reactive } from 'vue';
+  import { computed, reactive, watch } from 'vue';
   import { message } from 'ant-design-vue';
   interface FormState {
     name: string;
@@ -55,6 +55,9 @@
   }
   const props = defineProps({
     selectData: { type: Array, default: () => [] },
+  });
+  const data = reactive<any>({
+    selectData: [],
   });
   const emit = defineEmits(['reduce', 'add', 'remove', 'openPaymentModal']);
 
@@ -70,20 +73,27 @@
     },
   });
 
+  watch(
+    () => props.selectData,
+    () => {
+      data.selectData = props.selectData;
+    },
+    { deep: true }
+  );
   const onFinish = (values: any) => {
     sellSubmit(values);
   };
 
   const total = computed((): number => {
     let tal: any = 0;
-    props.selectData?.forEach((item) => {
+    data.selectData.forEach((item) => {
       tal += item.quantity * item.price;
     });
     return tal.toFixed(2);
   });
 
   const sellSubmit = (list) => {
-    if (props.selectData?.length == 0) {
+    if (data.selectData.length == 0) {
       message.warning('未添加票种！');
       return;
     }

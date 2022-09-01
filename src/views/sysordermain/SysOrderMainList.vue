@@ -59,9 +59,16 @@
               <a-button size="small" type="primary" v-if="record.ticketWriteOff == '1'">未核销</a-button>
               <a-button size="small" v-if="record.ticketWriteOff == '2'">已核销</a-button>
             </template>
-            <template #ticketAccessGate="{ record }">
-              <a-button size="small" v-if="record.ticketAccessGate == '1'" @click="mockHandel(1, record.id)">未入闸</a-button>
-              <a-button size="small" type="primary" v-if="record.ticketAccessGate == '2'" @click="mockHandel(2, record.id)">申请出闸</a-button>
+            <template #ticketAccessGate="{ record, index }">
+              <template v-if="record.ticketAccessGate == '1'">
+                <a-input :ref="`lockerNo${index}`" type="text" placeholder="请输入闸机号" style="width: 120px; margin-right: 10px" />
+                <a-button size="small" @click="mockHandel(1, record.id, index)">未入闸</a-button>
+              </template>
+              <template v-if="record.ticketAccessGate == '2'">
+                <a-input :ref="`lockerNo${index}`" type="text" placeholder="请输入闸机号" style="width: 120px; margin-right: 10px" />
+                <a-button size="small" type="primary" @click="mockHandel(2, record.id, index)">申请出闸</a-button>
+              </template>
+
               <a-button size="small" type="primary" v-if="record.ticketAccessGate == '3'" disabled>已出闸</a-button>
             </template>
           </a-table>
@@ -82,11 +89,11 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { onMounted, reactive } from 'vue';
+  import { getCurrentInstance, onMounted, reactive } from 'vue';
   import { columns, childrenColumn } from './SysOrderMain.data';
   import { list, entranceGate, exitGate } from './SysOrderMain.api';
-  import { Pagination } from 'ant-design-vue';
-
+  import { message, Pagination } from 'ant-design-vue';
+  const { proxy } = getCurrentInstance();
   const APagination = Pagination;
   let data = reactive({
     isLoading: true,
@@ -112,13 +119,21 @@
     data.parentPagination.current = isCur;
     getList(isCur);
   };
-  const mockHandel = async (type, id) => {
+  const mockHandel = async (type, id, index) => {
+    const refsI = `lockerNo${index}`;
+    const { $refs } = proxy;
+    const lockerNo = $refs[refsI].stateValue;
+    if (!lockerNo) {
+      $refs[refsI].focus();
+      message.error('未检测到闸机数据！');
+      return;
+    }
     switch (type) {
       case 1:
-        await entranceGate({ id }, getList);
+        await entranceGate({ id, lockerNo }, getList);
         break;
       case 2:
-        await exitGate({ id }, getList);
+        await exitGate({ id, lockerNo }, getList);
         break;
     }
   };

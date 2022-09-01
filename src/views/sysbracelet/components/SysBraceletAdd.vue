@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model:visible="data.visible" title="新增更衣柜" :footer="null" @ok="handleOk" @cancel="handleOk">
+  <a-modal v-model:visible="data.visible" title="新增手环" :footer="null" @ok="handleOk" @cancel="handleOk">
     <a-form class="ly-from" :model="formState" ref="formRef" name="addBasic" :label-col="{ span: 8 }" :wrapper-col="{ span: 12 }" autocomplete="off" @finish="onFinish">
       <a-form-item label="环芯编号" name="braceletLockNo" :rules="[{ required: true, message: '请输入环芯编号！' }]">
         <a-input v-model:value="formState.braceletLockNo" />
