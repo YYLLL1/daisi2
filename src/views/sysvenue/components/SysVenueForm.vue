@@ -1,35 +1,35 @@
 <template>
   <a-spin :spinning="confirmLoading">
-    <a-form ref="formRef" class="antd-modal-form" :labelCol="labelCol" :wrapperCol="wrapperCol">
+    <a-form ref="formRef" class="antd-modal-form" :label-col="{ span: 6 }" :wrapper-col="{ span: 14 }">
       <a-row>
         <a-col :span="24">
           <a-form-item label="场馆名字" v-bind="validateInfos.venueName">
-            <a-input v-model:value="formData.venueName" placeholder="请输入场馆名字" :disabled="props.disabled" />
+            <a-input v-model:value="formData.venueName" placeholder="请输入场馆名字" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
           <a-form-item label="场馆图片" v-bind="validateInfos.venuePhotos">
-            <j-image-upload v-model:value="formData.venuePhotos" :disabled="props.disabled" />
-          </a-form-item>
-        </a-col>
-        <a-col :span="24">
-          <a-form-item label="场馆介绍" v-bind="validateInfos.venueIntroduction">
-            <a-input v-model:value="formData.venueIntroduction" placeholder="请输入场馆介绍" :disabled="props.disabled" />
+            <j-image-upload v-model:value="formData.venuePhotos" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
           <a-form-item label="场馆电话" v-bind="validateInfos.venueTel">
-            <a-input v-model:value="formData.venueTel" placeholder="请输入场馆电话" :disabled="props.disabled" />
+            <a-input v-model:value="formData.venueTel" placeholder="请输入场馆电话" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item label="场馆介绍" v-bind="validateInfos.venueIntroduction">
+            <a-textarea v-model:value="formData.venueIntroduction" :auto-size="{ minRows: 2, maxRows: 5 }" placeholder="请输入场馆介绍" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
           <a-form-item label="运营时间" v-bind="validateInfos.venueTime">
-            <a-input v-model:value="formData.venueTime" placeholder="请输入运营时间" :disabled="props.disabled" />
+            <a-textarea v-model:value="formData.venueTime" :auto-size="{ minRows: 2, maxRows: 5 }" placeholder="请输入运营时间" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
           <a-form-item label="入场须知" v-bind="validateInfos.venueNotice">
-            <a-input v-model:value="formData.venueNotice" placeholder="请输入入场须知" :disabled="props.disabled" />
+            <a-textarea v-model:value="formData.venueNotice" :auto-size="{ minRows: 2, maxRows: 5 }" placeholder="请输入入场须知" />
           </a-form-item>
         </a-col>
       </a-row>
@@ -45,40 +45,23 @@
   import { saveOrUpdate } from '../SysVenue.api';
   import { Form } from 'ant-design-vue';
 
-  const props = defineProps({
-    disabled: { type: Boolean, default: false },
-  });
   const formRef = ref();
   const useForm = Form.useForm;
   const emit = defineEmits(['register', 'ok']);
   const formData = reactive<Record<string, any>>({
     id: '',
     venueName: '',
-    id: '',
     venuePhotos: '',
-    id: '',
     venueIntroduction: '',
-    id: '',
     venueTel: '',
-    id: '',
     venueTime: '',
-    id: '',
     venueNotice: '',
   });
   const { createMessage } = useMessage();
-  const labelCol = ref<any>({ xs: { span: 24 }, sm: { span: 5 } });
-  const wrapperCol = ref<any>({ xs: { span: 24 }, sm: { span: 16 } });
   const confirmLoading = ref<boolean>(false);
   //表单验证
   const validatorRules = {};
   const { resetFields, validate, validateInfos } = useForm(formData, validatorRules, { immediate: true });
-
-  /**
-   * 新增
-   */
-  function add() {
-    edit({});
-  }
 
   /**
    * 编辑
@@ -130,7 +113,6 @@
   }
 
   defineExpose({
-    add,
     edit,
     submitForm,
   });

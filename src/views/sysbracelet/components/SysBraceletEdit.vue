@@ -41,6 +41,7 @@
 
 <script lang="ts" setup>
   import { nextTick, reactive, watch } from 'vue';
+  import { FormState } from '../SysBracelet.data';
   const emit = defineEmits(['closeSuccessModal', 'submitModal']);
   const props = defineProps({
     braceletForm: { type: Object },
@@ -51,7 +52,7 @@
     title: '',
     visible: false,
   });
-  let formState = reactive({
+  let formState = reactive<FormState>({
     braceletLockNo: '',
     braceletNo: '',
     dispenserPosition: '1',

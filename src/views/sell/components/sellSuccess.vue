@@ -50,7 +50,9 @@
   import { sellColumns, SysOrderTicket } from '../data';
   import { saveBind, getBraceletNo } from '../api';
   import { message } from 'ant-design-vue';
-  const { proxy } = getCurrentInstance();
+  // 获取ref
+  const ComponentInternalInstance = getCurrentInstance();
+
   const props = defineProps({
     successData: { type: Object },
     successVisible: { type: Boolean },
@@ -72,7 +74,7 @@
 
   const inputHandel = (inputRefs, index) => {
     const refsI = inputRefs + index;
-    const { $refs } = proxy;
+    const { $refs } = (ComponentInternalInstance as any).proxy;
     $refs[refsI].stateValue = '等待数据录入...';
     setTimeout(() => {
       $refs[refsI].stateValue = refsI + '测试数据';
@@ -82,7 +84,8 @@
   //测试手环提交
   const bracelet = async (inputRefs, index) => {
     const refsI = inputRefs + index;
-    const { $refs } = proxy;
+    const { $refs } = (ComponentInternalInstance as any).proxy;
+    console.log($refs);
     $refs[refsI].stateValue = '等待数据录入...';
     let result = await getBraceletNo();
     if (result) {
@@ -97,10 +100,10 @@
     sysOrderTicket.id = record.id;
     sysOrderTicket.phone = record.phone;
     sysOrderTicket.deposit = record.deposit;
+    const { $refs } = (ComponentInternalInstance as any).proxy;
     if (record.deposit) {
       save();
     } else {
-      const { $refs } = proxy;
       $refs['deposit' + index].focus();
       message.error('请输入押金！');
     }

@@ -20,13 +20,13 @@
     </a-col>
     <a-col class="ly-col" :span="4">
       <div class="ly-const">
-        <p>0</p>
+        <p>{{ props.gateNumber }}</p>
         <span>入闸总人数</span>
       </div>
     </a-col>
     <a-col class="ly-col" :span="4">
       <div class="ly-const">
-        <p>0</p>
+        <p>{{ props.gateNumber }}</p>
         <span>会员入闸</span>
       </div>
     </a-col>
@@ -36,6 +36,7 @@
 <script lang="ts" setup>
   const props = defineProps({
     ticketCount: { type: Number, default: 0 },
+    gateNumber: { type: Number, default: 0 },
   });
 </script>
 

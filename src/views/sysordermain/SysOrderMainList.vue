@@ -93,7 +93,9 @@
   import { columns, childrenColumn } from './SysOrderMain.data';
   import { list, entranceGate, exitGate } from './SysOrderMain.api';
   import { message, Pagination } from 'ant-design-vue';
-  const { proxy } = getCurrentInstance();
+  // 获取ref
+  const ComponentInternalInstance = getCurrentInstance();
+
   const APagination = Pagination;
   let data = reactive({
     isLoading: true,
@@ -121,7 +123,7 @@
   };
   const mockHandel = async (type, id, index) => {
     const refsI = `lockerNo${index}`;
-    const { $refs } = proxy;
+    const { $refs } = (ComponentInternalInstance as any).proxy;
     const lockerNo = $refs[refsI].stateValue;
     if (!lockerNo) {
       $refs[refsI].focus();
@@ -140,7 +142,7 @@
 </script>
 <style lang="less" scoped>
   ::v-deep(.table-striped) {
-    background-color: skyblue;
+    background-color: #f5f5f5;
   }
 
   .ly-card-pagination {

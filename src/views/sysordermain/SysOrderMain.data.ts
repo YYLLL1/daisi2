@@ -110,6 +110,7 @@ export const childrenColumn = [
     align: 'center',
     dataIndex: 'ticketAccessGate',
     key: 'ticketAccessGate',
+    width: 240,
     slots: { customRender: 'ticketAccessGate' },
   },
 ];

@@ -17,6 +17,7 @@
 
   const props = defineProps({
     revenue: { type: Number, default: 0 },
+    guestFlow: { type: Number, default: 0 },
     ticketCount: { type: Number, default: 0 },
   });
   const indexCenter = reactive<any>({
@@ -49,6 +50,7 @@
     () => {
       indexCenter.data[1].total = props.revenue;
       indexCenter.data[2].total = props.ticketCount;
+      indexCenter.data[3].total = props.guestFlow;
     }
   );
 </script>

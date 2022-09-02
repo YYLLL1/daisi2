@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, nextTick, defineExpose } from 'vue';
+  import { ref, nextTick } from 'vue';
   import SysGateLogForm from './SysGateLogForm.vue';
 
   const title = ref<string>('');

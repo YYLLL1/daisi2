@@ -23,7 +23,7 @@
   import { onMounted, reactive } from 'vue';
   import { list, save } from './api';
 
-  const data = reactive({
+  const data = reactive<any>({
     ticketData: [],
     selectData: [],
     paymentData: [],
@@ -93,8 +93,8 @@
 
   // 打开支付弹窗
   const openPaymentModal = ({ name, phone }) => {
-    let sysOrderTicketList = [];
-    data.selectData?.forEach((item) => {
+    let sysOrderTicketList = reactive<any>([]);
+    data.selectData.forEach((item) => {
       let sysTicked = {
         sysTicketId: item.id,
         num: item.quantity,

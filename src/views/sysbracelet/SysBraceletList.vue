@@ -116,7 +116,6 @@
   };
 
   onMounted(() => {
-    // getTab();
     getStatistics();
     getList();
   });
@@ -149,7 +148,6 @@
   const edit = (item) => {
     modalList.braceletEditVisible = true;
     modalList.braceletForm = item;
-    console.log(item);
   };
   const add = () => {
     modalList.braceletAddVisible = true;

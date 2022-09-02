@@ -43,6 +43,9 @@
 <script lang="ts" setup>
   import { getCurrentInstance, nextTick, reactive, watch } from 'vue';
   import { IFormState } from '../SysCabinetList.data';
+  // 获取ref
+  const ComponentInternalInstance = getCurrentInstance();
+
   const emit = defineEmits(['closeSuccessModal', 'submitModal']);
   const props = defineProps({
     cabinetForm: { type: Object },
@@ -88,9 +91,9 @@
   const changeHandel = (type) => {
     type ? (formState.switchState = '开') : (formState.switchState = '关');
   };
-  const { proxy } = getCurrentInstance();
+
   const handleOk = () => {
-    const { $refs } = proxy;
+    const { $refs } = (ComponentInternalInstance as any).proxy;
     $refs['formRef'].resetFields();
     emit('closeSuccessModal', false);
   };

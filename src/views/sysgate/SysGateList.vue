@@ -184,7 +184,6 @@
   const edit = (item) => {
     modalList.gateEditVisible = true;
     modalList.gateForm = item;
-    console.log(item);
   };
   const add = () => {
     modalList.gateAddVisible = true;
@@ -202,6 +201,7 @@
     } else {
       addGate(data);
     }
+    closeSuccessModal(false);
     getList();
   };
 </script>
@@ -279,7 +279,7 @@
           align-items: center;
           flex-wrap: wrap;
           justify-content: space-evenly;
-          width: 80%;
+          width: 90%;
           .left {
             width: 15%;
             text-align: center;

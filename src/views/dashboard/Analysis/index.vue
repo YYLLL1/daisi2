@@ -1,7 +1,7 @@
 <template>
   <div class="ly-container">
-    <IndexTop :ticketCount="data.ticketCount" />
-    <IndexCenter :revenue="data.revenue" :ticketCount="data.ticketCount" />
+    <IndexTop :ticketCount="data.ticketCount" :gateNumber="data.gateNumber" />
+    <IndexCenter :revenue="data.revenue" :ticketCount="data.ticketCount" :guestFlow="data.guestFlow" />
     <div class="gutter-example">
       <a-row :gutter="16">
         <a-col class="gutter-row" :span="12">
@@ -25,6 +25,8 @@
   const data = reactive({
     revenue: 0,
     ticketCount: 0,
+    gateNumber: 0,
+    guestFlow: 0,
     ticketList: [],
   });
   const getSelectHomePageData = async () => {
@@ -32,6 +34,8 @@
     data.ticketList = result[0].data;
     data.revenue = result[0].revenue;
     data.ticketCount = result[0].ticketCount;
+    data.gateNumber = result[0].gateNumber;
+    data.guestFlow = result[0].guestFlow;
   };
   onMounted(() => {
     getSelectHomePageData();
