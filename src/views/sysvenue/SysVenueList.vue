@@ -3,51 +3,53 @@
     <a-card class="ly-card">
       <div class="ly-venue-edit" @click="handleEdit(data.venueList)">编辑设置</div>
       <div class="ly-card-container">
-        <div class="ly-venue-header">
-          <a-row :gutter="16">
-            <a-col class="gutter-row" :span="6">
-              <img :src="data.venueImage[0]" alt="" />
-            </a-col>
-            <a-col class="gutter-row" :span="18">
-              <h3 class="ly-venue-title">{{ data.venueList.venueName }}</h3>
-              <p class="ly-venue-status">状态：<span class="c-blue">营业中</span></p>
-              <p class="ly-venue-address">地址：深圳市南山区</p>
-              <p class="ly-venue-introduce">简介：{{ data.venueList.venueIntroduction }}</p>
-            </a-col>
-          </a-row>
-        </div>
-        <div class="ly-venue-gallery">
-          <h3>场馆图片</h3>
-          <ul>
-            <li v-for="(item, index) of data.venueImage" :key="index">
-              <img :src="item" alt="" />
-            </li>
-          </ul>
-        </div>
-        <div class="ly-venue-item">
-          <h3>详细介绍</h3>
-          <p class="ly-item-content">
-            {{ data.venueList.venueIntroduction }}
-          </p>
-        </div>
-        <div class="ly-venue-item">
-          <h3>场馆电话</h3>
-          <p class="ly-item-content">
-            {{ data.venueList.venueTel }}
-          </p>
-        </div>
-        <div class="ly-venue-item">
-          <h3>运营时间</h3>
-          <p class="ly-item-content">
-            {{ data.venueList.venueTime }}
-          </p>
-        </div>
-        <div class="ly-venue-item">
-          <h3>入场须知</h3>
-          <p class="ly-item-content">
-            {{ data.venueList.venueNotice }}
-          </p>
-        </div>
+        <a-spin :spinning="spinning">
+          <div class="ly-venue-header">
+            <a-row :gutter="16">
+              <a-col class="gutter-row" :span="6">
+                <img :src="data.venueImage[0]" alt="" />
+              </a-col>
+              <a-col class="gutter-row" :span="18">
+                <h3 class="ly-venue-title">{{ data.venueList.venueName }}</h3>
+                <p class="ly-venue-status">状态：<span class="c-blue">营业中</span></p>
+                <p class="ly-venue-address">地址：深圳市南山区</p>
+                <p class="ly-venue-introduce">简介：{{ data.venueList.venueIntroduction }}</p>
+              </a-col>
+            </a-row>
+          </div>
+          <div class="ly-venue-gallery">
+            <h3>场馆图片</h3>
+            <ul>
+              <li v-for="(item, index) of data.venueImage" :key="index">
+                <img :src="item" alt="" />
+              </li>
+            </ul>
+          </div>
+          <div class="ly-venue-item">
+            <h3>详细介绍</h3>
+            <p class="ly-item-content">
+              {{ data.venueList.venueIntroduction }}
+            </p>
+          </div>
+          <div class="ly-venue-item">
+            <h3>场馆电话</h3>
+            <p class="ly-item-content">
+              {{ data.venueList.venueTel }}
+            </p>
+          </div>
+          <div class="ly-venue-item">
+            <h3>运营时间</h3>
+            <p class="ly-item-content">
+              {{ data.venueList.venueTime }}
+            </p>
+          </div>
+          <div class="ly-venue-item">
+            <h3>入场须知</h3>
+            <p class="ly-item-content">
+              {{ data.venueList.venueNotice }}
+            </p>
+          </div>
+        </a-spin>
       </div>
       <!-- 表单区域 -->
       <SysVenueModal ref="registerModal" @success="handleSuccess" />
@@ -62,16 +64,19 @@
   import { getFileAccessHttpUrl } from '/@/utils/common/compUtils';
 
   const registerModal = ref();
+  const spinning = ref<Boolean>(true);
   let data = reactive<any>({
     venueList: {},
     venueImage: [],
   });
   async function handleList() {
+    spinning.value = true;
     let { records } = await list();
     let arr = reactive<any>([]);
     records[0].venuePhotos.split(',').forEach((item: any) => arr.push(getFileAccessHttpUrl(item)));
     data.venueList = records[0];
     data.venueImage = arr;
+    spinning.value = false;
   }
   onMounted(() => {
     handleList();
@@ -89,6 +94,7 @@
    */
   function handleSuccess() {
     registerModal.value = {};
+    handleList();
   }
 </script>
 
@@ -104,7 +110,9 @@
     font-weight: 700;
     cursor: pointer;
   }
-
+  .ly-venue-header {
+    margin-bottom: 16px;
+  }
   .ly-venue-gallery img {
     height: 100%;
     max-height: 100px;

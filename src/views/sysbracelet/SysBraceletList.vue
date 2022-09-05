@@ -242,7 +242,7 @@
           display: flex;
           align-items: center;
           justify-content: space-evenly;
-          width: 50%;
+          width: 60%;
           .left {
             font-size: 30px !important;
           }
