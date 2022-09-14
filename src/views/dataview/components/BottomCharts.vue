@@ -22,11 +22,11 @@
 
 <script lang="ts" setup>
   import { reactive } from 'vue';
-  import icon1 from '../assets/icon1.png';
-  import icon2 from '../assets/icon2.png';
-  import icon3 from '../assets/icon3.png';
-  import icon4 from '../assets/icon4.png';
-  import icon5 from '../assets/icon5.png';
+  import icon1 from '../assets/img/icon1.png';
+  import icon2 from '../assets/img/icon2.png';
+  import icon3 from '../assets/img/icon3.png';
+  import icon4 from '../assets/img/icon4.png';
+  import icon5 from '../assets/img/icon5.png';
 
   const data = reactive({
     status: [
@@ -78,6 +78,7 @@
     padding: 0 10px;
     justify-content: space-between;
     margin-bottom: 10px;
+    font-family: 'SourceHanSansCN';
     .chart-item {
       background-color: #283f78;
       width: calc(20% - 15px);
@@ -108,6 +109,8 @@
         p {
           margin: 0;
           margin-left: 10px;
+          font-weight: 700;
+          font-size: 18px;
         }
       }
       .chart-footer p {

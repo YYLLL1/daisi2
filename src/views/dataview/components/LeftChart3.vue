@@ -1,53 +1,69 @@
 <template>
   <div class="left-chart-3">
     <dv-border-box-10 :color="['#054769', '#2394d0']">
-      <div dv-bg>
+      <div class="chart-box">
         <div class="lc1-header"> 柜控统计 </div>
         <div class="lc1-details"> 设备运行总数<span>245</span> </div>
-        <dv-capsule-chart class="lc3-chart" :config="state.config" />
+        <div id="LeftChart3"></div>
       </div>
     </dv-border-box-10>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { reactive } from 'vue';
+  import { onMounted } from 'vue';
+  import * as echarts from 'echarts';
 
-  const state = reactive({
-    config: {
-      showValue: true,
-      data: [
-        {
-          name: 'all',
-          value: 200,
+  onMounted(() => {
+    let myChart = echarts.init(document.getElementById('LeftChart3'));
+
+    myChart.setOption({
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow',
         },
-        {
-          name: '维护中',
-          value: 21,
+      },
+      grid: {
+        top: '4%',
+        left: '3%',
+        right: '4%',
+        bottom: '0%',
+        containLabel: true,
+      },
+      xAxis: {
+        type: 'value',
+        show: false,
+      },
+      yAxis: {
+        axisLabel: {
+          color: '#fff',
+          with: 60,
         },
+        type: 'category',
+        data: ['其他', '维护中', '空闲', '已开柜', '正在使用'],
+      },
+      series: [
         {
-          name: '空闲',
-          value: 54,
-        },
-        {
-          name: '已开柜',
-          value: 123,
-        },
-        {
-          name: '正在使用',
-          value: 167,
-        },
-        {
-          name: '其他',
-          value: 77,
+          type: 'bar',
+          data: [21, 54, 123, 167, 77],
+          colorBy: 'data',
         },
       ],
-      colors: ['#00baff', '#3de7c9', '#fff', '#ffc530', '#469f4b'],
-    },
+    });
   });
 </script>
 
 <style lang="less">
+  #LeftChart3 {
+    width: 100%;
+    height: 100%;
+  }
+  .chart-box {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
   .left-chart-3 {
     width: 100%;
     height: 100%;

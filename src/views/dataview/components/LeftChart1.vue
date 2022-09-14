@@ -3,7 +3,7 @@
     <dv-border-box-10 :color="['#054769', '#2394d0']">
       <div class="lc1-header"> 更衣室 </div>
       <div class="lc1-details"> 当前运行总数<span>340</span> </div>
-      <dv-capsule-chart class="lc1-chart" :config="state.config" />
+      <div id="LeftChart1"></div>
       <dv-decoration-2 style="height: 10px" />
       <div class="chart-footer">
         <div class="footer-box">
@@ -20,35 +20,55 @@
 </template>
 
 <script lang="ts" setup>
-  import { reactive } from 'vue';
+  import { onMounted } from 'vue';
+  import * as echarts from 'echarts';
 
-  const state = reactive({
-    config: {
-      showValue: true,
-      data: [
-        {
-          name: 'all',
-          value: 200,
+  onMounted(() => {
+    let myChart = echarts.init(document.getElementById('LeftChart1'));
+
+    myChart.setOption({
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow',
         },
-        {
-          name: '男更衣智能柜',
-          value: 160,
+      },
+
+      grid: {
+        top: '4%',
+        left: '3%',
+        right: '4%',
+        bottom: '0%',
+        containLabel: true,
+      },
+      xAxis: {
+        type: 'value',
+        show: false,
+      },
+      yAxis: {
+        axisLabel: {
+          color: '#fff',
+          with: 60,
         },
+        type: 'category',
+        data: ['淋浴间', '女更智能柜', '男更智能柜'],
+      },
+      series: [
         {
-          name: '女更衣智能柜',
-          value: 80,
-        },
-        {
-          name: '淋浴间',
-          value: 20,
+          type: 'bar',
+          data: [40, 150, 150],
+          colorBy: 'data',
         },
       ],
-      colors: ['#00baff', '#3de7c9', '#fff'],
-    },
+    });
   });
 </script>
 
 <style lang="less">
+  #LeftChart1 {
+    width: 100%;
+    height: 100%;
+  }
   .left-chart-1 {
     width: 100%;
     height: 55%;
@@ -87,7 +107,6 @@
           font-weight: 700;
           line-height: 40px;
           margin: 0;
-          letter-spacing: 2px;
         }
       }
     }

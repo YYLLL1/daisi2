@@ -27,6 +27,7 @@
 </template>
 
 <script lang="ts" setup>
+  import './assets/font/font.css';
   import LeftChart1 from './components/LeftChart1.vue';
   import LeftChart2 from './components/LeftChart2.vue';
   import LeftChart3 from './components/LeftChart3.vue';
@@ -47,7 +48,6 @@
     width: 100vw;
     height: 100vh;
     color: #fff;
-    font-family: '思源黑体';
     .dv-capsule-chart {
       padding: 10px 0 0 0;
       .capsule-container {

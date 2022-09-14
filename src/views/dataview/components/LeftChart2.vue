@@ -3,8 +3,8 @@
     <dv-border-box-10 :color="['#054769', '#2394d0']">
       <div class="charts-box">
         <div class="lc1-header"> 代替名称 </div>
-        <div class="lc1-details"> 设备运行总数<span>245</span> </div>
-        <div id="LeftChart2" style="width: 100%; height: 110px"></div>
+        <div class="lc1-details"> 设备运行总数<span>250</span> </div>
+        <div id="LeftChart2"></div>
       </div>
     </dv-border-box-10>
   </div>
@@ -18,27 +18,34 @@
     let myChart = echarts.init(document.getElementById('LeftChart2'));
 
     myChart.setOption({
-      color: ['#fff'],
       tooltip: {
         trigger: 'axis',
         axisPointer: {
           type: 'shadow',
         },
       },
-      grid: {},
+      axisLabel: {
+        color: '#fff',
+      },
+      legend: {},
+      grid: {
+        top: '10%',
+        left: '3%',
+        right: '4%',
+        bottom: '0%',
+        containLabel: true,
+      },
       xAxis: {
-        type: 'value',
+        show: false,
+        data: ['202206', '202207', '202208'],
       },
-      yAxis: {
-        type: 'category',
-        data: ['淋浴间', '女', '男'],
-      },
+      yAxis: {},
       series: [
         {
-          name: '直接访问',
           type: 'bar',
-          barWidth: '60%',
-          data: [10, 52, 62],
+          data: [200, 210, 250],
+          barWidth: 30,
+          colorBy: 'data',
         },
       ],
     });
@@ -46,6 +53,16 @@
 </script>
 
 <style lang="less">
+  #LeftChart2 {
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+  }
+  .charts-box {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
   .left-chart-2 {
     width: 100%;
     height: 45%;

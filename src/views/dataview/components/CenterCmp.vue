@@ -1,6 +1,6 @@
 <template>
   <div class="center-cmp">
-    <img src="../assets/bg.png" />
+    <img src="../assets/img/bg.png" />
   </div>
 </template>
 

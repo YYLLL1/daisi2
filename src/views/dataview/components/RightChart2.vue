@@ -4,14 +4,14 @@
       <div class="chart-box">
         <div class="rc1-top">
           <div class="rc1-header"> 收入分类 </div>
-          <div>
-            <p>8500</p>
+          <div class="rc1-info">
+            <p>8565 <span>元</span> </p>
             <span>总收入</span>
           </div>
         </div>
 
         <div class="rc1-container">
-          <div id="chart1" style="width: 100%; height: 220px"></div>
+          <div id="chart1" style="width: 100%; height: 100%"></div>
         </div>
       </div>
     </dv-border-box-10>
@@ -23,9 +23,13 @@
   import * as echarts from 'echarts';
 
   onMounted(() => {
-    let myChart = echarts.init(document.getElementById('chart1'), 'dark');
+    let myChart = echarts.init(document.getElementById('chart1'));
 
     myChart.setOption({
+      tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b} : {c} ({d}%)',
+      },
       series: [
         {
           labelLine: {
@@ -66,9 +70,26 @@
       flex-direction: row;
       .rc1-top {
         width: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .rc1-info {
+          text-align: center;
+          margin-bottom: 20px;
+          font-weight: 700;
+          p {
+            font-size: 32px;
+            margin-bottom: 0;
+            span {
+              font-size: 16px;
+            }
+          }
+        }
       }
       .rc1-container {
         width: 70%;
+        display: flex;
+        flex-direction: column;
       }
     }
     .rc1-header {
