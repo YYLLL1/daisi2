@@ -79,6 +79,8 @@
         formState.lockerNo = props.gateForm?.lockerNo;
         formState.position = props.gateForm?.position;
         formState.gateState = props.gateForm?.gateState;
+        formState.switchControl = props.gateForm?.switchControl;
+        formState.switchState = props.gateForm?.switchState;
       });
     }
   );
