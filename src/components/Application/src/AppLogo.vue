@@ -62,7 +62,7 @@
     padding-left: 7px;
     cursor: pointer;
     transition: all 0.2s ease;
-
+    background-color: #fff;
     &.light {
       border-bottom: 1px solid @border-color-base;
     }
@@ -76,7 +76,8 @@
     }
 
     &.dark &__title {
-      color: @white;
+      // color: @white;
+      color: #0d73a1;
     }
 
     &__title {

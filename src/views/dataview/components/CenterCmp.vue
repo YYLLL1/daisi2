@@ -15,6 +15,8 @@
     align-items: center;
     justify-content: center;
     padding: 5px;
+    // background: url(../assets/img/bg.png) center no-repeat;
+    // background-size: 100% 100%;
     img {
       max-width: 100%;
       max-height: 100%;

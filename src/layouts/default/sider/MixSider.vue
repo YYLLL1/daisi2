@@ -338,7 +338,7 @@
 
       img {
         width: @logo-width;
-        height: @logo-width;
+        height: @logo-height;
       }
     }
 

@@ -2,8 +2,8 @@
   <div class="left-chart-2">
     <dv-border-box-10 :color="['#054769', '#2394d0']">
       <div class="charts-box">
-        <div class="lc1-header"> 代替名称 </div>
-        <div class="lc1-details"> 设备运行总数<span>250</span> </div>
+        <div class="lc1-header"> 水处理机房 </div>
+        <div class="lc1-details"> 水处理频率 </div>
         <div id="LeftChart2"></div>
       </div>
     </dv-border-box-10>
@@ -46,6 +46,10 @@
           data: [200, 210, 250],
           barWidth: 30,
           colorBy: 'data',
+          label: {
+            show: true,
+            position: 'inside',
+          },
         },
       ],
     });
@@ -74,15 +78,10 @@
     }
 
     .lc1-details {
-      font-size: 16px;
+      font-size: 12px;
       height: 30px;
       display: flex;
       align-items: center;
-      span {
-        font-weight: bold;
-        font-size: 30px;
-        margin-left: 20px;
-      }
     }
 
     .lc2-chart {

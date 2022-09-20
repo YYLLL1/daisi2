@@ -11,8 +11,8 @@
           <span>室内温度</span>
         </div>
         <div class="footer-box">
-          <p>30℃</p>
-          <span>水温</span>
+          <p>80<span style="font-size: 18px; font-weight: 500">%</span> </p>
+          <span>空气湿度</span>
         </div>
       </div>
     </dv-border-box-10>
@@ -48,16 +48,19 @@
       yAxis: {
         axisLabel: {
           color: '#fff',
-          with: 60,
         },
         type: 'category',
-        data: ['淋浴间', '女更智能柜', '男更智能柜'],
+        data: ['女淋浴间', '男淋浴间', '女更智能柜', '男更智能柜'],
       },
       series: [
         {
           type: 'bar',
-          data: [40, 150, 150],
+          data: [10, 7, 120, 120],
           colorBy: 'data',
+          label: {
+            show: true,
+            position: 'inside',
+          },
         },
       ],
     });
@@ -96,6 +99,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      // font-family: 'SourceHanSansCN';
       .footer-box {
         display: flex;
         flex-flow: column;

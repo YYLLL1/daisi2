@@ -82,7 +82,7 @@
     .chart-item {
       background-color: #283f78;
       width: calc(20% - 15px);
-      padding: 10px 10px 0;
+      padding: 20px 10px 0;
       border-radius: 4px;
       display: flex;
       flex-direction: column;

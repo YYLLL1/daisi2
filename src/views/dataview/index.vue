@@ -48,6 +48,7 @@
     width: 100vw;
     height: 100vh;
     color: #fff;
+    font-family: 'SourceHanSansCN';
     .dv-capsule-chart {
       padding: 10px 0 0 0;
       .capsule-container {

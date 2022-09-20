@@ -28,29 +28,32 @@
     myChart.setOption({
       tooltip: {
         trigger: 'item',
-        formatter: '{a} <br/>{b} : {c} ({d}%)',
       },
       series: [
         {
+          label: {
+            show: true,
+            position: 'inside',
+          },
           labelLine: {
             show: false,
           },
           type: 'pie',
-          radius: [10, 70],
+          radius: [10, 120],
           center: ['50%', '50%'],
           roseType: 'area',
           itemStyle: {
             borderRadius: 8,
           },
           data: [
+            { value: 24, name: '月卡' },
             { value: 30, name: '培训班' },
-            { value: 34, name: '月卡' },
             { value: 28, name: '次卡' },
-            { value: 26, name: '饮料' },
-            { value: 28, name: '门票' },
-            { value: 26, name: '会员卡' },
-            { value: 30, name: '小吃' },
-            { value: 26, name: '其他' },
+            { value: 22, name: '饮料' },
+            { value: 30, name: '门票' },
+            { value: 34, name: '会员卡' },
+            { value: 20, name: '小吃' },
+            { value: 16, name: '其他' },
           ],
         },
       ],
@@ -62,8 +65,7 @@
   .right-chart-2 {
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
+
     .chart-box {
       display: flex;
       justify-content: space-between;

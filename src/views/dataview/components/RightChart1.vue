@@ -10,20 +10,17 @@
           </div>
           <p class="date">{{ time }} {{ week }}</p>
         </div>
-
-        <ul class="rc1-chart-container">
-          <li v-for="(list, index) of data.todayList" :key="index">
-            <span>
-              <b>{{ list.num }}</b> 人
-            </span>
-            <p>{{ list.type }}</p>
-          </li>
-        </ul>
+        <div id="rightChart1"></div>
+        <dv-decoration2 style="width: 100%; height: 5px; margin-bottom: 5px" />
         <ul class="rc1-chart-bottom">
+          <li>
+            <h4>今日客流量来源：</h4>
+          </li>
           <li v-for="(item, index) of data.flowList" :key="index">
-            <span>
+            <h4>
               <b>{{ item.num }}</b>
-            </span>
+              <span>{{ item.company }}</span>
+            </h4>
             <p>{{ item.type }}</p>
           </li>
         </ul>
@@ -35,17 +32,12 @@
 <script lang="ts" setup>
   import { onMounted, onUnmounted, reactive, ref } from 'vue';
   import icon1 from '../assets/img/weather.png';
-
+  import * as echarts from 'echarts';
   const data = reactive({
     flowList: [
-      { num: 1315, type: '成人' },
-      { num: 415, type: '老人' },
-      { num: 90, type: '儿童' },
-      { num: 317, type: '其他' },
-    ],
-    todayList: [
-      { num: 262, type: '今日客流量' },
-      { num: 35262, type: '总人数' },
+      { num: 17, company: '人', type: '票务' },
+      { num: 48, company: '人', type: '会员' },
+      { num: 10, company: '人', type: '培训学员' },
     ],
   });
 
@@ -92,7 +84,53 @@
   function closeTimer() {
     if (timer) clearInterval(timer);
   }
+
+  const myChartFunction = () => {
+    let myChart = echarts.init(document.getElementById('rightChart1'));
+
+    myChart.setOption({
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow',
+        },
+      },
+      grid: {
+        top: '4%',
+        left: '3%',
+        right: '4%',
+        bottom: '0%',
+        containLabel: true,
+      },
+      xAxis: {
+        type: 'value',
+        show: false,
+      },
+      yAxis: [
+        {
+          axisLabel: {
+            color: '#fff',
+            with: 10,
+          },
+          type: 'category',
+          data: ['今日新增会员人数', '今日管内实时人数', '昨日总人数', '今日总人数'],
+        },
+      ],
+      series: [
+        {
+          type: 'bar',
+          data: [22, 96, 205, 210],
+          colorBy: 'data',
+          label: {
+            show: true,
+            position: 'inside',
+          },
+        },
+      ],
+    });
+  };
   onMounted(() => {
+    myChartFunction();
     getNowDate();
     closeTimer();
     openTimer();
@@ -103,12 +141,17 @@
 </script>
 
 <style lang="less">
+  #rightChart1 {
+    width: 100%;
+    height: 100%;
+  }
   .right-chart-1 {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     padding-bottom: 5px;
+
     .chart-box {
       justify-content: space-between;
     }
@@ -145,7 +188,6 @@
       }
     }
 
-    .rc1-chart-container,
     .rc1-chart-bottom {
       margin-bottom: 0;
       display: flex;
@@ -155,8 +197,10 @@
       justify-content: space-between;
       li {
         width: 25%;
-        span {
+        h4 {
           font-size: 12px;
+          margin-bottom: 0;
+          color: #fff;
           b {
             font-size: 30px;
             line-height: 1;
@@ -166,11 +210,6 @@
         p {
           font-size: 12px;
         }
-      }
-    }
-    .rc1-chart-container {
-      li {
-        width: 50%;
       }
     }
   }

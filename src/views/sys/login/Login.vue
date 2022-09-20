@@ -153,7 +153,7 @@
     .container {
       .@{logo-prefix-cls} {
         display: flex;
-        width: 60%;
+        // width: 60%;
         height: 80px;
 
         &__title {
