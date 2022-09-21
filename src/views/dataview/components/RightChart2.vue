@@ -28,12 +28,14 @@
     myChart.setOption({
       tooltip: {
         trigger: 'item',
+        formatter: '{b} : {c} ({d}%)',
       },
       series: [
         {
           label: {
             show: true,
             position: 'inside',
+            color: '#fff',
           },
           labelLine: {
             show: false,

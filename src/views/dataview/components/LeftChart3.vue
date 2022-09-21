@@ -38,8 +38,8 @@
         axisPointer: {
           type: 'shadow',
         },
+        formatter: '{b}：{c}吨',
       },
-
       grid: {
         top: '4%',
         left: '3%',
@@ -56,7 +56,7 @@
           color: '#fff',
         },
         type: 'category',
-        data: ['女淋浴间', '男淋浴间'],
+        data: ['女浴用水量', '男浴用水量'],
       },
       series: [
         {
@@ -66,6 +66,8 @@
           label: {
             show: true,
             position: 'inside',
+            color: '#fff',
+            formatter: '{c}吨',
           },
         },
       ],
@@ -77,10 +79,6 @@
   #LeftChart3 {
     width: 100%;
     height: 100%;
-    & > div {
-      width: 100%;
-      height: 100%;
-    }
   }
   .dv-decoration-2 > svg {
     height: 5px;

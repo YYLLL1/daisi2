@@ -32,8 +32,8 @@
         axisPointer: {
           type: 'shadow',
         },
+        formatter: '{b}<br/>使用中：{c}<br/>最大设备数：150',
       },
-
       grid: {
         top: '4%',
         left: '3%',
@@ -44,6 +44,7 @@
       xAxis: {
         type: 'value',
         show: false,
+        max: 150,
       },
       yAxis: {
         axisLabel: {
@@ -55,11 +56,13 @@
       series: [
         {
           type: 'bar',
-          data: [10, 7, 120, 120],
+          data: [10, 7, 120, 107],
           colorBy: 'data',
           label: {
             show: true,
             position: 'inside',
+            color: '#fff',
+            formatter: '{c}/150',
           },
         },
       ],

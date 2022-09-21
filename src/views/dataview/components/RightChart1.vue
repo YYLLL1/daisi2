@@ -96,10 +96,10 @@
         },
       },
       grid: {
-        top: '4%',
-        left: '3%',
-        right: '4%',
-        bottom: '0%',
+        top: '2%',
+        left: '2%',
+        right: '2%',
+        bottom: '0',
         containLabel: true,
       },
       xAxis: {
@@ -124,6 +124,7 @@
           label: {
             show: true,
             position: 'inside',
+            color: '#fff',
           },
         },
       ],
@@ -177,7 +178,7 @@
           font-size: 20px;
           font-weight: 500;
           margin-left: 5px;
-          margin-bottom: 0;
+
           line-height: 1;
         }
       }
@@ -189,12 +190,12 @@
     }
 
     .rc1-chart-bottom {
-      margin-bottom: 0;
       display: flex;
       width: 100%;
       color: #fff;
       text-align: center;
       justify-content: space-between;
+      margin-bottom: 0;
       li {
         width: 25%;
         h4 {
@@ -209,6 +210,7 @@
         }
         p {
           font-size: 12px;
+          margin-bottom: 5px;
         }
       }
     }

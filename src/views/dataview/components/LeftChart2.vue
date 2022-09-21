@@ -44,11 +44,12 @@
         {
           type: 'bar',
           data: [200, 210, 250],
-          barWidth: 30,
+          barWidth: 40,
           colorBy: 'data',
           label: {
             show: true,
             position: 'inside',
+            color: '#fff',
           },
         },
       ],
