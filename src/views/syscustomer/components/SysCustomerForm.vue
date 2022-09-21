@@ -14,7 +14,7 @@
         </a-col>
         <a-col :span="24">
           <a-form-item label="性别" v-bind="validateInfos.sex">
-            <a-input v-model:value="formData.sex" placeholder="请输入性别" :disabled="props.disabled" />
+            <j-dict-select-tag type="radio" v-model:value="formData.sex" dictCode="sex" placeholder="请选择性别" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
@@ -23,8 +23,38 @@
           </a-form-item>
         </a-col>
         <a-col :span="24">
+          <a-form-item label="掌静脉ID" v-bind="validateInfos.sysPalmarveinId">
+            <a-input v-model:value="formData.sysPalmarveinId" placeholder="请输入掌静脉ID" :disabled="props.disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item label="人脸ID" v-bind="validateInfos.sysHumanfaceId">
+            <a-input v-model:value="formData.sysHumanfaceId" placeholder="请输入人脸ID" :disabled="props.disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item label="关联实体卡" v-bind="validateInfos.sysPcVipCardId">
+            <a-input v-model:value="formData.sysPcVipCardId" placeholder="请输入关联实体卡" :disabled="props.disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item label="实体卡工本费" v-bind="validateInfos.costOfProduction">
+            <j-dict-select-tag type="radio" v-model:value="formData.costOfProduction" dictCode="cost_of_production" placeholder="请选择实体卡工本费" :disabled="props.disabled" />
+          </a-form-item>
+        </a-col>
+        <!-- <a-col :span="24">
           <a-form-item label="客户类型" v-bind="validateInfos.customerType">
             <j-dict-select-tag v-model:value="formData.customerType" dictCode="customer_type" placeholder="请选择客户类型" :disabled="props.disabled" />
+          </a-form-item>
+        </a-col> -->
+        <a-col :span="24">
+          <a-form-item label="折扣" v-bind="validateInfos.discount">
+            <a-input-number v-model:value="formData.discount" placeholder="请输入折扣" style="width: 100%" :disabled="props.disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item label="押金" v-bind="validateInfos.deposit">
+            <a-input-number v-model:value="formData.deposit" placeholder="请输入押金" style="width: 100%" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
@@ -32,24 +62,44 @@
             <a-input-number v-model:value="formData.recharge" placeholder="请输入充值金额" style="width: 100%" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
-        <a-col :span="24">
-          <a-form-item label="人脸信息存在" v-bind="validateInfos.isHumanface">
-            <j-dict-select-tag v-model:value="formData.isHumanface" dictCode="is_exist" placeholder="请选择人脸信息存在" :disabled="props.disabled" />
-          </a-form-item>
-        </a-col>
-        <a-col :span="24">
-          <a-form-item label="掌静脉信息存在" v-bind="validateInfos.isPalmarvein">
-            <j-dict-select-tag v-model:value="formData.isPalmarvein" dictCode="is_exist" placeholder="请选择掌静脉信息存在" :disabled="props.disabled" />
-          </a-form-item>
-        </a-col>
-        <a-col :span="24">
+        <!-- <a-col :span="24">
           <a-form-item label="来源" v-bind="validateInfos.source">
             <j-dict-select-tag v-model:value="formData.source" dictCode="order_form" placeholder="请选择来源" :disabled="props.disabled" />
           </a-form-item>
-        </a-col>
+        </a-col> -->
         <a-col :span="24">
           <a-form-item label="注册时间" v-bind="validateInfos.registerTime">
             <a-date-picker placeholder="请选择注册时间" v-model:value="formData.registerTime" showTime value-format="YYYY-MM-DD HH:mm:ss" style="width: 100%" :disabled="props.disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item label="协议签名" v-bind="validateInfos.agreementSignature">
+            <a-input v-model:value="formData.agreementSignature" placeholder="请输入协议签名" :disabled="props.disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item label="身份证号" v-bind="validateInfos.idNumber">
+            <a-input v-model:value="formData.idNumber" placeholder="请输入身份证号" :disabled="props.disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item label="照片" v-bind="validateInfos.memberPhotos">
+            <j-image-upload v-model:value="formData.memberPhotos" :disabled="props.disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item label="紧急联系人" v-bind="validateInfos.urgentPeople">
+            <a-input v-model:value="formData.urgentPeople" placeholder="请输入紧急联系人" :disabled="props.disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item label="紧急联系人电话" v-bind="validateInfos.urgentPeopleTel">
+            <a-input v-model:value="formData.urgentPeopleTel" placeholder="请输入紧急联系人电话" :disabled="props.disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item label="说明" v-bind="validateInfos.remarks">
+            <a-textarea v-model:value="formData.remarks" rows="4" placeholder="请输入说明" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
       </a-row>
@@ -58,9 +108,10 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, reactive, nextTick } from 'vue';
+  import { ref, reactive, defineExpose, nextTick, defineProps } from 'vue';
   import { useMessage } from '/@/hooks/web/useMessage';
   import JDictSelectTag from '/@/components/Form/src/jeecg/components/JDictSelectTag.vue';
+  import JImageUpload from '/@/components/Form/src/jeecg/components/JImageUpload.vue';
   import { getValueType } from '/@/utils';
   import { saveOrUpdate } from '../SysCustomer.api';
   import { Form } from 'ant-design-vue';
@@ -74,24 +125,25 @@
   const formData = reactive<Record<string, any>>({
     id: '',
     customerCode: '',
-    id: '',
     name: '',
-    id: '',
     sex: '',
-    id: '',
     phone: '',
-    id: '',
-    customerType: '',
-    id: '',
+    sysPalmarveinId: '',
+    sysHumanfaceId: '',
+    sysPcVipCardId: '',
+    costOfProduction: undefined,
+    customerType: '2',
+    discount: undefined,
+    deposit: undefined,
     recharge: undefined,
-    id: '',
-    isHumanface: undefined,
-    id: '',
-    isPalmarvein: undefined,
-    id: '',
-    source: undefined,
-    id: '',
+    source: '2',
     registerTime: '',
+    agreementSignature: '',
+    idNumber: '',
+    memberPhotos: '',
+    urgentPeople: '',
+    urgentPeopleTel: '',
+    remarks: '',
   });
   const { createMessage } = useMessage();
   const labelCol = ref<any>({ xs: { span: 24 }, sm: { span: 5 } });
