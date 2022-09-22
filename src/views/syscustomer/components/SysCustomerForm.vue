@@ -4,7 +4,7 @@
       <a-row>
         <a-col :span="24">
           <a-form-item label="客户编码" v-bind="validateInfos.customerCode">
-            <a-input v-model:value="formData.customerCode" placeholder="请输入客户编码" :disabled="props.disabled" />
+            <a-input v-model:value="formData.customerCode" placeholder="请输入客户编码" disabled />
           </a-form-item>
         </a-col>
         <a-col :span="24">
@@ -113,7 +113,7 @@
   import JDictSelectTag from '/@/components/Form/src/jeecg/components/JDictSelectTag.vue';
   import JImageUpload from '/@/components/Form/src/jeecg/components/JImageUpload.vue';
   import { getValueType } from '/@/utils';
-  import { saveOrUpdate } from '../SysCustomer.api';
+  import { saveOrUpdate, customerCode } from '../SysCustomer.api';
   import { Form } from 'ant-design-vue';
 
   const props = defineProps({
@@ -164,8 +164,12 @@
    * 编辑
    */
   function edit(record) {
-    nextTick(() => {
+    nextTick(async () => {
       resetFields();
+      if (!record.customerCode) {
+        let result = await customerCode();
+        record.customerCode = result;
+      }
       //赋值
       Object.assign(formData, record);
     });

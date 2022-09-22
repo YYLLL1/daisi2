@@ -82,7 +82,6 @@
   import JDictSelectTag from '/@/components/Form/src/jeecg/components/JDictSelectTag.vue';
 
   const queryParam = ref<any>({});
-  const toggleSearchStatus = ref<boolean>(false);
   const registerModal = ref();
   //注册table数据
   const { tableContext, onExportXls, onImportXls } = useListPage({

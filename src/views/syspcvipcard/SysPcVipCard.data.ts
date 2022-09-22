@@ -8,6 +8,11 @@ export const columns: BasicColumn[] = [
     dataIndex: 'cardNumber',
   },
   {
+    title: '卡名称',
+    align: 'center',
+    dataIndex: 'cardName',
+  },
+  {
     title: '卡类型',
     align: 'center',
     dataIndex: 'cardType_dictText',
@@ -97,6 +102,11 @@ export const formSchema: FormSchema[] = [
   {
     label: '卡号',
     field: 'cardNumber',
+    component: 'Input',
+  },
+  {
+    label: '卡名称',
+    field: 'cardName',
     component: 'Input',
   },
   {

@@ -8,6 +8,11 @@
           </a-form-item>
         </a-col>
         <a-col :span="24">
+          <a-form-item label="卡名称" v-bind="validateInfos.cardName">
+            <a-input v-model:value="formData.cardName" placeholder="请输入卡名称" :disabled="props.disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
           <a-form-item label="卡类型" v-bind="validateInfos.cardType">
             <j-dict-select-tag v-model:value="formData.cardType" dictCode="card_type" placeholder="请选择卡类型" :disabled="props.disabled" />
           </a-form-item>
@@ -84,6 +89,7 @@
   const formData = reactive<Record<string, any>>({
     id: '',
     cardNumber: '',
+    cardName: '',
     cardType: undefined,
     cardAttribute: undefined,
     commonAttributes: undefined,

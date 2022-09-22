@@ -11,6 +11,7 @@ enum Api {
   deleteBatch = '/syscustomer/sysCustomer/deleteBatch',
   importExcel = '/syscustomer/sysCustomer/importExcel',
   exportXls = '/syscustomer/sysCustomer/exportXls',
+  customerCode = '/sys/fillRule/executeRuleByCode/customer_code',
 }
 
 /**
@@ -29,6 +30,12 @@ export const getImportUrl = Api.importExcel;
  * @param params
  */
 export const list = (params) => defHttp.get({ url: Api.list, params });
+
+/**
+ * 生成客户编码流水地址
+ * @param params
+ */
+export const customerCode = () => defHttp.put({ url: Api.customerCode });
 
 /**
  * 删除单个
