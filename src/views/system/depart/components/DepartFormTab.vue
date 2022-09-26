@@ -56,13 +56,12 @@
         if (typeof record !== 'object') {
           record = {};
         }
-        console.log(props.data);
         //租户信息定义成数组
-        if (record.tenantIds && !Array.isArray(record.tenantIds)) {
-          record.tenantIds = record.tenantIds.split(',');
+        if (record.tenantId && !Array.isArray(record.tenantId)) {
+          record.tenantId = record.tenantId.split(',');
         } else {
           //【issues/I56C5I】用户管理中连续点两次编辑租户配置就丢失了
-          //record.TenantIds = [];
+          //record.TenantId = [];
         }
         model.value = record;
         await resetFields();
