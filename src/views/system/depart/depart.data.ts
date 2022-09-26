@@ -1,4 +1,5 @@
 import { FormSchema } from '/@/components/Form';
+import { getAllTenantList } from './depart.api';
 
 // 部门基础表单
 export function useBasicFormSchema() {
@@ -41,6 +42,18 @@ export function useBasicFormSchema() {
       label: '排序',
       component: 'InputNumber',
       componentProps: {},
+    },
+    {
+      label: '租户',
+      field: 'tenantIds',
+      component: 'ApiSelect',
+      componentProps: {
+        mode: 'multiple',
+        api: getAllTenantList,
+        numberToString: true,
+        labelField: 'name',
+        valueField: 'id',
+      },
     },
     {
       field: 'mobile',

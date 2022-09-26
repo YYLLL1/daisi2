@@ -21,8 +21,13 @@ export enum Api {
 
   getCurrentUserDeparts = '/sys/user/getCurrentUserDeparts',
   selectDepart = '/sys/selectDepart',
+  allTenantList = '/sys/tenant/queryList',
 }
 
+/**
+ * 获取全部租户
+ */
+export const getAllTenantList = (params) => defHttp.get({ url: Api.allTenantList, params });
 /**
  * 获取部门树列表
  */
