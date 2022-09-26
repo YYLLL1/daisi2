@@ -45,7 +45,7 @@ export function useBasicFormSchema() {
     },
     {
       label: '租户',
-      field: 'tenantIds',
+      field: 'tenantId',
       component: 'ApiSelect',
       componentProps: {
         mode: 'multiple',
