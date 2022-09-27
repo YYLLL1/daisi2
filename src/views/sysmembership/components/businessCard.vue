@@ -3,12 +3,9 @@
     <a-spin :spinning="spinning">
       <div class="ly-card-container">
         <template v-for="item of data.ticketData" :key="item.id">
-          <div class="sell-ticket">
-            <div class="ticket-left"> {{ item.cardType_dictText }} </div>
-            <div class="ticket-right">
-              <p class="ticket-price">￥{{ item.price.toFixed(2) }} </p>
-              <span class="ticket-name">{{ item.name }}</span>
-            </div>
+          <div class="business-card" :class="active == item.id ? 'active' : ''" @click="isSelect(item)">
+            <h4>￥{{ item.price.toFixed(2) }} </h4>
+            <p>{{ item.cardType_dictText }}</p>
           </div>
         </template>
       </div>
@@ -22,12 +19,12 @@
   const props = defineProps({
     ticketData: { type: Array, default: () => [] },
   });
-  // const emit = defineEmits(['ticketSelect']);
+  const emit = defineEmits(['ticketSelect']);
   const data = reactive<any>({
     ticketData: [],
   });
   const spinning = ref(true);
-
+  const active = ref('0');
   watch(
     () => props.ticketData,
     () => {
@@ -36,17 +33,26 @@
     },
     { deep: true }
   );
-  // const isSelect = (item) => {
-  //   emit('ticketSelect', item);
-  // };
+  const isSelect = (item) => {
+    active.value = item.id;
+    emit('ticketSelect', item);
+  };
+  // 清空票卡信息
+  const refreshCard = () => {
+    active.value = '0';
+  };
+  defineExpose({
+    refreshCard,
+  });
 </script>
 
 <style lang="less" scoped>
   .ly-card {
     height: 100%;
-    max-height: 600px;
-    min-height: 400px;
+    max-height: 550px;
+    min-height: 450px;
     overflow-y: auto;
+    padding: 24px;
   }
   .ly-card-container {
     display: flex;
@@ -54,40 +60,32 @@
     justify-content: space-between;
     width: 100%;
     height: 100%;
-    .sell-ticket {
-      width: calc(50% - 20px);
+    .business-card {
+      width: calc(50% - 12px);
       background-color: #1892d0;
-      display: flex;
+      text-align: center;
       color: #fff;
-      margin-bottom: 20px;
-      font-size: 16px;
-      padding: 5px;
+      margin-bottom: 24px;
+      padding: 16px;
       cursor: pointer;
-      .ticket-left {
-        border-right: 1px dashed rgba(0, 0, 0, 0.3);
-        width: 50px;
-        height: 120px;
-        text-align: center;
-        padding: 30px 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-flow: column;
+      border: 3px solid #1892d0;
+      transition: all 0.3s;
+      &.active,
+      &:hover {
+        background-color: #fff;
+        color: #1892d0;
+        h4 {
+          color: #1892d0;
+        }
       }
-      .ticket-right {
-        width: calc(100% - 50px);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-flow: column;
-        .ticket-price {
-          margin-bottom: 0;
-          font-size: 36px;
-          font-weight: 700;
-        }
-        .ticket-name {
-          font-size: 12px;
-        }
+      h4 {
+        font-weight: 700;
+        font-size: 32px;
+        color: #fff;
+        margin-bottom: 0;
+      }
+      p {
+        margin-bottom: 0;
       }
     }
   }

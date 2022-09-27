@@ -58,6 +58,16 @@ export const columns: BasicColumn[] = [
     dataIndex: 'numberOfGifts',
   },
   {
+    title: '充值金额',
+    align: 'center',
+    dataIndex: 'amount',
+  },
+  {
+    title: '赠送金额',
+    align: 'center',
+    dataIndex: 'giftAmount',
+  },
+  {
     title: '价格',
     align: 'center',
     dataIndex: 'price',
@@ -167,6 +177,16 @@ export const formSchema: FormSchema[] = [
   {
     label: '赠送次数',
     field: 'numberOfGifts',
+    component: 'InputNumber',
+  },
+  {
+    label: '充值金额',
+    field: 'amount',
+    component: 'InputNumber',
+  },
+  {
+    label: '赠送金额',
+    field: 'giftAmount',
     component: 'InputNumber',
   },
   {

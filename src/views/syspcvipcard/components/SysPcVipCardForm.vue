@@ -58,6 +58,16 @@
           </a-form-item>
         </a-col>
         <a-col :span="24">
+          <a-form-item label="充值金额" v-bind="validateInfos.amount">
+            <a-input-number v-model:value="formData.amount" placeholder="请输入充值金额" style="width: 100%" :disabled="props.disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item label="赠送金额" v-bind="validateInfos.giftAmount">
+            <a-input-number v-model:value="formData.giftAmount" placeholder="请输入赠送金额" style="width: 100%" :disabled="props.disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
           <a-form-item label="价格" v-bind="validateInfos.price">
             <a-input-number v-model:value="formData.price" placeholder="请输入价格" style="width: 100%" :disabled="props.disabled" />
           </a-form-item>
@@ -99,6 +109,8 @@
     onLineIs: undefined,
     numberOf: undefined,
     numberOfGifts: undefined,
+    amount: undefined,
+    giftAmount: undefined,
     price: undefined,
     remarks: '',
   });

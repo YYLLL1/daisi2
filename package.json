@@ -216,6 +216,7 @@
         "crypto-js/md5",
         "crypto-js/mode-ecb",
         "crypto-js/pad-pkcs7",
+        "dayjs",
         "dom-align",
         "echarts",
         "echarts/charts",
