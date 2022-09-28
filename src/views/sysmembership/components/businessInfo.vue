@@ -123,7 +123,7 @@
     emit('customerId', result.id);
     Object.assign(businessInfo, result);
     //初始化有效卡
-    data.selectCardList = businessInfo.sysInValidCards;
+    data.selectCardList = businessInfo.sysValidCards;
     spinning.value = false;
   };
   const handleChange = (cardId) => {
@@ -143,10 +143,11 @@
       selectCard.value = '0';
       switch (typeCard.value) {
         case '0':
-          data.selectCardList = businessInfo.sysInValidCards;
+          data.selectCardList = businessInfo.sysValidCards;
+
           break;
         case '1':
-          data.selectCardList = businessInfo.sysValidCards;
+          data.selectCardList = businessInfo.sysInValidCards;
           break;
       }
     }
