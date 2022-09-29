@@ -144,7 +144,6 @@
       switch (typeCard.value) {
         case '0':
           data.selectCardList = businessInfo.sysValidCards;
-
           break;
         case '1':
           data.selectCardList = businessInfo.sysInValidCards;

@@ -16,7 +16,7 @@
         <!-- 次卡 -->
         <template v-if="selectObj.cardType == 2">
           <a-form-item class="ly-form-item" name="numberOf" label="充值次数">
-            <a-input :value="selectObj.numberOf + selectObj.numberOfGifts" disabled style="width: 183px; display: inline-block" />
+            <a-input :value="numberSum" disabled style="width: 183px; display: inline-block" />
             <span style="line-height: 32px; display: inline-block; width: 32px; text-align: center">次</span>
             <span>（赠：{{ selectObj.numberOfGifts || 0 }} 次）</span>
           </a-form-item>
@@ -45,7 +45,7 @@
 <script lang="ts" setup>
   import { Dayjs } from 'dayjs';
   import moment from 'moment';
-  import { reactive, watch } from 'vue';
+  import { computed, reactive, watch } from 'vue';
   const props = defineProps({
     ticketSelectObj: { type: Object, default: () => {} },
   });
@@ -55,11 +55,16 @@
     cardType: 1,
     price: 0,
     recharge: 0,
+    numberOf: 0,
+    numberOfGifts: 0,
   });
   // 限定只能选今天往后的日期
   const disabledDate = (current: Dayjs) => {
     return current && current < moment().subtract(1, 'days').endOf('day');
   };
+  const numberSum = computed(() => {
+    return selectObj.numberOf + selectObj.numberOfGifts || 0;
+  });
   watch(
     () => props.ticketSelectObj,
     () => {
@@ -69,6 +74,7 @@
     { deep: true }
   );
   const onFinish = (values: any) => {
+    values.numberOf = numberSum.value;
     emit('payInfo', selectObj.cardType, values);
   };
   // 清空支付信息
@@ -77,6 +83,8 @@
       cardType: 1,
       price: 0,
       recharge: 0,
+      numberOf: 0,
+      numberOfGifts: 0,
     };
   };
   defineExpose({
