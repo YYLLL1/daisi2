@@ -66,4 +66,29 @@ export const formSchema: FormSchema[] = [
       return rules.duplicateCheckRule('sys_position', 'code', model, schema, true);
     },
   },
+  {
+    label: '所属部门',
+    field: 'selecteddeparts',
+    component: 'JSelectDept',
+    componentProps: ({ formActionType, formModel }) => {
+      return {
+        sync: false,
+        checkStrictly: true,
+        defaultExpandLevel: 2,
+
+        onSelect: (options, values) => {
+          const { updateSchema } = formActionType;
+          //所属部门修改后更新负责部门下拉框数据
+          updateSchema([
+            {
+              field: 'departIds',
+              componentProps: { options },
+            },
+          ]);
+          //所属部门修改后更新负责部门数据
+          formModel.departIds && (formModel.departIds = formModel.departIds.filter((item) => values.value.indexOf(item) > -1));
+        },
+      };
+    },
+  },
 ];

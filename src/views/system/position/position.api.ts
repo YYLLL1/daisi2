@@ -10,6 +10,7 @@ enum Api {
   importExcel = '/sys/position/importExcel',
   exportXls = '/sys/position/exportXls',
   deleteBatch = '/sys/position/deleteBatch',
+  userDepartList = '/sys/user/userDepartList',
 }
 /**
  * 导出api
@@ -51,6 +52,10 @@ export const deletePosition = (params, handleSuccess) => {
     handleSuccess();
   });
 };
+/**
+ * 获取指定用户负责部门
+ */
+export const getUserDepartList = (params) => defHttp.get({ url: Api.userDepartList, params }, { successMessageMode: 'none' });
 
 /**
  * 批量删除
