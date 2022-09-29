@@ -79,13 +79,11 @@
   };
   // 清空支付信息
   const refreshPay = () => {
-    selectObj = {
-      cardType: 1,
-      price: 0,
-      recharge: 0,
-      numberOf: 0,
-      numberOfGifts: 0,
-    };
+    selectObj.cardType = 1;
+    selectObj.price = 0;
+    selectObj.recharge = 0;
+    selectObj.numberOf = 0;
+    selectObj.numberOfGifts = 0;
   };
   defineExpose({
     refreshPay,

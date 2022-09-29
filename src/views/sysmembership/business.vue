@@ -58,11 +58,11 @@
     customerData.value.refreshInfo();
     payData.value.refreshPay();
     cardData.value.refreshCard();
-    submitFrom = {};
-    // submitFrom.cardId = '';
-    // submitFrom.cardName = '';
-    // submitFrom.customerId = '';
-    // submitFrom.cardAttribute = 0;
+    submitFrom.cardType = 1;
+    submitFrom.cardId = '';
+    submitFrom.cardName = '';
+    submitFrom.customerId = '';
+    submitFrom.cardAttribute = 0;
   };
   // 提交会员业务数据
   const submit = async (data) => {
