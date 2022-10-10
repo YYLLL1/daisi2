@@ -49,8 +49,8 @@
         </a-col>
         <a-col :span="24">
           <a-form-item label="可用时段">
-            <TimePicker style="width: 200px; margin-right: 20px" v-model:value="formData.startTime" use12-hours placeholder="请输入起始时间" :disabled="disabled" />
-            <TimePicker style="width: 200px" v-model:value="formData.endTime" use12-hours placeholder="请输入结束时间" :disabled="disabled" />
+            <TimePicker style="width: 200px; margin-right: 20px" v-model:value="formData.startTime" value-format="HH:mm:ss" use12-hours placeholder="请输入起始时间" :disabled="disabled" />
+            <TimePicker style="width: 200px" v-model:value="formData.endTime" value-format="HH:mm:ss" use12-hours placeholder="请输入结束时间" :disabled="disabled" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
@@ -60,7 +60,7 @@
         </a-col>
         <a-col :span="24">
           <a-form-item label="有效日期" v-bind="validateInfos.termOfValidity">
-            <a-range-picker style="width: 400px" v-model:value="formData.termOfValidity" :disabled-date="disabledDate" format="YYYY-MM-DD" placeholder="请选择有效日期" :disabled="disabled" />
+            <a-range-picker style="width: 400px" v-model:value="formData.termOfValidity" :disabled-date="disabledDate" value-format="YYYY-MM-DD" placeholder="请选择有效日期" :disabled="disabled" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
