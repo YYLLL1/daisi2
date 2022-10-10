@@ -29,7 +29,43 @@
         </a-col>
         <a-col :span="24">
           <a-form-item label="特殊说明" v-bind="validateInfos.special">
-            <a-input v-model:value="formData.special" placeholder="请输入特殊说明" :disabled="props.disabled" />
+            <a-input v-model:value="formData.special" placeholder="请输入特殊说明" :disabled="disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item label="单位" v-bind="validateInfos.unit">
+            <j-dict-select-tag v-model:value="formData.unit" dictCode="unit" placeholder="请选择单位" :disabled="disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item label="二维码闸机核销" v-bind="validateInfos.edTicketWriteOff">
+            <j-dict-select-tag type="radio" v-model:value="formData.edTicketWriteOff" dictCode="ed_ticket_write_off" placeholder="请选择二维码闸机核销" :disabled="disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item label="线上同步" v-bind="validateInfos.onLineIs">
+            <j-dict-select-tag type="radio" v-model:value="formData.onLineIs" dictCode="is_exist" placeholder="请选择线上同步" :disabled="disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item label="可用时段">
+            <TimePicker style="width: 200px; margin-right: 20px" v-model:value="formData.startTime" use12-hours placeholder="请输入起始时间" :disabled="disabled" />
+            <TimePicker style="width: 200px" v-model:value="formData.endTime" use12-hours placeholder="请输入结束时间" :disabled="disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item label="有效期天数" v-bind="validateInfos.validDays">
+            <a-input-number v-model:value="formData.validDays" placeholder="请输入有效期天数" style="width: 100%" :disabled="disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item label="有效日期" v-bind="validateInfos.termOfValidity">
+            <a-range-picker style="width: 400px" v-model:value="formData.termOfValidity" :disabled-date="disabledDate" format="YYYY-MM-DD" placeholder="请选择有效日期" :disabled="disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item label="备注" v-bind="validateInfos.remarks">
+            <a-input v-model:value="formData.remarks" placeholder="请输入备注" :disabled="disabled" />
           </a-form-item>
         </a-col>
       </a-row>
@@ -38,12 +74,14 @@
 </template>
 
 <script lang="ts" setup>
+  import { Dayjs } from 'dayjs';
+  import moment from 'moment';
   import { ref, reactive, nextTick } from 'vue';
   import { useMessage } from '/@/hooks/web/useMessage';
   import JDictSelectTag from '/@/components/Form/src/jeecg/components/JDictSelectTag.vue';
   import { getValueType } from '/@/utils';
   import { saveOrUpdate } from '../SysTicket.api';
-  import { Form } from 'ant-design-vue';
+  import { Form, TimePicker } from 'ant-design-vue';
 
   const props = defineProps({
     disabled: { type: Boolean, default: false },
@@ -54,16 +92,19 @@
   const formData = reactive<Record<string, any>>({
     id: '',
     name: '',
-    id: '',
     ticketType: undefined,
-    id: '',
     price: undefined,
-    id: '',
     sellStatus: undefined,
-    id: '',
-    peopleNumber: undefined,
-    id: '',
+    peopleNumber: 1,
     special: '',
+    unit: undefined,
+    edTicketWriteOff: undefined,
+    onLineIs: undefined,
+    startTime: '',
+    endTime: '',
+    validDays: undefined,
+    termOfValidity: '',
+    remarks: '',
   });
   const { createMessage } = useMessage();
   const labelCol = ref<any>({ xs: { span: 24 }, sm: { span: 5 } });
@@ -78,6 +119,11 @@
     peopleNumber: [{ required: true, message: '请输入人数!' }],
   };
   const { resetFields, validate, validateInfos } = useForm(formData, validatorRules, { immediate: true });
+
+  // 限定只能选今天往后的日期
+  const disabledDate = (current: Dayjs) => {
+    return current && current < moment().subtract(1, 'days').endOf('day');
+  };
 
   /**
    * 新增

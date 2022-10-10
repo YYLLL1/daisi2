@@ -33,6 +33,46 @@ export const columns: BasicColumn[] = [
     align: 'center',
     dataIndex: 'special',
   },
+  {
+    title: '单位',
+    align: 'center',
+    dataIndex: 'unit_dictText',
+  },
+  {
+    title: '二维码闸机核销',
+    align: 'center',
+    dataIndex: 'edTicketWriteOff_dictText',
+  },
+  {
+    title: '线上同步',
+    align: 'center',
+    dataIndex: 'onLineIs_dictText',
+  },
+  {
+    title: '起始时间',
+    align: 'center',
+    dataIndex: 'startTime',
+  },
+  {
+    title: '结束时间',
+    align: 'center',
+    dataIndex: 'endTime',
+  },
+  {
+    title: '有效期天数',
+    align: 'center',
+    dataIndex: 'validDays',
+  },
+  {
+    title: '有效日期',
+    align: 'center',
+    dataIndex: 'termOfValidity',
+  },
+  {
+    title: '备注',
+    align: 'center',
+    dataIndex: 'remarks',
+  },
 ];
 
 //查询数据
@@ -99,6 +139,59 @@ export const formSchema: FormSchema[] = [
   {
     label: '特殊说明',
     field: 'special',
+    component: 'Input',
+  },
+  {
+    label: '单位',
+    field: 'unit',
+    component: 'JDictSelectTag',
+    componentProps: {
+      dictCode: 'unit',
+    },
+  },
+  {
+    label: '二维码闸机核销',
+    field: 'edTicketWriteOff',
+    component: 'JDictSelectTag',
+    componentProps: {
+      dictCode: 'ed_ticket_write_off',
+    },
+  },
+  {
+    label: '线上同步',
+    field: 'onLineIs',
+    component: 'JDictSelectTag',
+    componentProps: {
+      dictCode: 'is_exist',
+    },
+  },
+  {
+    label: '起始时间',
+    field: 'startTime',
+    component: 'TimePicker',
+  },
+  {
+    label: '结束时间',
+    field: 'endTime',
+    component: 'TimePicker',
+  },
+  {
+    label: '有效期天数',
+    field: 'validDays',
+    component: 'InputNumber',
+  },
+  {
+    label: '有效日期',
+    field: 'termOfValidity',
+    component: 'DatePicker',
+    componentProps: {
+      showTime: true,
+      valueFormat: 'YYYY-MM-DD HH:mm:ss',
+    },
+  },
+  {
+    label: '备注',
+    field: 'remarks',
     component: 'Input',
   },
   // TODO 主键隐藏字段，目前写死为ID

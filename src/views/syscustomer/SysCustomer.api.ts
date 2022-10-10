@@ -12,8 +12,20 @@ enum Api {
   importExcel = '/syscustomer/sysCustomer/importExcel',
   exportXls = '/syscustomer/sysCustomer/exportXls',
   customerCode = '/sys/fillRule/executeRuleByCode/customer_code',
+  entranceGate = '/sysordermain/sysOrderMain/entranceGate',
+  exitGate = '/sysordermain/sysOrderMain/exitGate',
 }
-
+// 模拟接口
+export const entranceGate = (params, handleSuccess) => {
+  return defHttp.get({ url: Api.entranceGate, params }, { joinParamsToUrl: true }).then(() => {
+    handleSuccess();
+  });
+};
+export const exitGate = (params, handleSuccess) => {
+  return defHttp.get({ url: Api.exitGate, params }, { joinParamsToUrl: true }).then(() => {
+    handleSuccess();
+  });
+};
 /**
  * 导出api
  * @param params

@@ -26,6 +26,28 @@
         </a-row>
       </a-form>
     </div>
+    <div class="jeecg-basic-table-form-container">
+      <h2>模拟出/入闸</h2>
+      <a-form :model="mockList" :label-col="labelCol" :wrapper-col="wrapperCol">
+        <a-row :gutter="24">
+          <a-col :lg="6">
+            <a-form-item label="客户编码">
+              <a-input placeholder="请输入名字" v-model:value="mockList.customerCode" />
+            </a-form-item>
+          </a-col>
+          <a-col :lg="6">
+            <a-form-item label="闸机号">
+              <a-input placeholder="请输入名字" v-model:value="mockList.lockerNo" />
+            </a-form-item>
+          </a-col>
+
+          <a-col :lg="6">
+            <a-button type="primary" preIcon="ant-design:search-outlined" @click="mockGateEntry">出闸</a-button>
+            <a-button type="primary" preIcon="ant-design:reload-outlined" @click="mockExitGate" style="margin-left: 8px">进闸</a-button>
+          </a-col>
+        </a-row>
+      </a-form>
+    </div>
     <!--引用表格-->
     <BasicTable @register="registerTable" :rowSelection="rowSelection">
       <!--插槽:table标题-->
@@ -76,11 +98,10 @@
   import { useListPage } from '/@/hooks/system/useListPage';
   import { getAreaTextByCode } from '/@/components/Form/src/utils/Area';
   import { columns } from './SysCustomer.data';
-  import { list, deleteOne, batchDelete, getImportUrl, getExportUrl } from './SysCustomer.api';
+  import { list, deleteOne, batchDelete, getImportUrl, getExportUrl, entranceGate, exitGate } from './SysCustomer.api';
   import { downloadFile } from '/@/utils/common/renderUtils';
   import SysCustomerModal from './components/SysCustomerModal.vue';
   import JDictSelectTag from '/@/components/Form/src/jeecg/components/JDictSelectTag.vue';
-
   const queryParam = ref<any>({});
   const registerModal = ref();
   //注册table数据
@@ -117,6 +138,17 @@
     xs: { span: 24 },
     sm: { span: 16 },
   });
+  // 模拟出入闸数据
+  const mockList = reactive({
+    customerCode: '',
+    lockerNo: '',
+  });
+  const mockGateEntry = async () => {
+    await entranceGate(mockList, reload());
+  };
+  const mockExitGate = async () => {
+    await exitGate(mockList, reload());
+  };
 
   /**
    * 新增事件
@@ -214,6 +246,7 @@
 
 <style lang="less" scoped>
   .jeecg-basic-table-form-container {
+    background-color: #fff;
     padding: 0;
     .query-group-cust {
       width: calc(50% - 15px);
