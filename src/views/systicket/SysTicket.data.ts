@@ -64,9 +64,20 @@ export const columns: BasicColumn[] = [
     dataIndex: 'validDays',
   },
   {
-    title: '有效日期',
+    title: '有效日期开始',
     align: 'center',
-    dataIndex: 'termOfValidity',
+    dataIndex: 'startOfValidDay',
+    customRender: ({ text }) => {
+      return !text ? '' : text.length > 10 ? text.substr(0, 10) : text;
+    },
+  },
+  {
+    title: '有效日期结束',
+    align: 'center',
+    dataIndex: 'endOfValidDay',
+    customRender: ({ text }) => {
+      return !text ? '' : text.length > 10 ? text.substr(0, 10) : text;
+    },
   },
   {
     title: '备注',
@@ -176,17 +187,32 @@ export const formSchema: FormSchema[] = [
     component: 'TimePicker',
   },
   {
+    label: '有效期',
+    field: 'ticketMark',
+    component: 'RadioGroup',
+  },
+  {
     label: '有效期天数',
     field: 'validDays',
     component: 'InputNumber',
   },
+
   {
-    label: '有效日期',
-    field: 'termOfValidity',
+    label: '有效日期开始',
+    field: 'startOfValidDay',
     component: 'DatePicker',
     componentProps: {
-      showTime: true,
-      valueFormat: 'YYYY-MM-DD HH:mm:ss',
+      showTime: false,
+      valueFormat: 'YYYY-MM-DD',
+    },
+  },
+  {
+    label: '有效日期结束',
+    field: 'endOfValidDay',
+    component: 'DatePicker',
+    componentProps: {
+      showTime: false,
+      valueFormat: 'YYYY-MM-DD',
     },
   },
   {

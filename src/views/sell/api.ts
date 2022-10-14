@@ -12,6 +12,7 @@ enum Api {
   //测试接口
   cabinetRent = '/sysordermain/sysOrderMain/bindingOrderTicket',
   cabinetOut = '/sysordermain/sysOrderMain/unboundOrderTicket',
+  cabinetPhone = '/sysordermain/sysOrderMain/bindingBraceletByPhone',
 }
 /**
  * 测试接口
@@ -24,6 +25,11 @@ export const cabinetRent = (params, handleSuccess) => {
 };
 export const cabinetOut = (params, handleSuccess) => {
   return defHttp.post({ url: Api.cabinetOut, params }, { joinParamsToUrl: true }).then(() => {
+    handleSuccess;
+  });
+};
+export const cabinetPhone = (params, handleSuccess) => {
+  return defHttp.post({ url: Api.cabinetPhone, params }, { joinParamsToUrl: true }).then(() => {
     handleSuccess;
   });
 };

@@ -54,13 +54,22 @@
           </a-form-item>
         </a-col>
         <a-col :span="24">
-          <a-form-item label="有效期天数" v-bind="validateInfos.validDays">
-            <a-input-number v-model:value="formData.validDays" placeholder="请输入有效期天数" style="width: 100%" :disabled="disabled" />
+          <a-form-item label="有效期">
+            <a-radio-group name="radioGroup" v-model:value="formData.ticketMark">
+              <a-radio :value="1">固定时间段</a-radio>
+              <a-radio :value="2">购买后有效期天数</a-radio>
+            </a-radio-group>
           </a-form-item>
         </a-col>
-        <a-col :span="24">
-          <a-form-item label="有效日期" v-bind="validateInfos.termOfValidity">
-            <a-range-picker style="width: 400px" v-model:value="formData.termOfValidity" :disabled-date="disabledDate" value-format="YYYY-MM-DD" placeholder="请选择有效日期" :disabled="disabled" />
+        <a-col :span="24" v-if="formData.ticketMark == 1">
+          <a-form-item label="有效日期开始" v-bind="validateInfos.startOfValidDay">
+            <a-date-picker style="width: 200px; margin-right: 20px" placeholder="请选择有效日期开始" v-model:value="formData.startOfValidDay" value-format="YYYY-MM-DD" :disabled="disabled" />
+            <a-date-picker style="width: 200px" placeholder="请选择有效日期结束" v-model:value="formData.endOfValidDay" value-format="YYYY-MM-DD" :disabled="disabled" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24" v-if="formData.ticketMark == 2">
+          <a-form-item label="有效期天数" v-bind="validateInfos.validDays">
+            <a-input-number v-model:value="formData.validDays" placeholder="请输入有效期天数" style="width: 100%" :disabled="disabled" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
@@ -74,8 +83,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { Dayjs } from 'dayjs';
-  import moment from 'moment';
+  // import { Dayjs } from 'dayjs';
+  // import moment from 'moment';
   import { ref, reactive, nextTick } from 'vue';
   import { useMessage } from '/@/hooks/web/useMessage';
   import JDictSelectTag from '/@/components/Form/src/jeecg/components/JDictSelectTag.vue';
@@ -102,8 +111,10 @@
     onLineIs: undefined,
     startTime: '',
     endTime: '',
+    ticketMark: 1,
     validDays: undefined,
-    termOfValidity: '',
+    startOfValidDay: '',
+    endOfValidDay: '',
     remarks: '',
   });
   const { createMessage } = useMessage();
@@ -120,10 +131,10 @@
   };
   const { resetFields, validate, validateInfos } = useForm(formData, validatorRules, { immediate: true });
 
-  // 限定只能选今天往后的日期
-  const disabledDate = (current: Dayjs) => {
-    return current && current < moment().subtract(1, 'days').endOf('day');
-  };
+  // // 限定只能选今天往后的日期
+  // const disabledDate = (current: Dayjs) => {
+  //   return current && current < moment().subtract(1, 'days').endOf('day');
+  // };
 
   /**
    * 新增
