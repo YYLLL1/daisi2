@@ -108,7 +108,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, reactive, defineExpose, nextTick, defineProps } from 'vue';
+  import { ref, reactive, nextTick } from 'vue';
   import { useMessage } from '/@/hooks/web/useMessage';
   import JDictSelectTag from '/@/components/Form/src/jeecg/components/JDictSelectTag.vue';
   import JImageUpload from '/@/components/Form/src/jeecg/components/JImageUpload.vue';
