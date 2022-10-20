@@ -31,6 +31,13 @@ export const columns = [
     slots: { customRender: 'category' },
   },
   {
+    title: '订单状态',
+    align: 'center',
+    key: 'orderStatus',
+    dataIndex: 'orderStatus',
+    slots: { customRender: 'orderStatus' },
+  },
+  {
     title: '手机号码',
     align: 'center',
     key: 'phone',

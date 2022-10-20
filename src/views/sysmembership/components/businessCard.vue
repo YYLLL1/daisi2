@@ -5,7 +5,7 @@
         <template v-for="item of data.ticketData" :key="item.id">
           <div class="business-card" :class="active == item.id ? 'active' : ''" @click="isSelect(item)">
             <h4>￥{{ item.price.toFixed(2) }} </h4>
-            <p>{{ item.cardType_dictText }}</p>
+            <p>{{ item.cardName }}</p>
           </div>
         </template>
       </div>

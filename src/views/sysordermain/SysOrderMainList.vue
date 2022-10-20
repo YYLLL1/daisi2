@@ -27,6 +27,14 @@
           <span v-if="record.category == '1'">售票</span>
           <span v-if="record.category == '2'">租柜</span>
         </template>
+        <template #orderStatus="{ record }">
+          <span v-if="record.orderStatus == '1'">已完成</span>
+          <span v-if="record.orderStatus == '2'">已付款</span>
+          <span v-if="record.orderStatus == '3'">使用中</span>
+          <span v-if="record.orderStatus == '4'">退款成功</span>
+          <span v-if="record.orderStatus == '5'">待付款</span>
+          <span v-if="record.orderStatus == '6'">待评价</span>
+        </template>
         <template #expandedRowRender="{ record }">
           <a-table
             bordered

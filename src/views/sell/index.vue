@@ -21,14 +21,14 @@
   import SellPayment from './components/sellPayment.vue';
   import SellSuccess from './components/sellSuccess.vue';
   import { onMounted, reactive } from 'vue';
-  import { list, save } from './api';
+  import { list, payOrder } from './api';
 
   const data = reactive<any>({
     ticketData: [],
     selectData: [],
     paymentData: [],
-    sysOrder: {},
     successData: {},
+    orderId: '',
     successVisible: false,
     paymentVisible: false,
   });
@@ -88,23 +88,12 @@
 
   //结账
   const submit = async () => {
-    await save(data.sysOrder, openSuccessModal);
+    await payOrder({ id: data.orderId }, openSuccessModal);
   };
 
   // 打开支付弹窗
-  const openPaymentModal = ({ name, phone }) => {
-    let sysOrderTicketList = reactive<any>([]);
-    data.selectData.forEach((item) => {
-      let sysTicked = {
-        sysTicketId: item.id,
-        num: item.quantity,
-      };
-      sysOrderTicketList.push(sysTicked);
-    });
-    data.sysOrder = {
-      sysOrderTicketList,
-      sysOrderCustomerList: [{ name: name || '', phone: phone || '' }],
-    };
+  const openPaymentModal = (list) => {
+    data.orderId = list.id;
     //打开支付弹窗
     data.paymentVisible = true;
   };
@@ -117,6 +106,7 @@
   const openSuccessModal = (res) => {
     data.paymentVisible = false;
     data.successVisible = true;
+    data.selectData = [];
     data.successData = res;
   };
 
@@ -124,7 +114,6 @@
   const closeSuccessModal = (isShow: boolean) => {
     data.selectData = [];
     data.paymentData = [];
-    data.sysOrder = {};
     data.successData = {};
     data.successVisible = isShow;
     data.paymentVisible = isShow;

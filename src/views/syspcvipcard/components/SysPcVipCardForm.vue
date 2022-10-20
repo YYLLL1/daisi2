@@ -4,7 +4,7 @@
       <a-row>
         <a-col :span="24">
           <a-form-item label="卡号" v-bind="validateInfos.cardNumber">
-            <a-input v-model:value="formData.cardNumber" placeholder="请输入卡号" :disabled="props.disabled" />
+            <a-input v-model:value="formData.cardNumber" placeholder="请输入卡号" disabled />
           </a-form-item>
         </a-col>
         <a-col :span="24">
@@ -14,62 +14,139 @@
         </a-col>
         <a-col :span="24">
           <a-form-item label="卡类型" v-bind="validateInfos.cardType">
-            <j-dict-select-tag v-model:value="formData.cardType" dictCode="card_type" placeholder="请选择卡类型" :disabled="props.disabled" />
+            <j-dict-select-tag v-model:value="formData.cardType" :showChooseOption="false" dictCode="card_type" placeholder="请选择卡类型" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
-        <a-col :span="24">
-          <a-form-item label="卡属性" v-bind="validateInfos.cardAttribute">
-            <j-dict-select-tag v-model:value="formData.cardAttribute" dictCode="card_attribute" placeholder="请选择卡属性" :disabled="props.disabled" />
-          </a-form-item>
-        </a-col>
-        <a-col :span="24">
-          <a-form-item label="通用属性" v-bind="validateInfos.commonAttributes">
-            <j-dict-select-tag v-model:value="formData.commonAttributes" dictCode="common_attributes" placeholder="请选择通用属性" :disabled="props.disabled" />
-          </a-form-item>
-        </a-col>
-        <a-col :span="24">
-          <a-form-item label="限制" v-bind="validateInfos.astrict">
-            <a-input-number v-model:value="formData.astrict" placeholder="请输入限制" style="width: 100%" :disabled="props.disabled" />
-          </a-form-item>
-        </a-col>
-        <a-col :span="24">
-          <a-form-item label="有效期" v-bind="validateInfos.termOfValidity">
-            <a-input-number v-model:value="formData.termOfValidity" placeholder="请输入有效期" style="width: 100%" :disabled="props.disabled" />
-          </a-form-item>
-        </a-col>
-        <a-col :span="24">
-          <a-form-item label="有效期累加" v-bind="validateInfos.accumulation">
-            <j-dict-select-tag v-model:value="formData.accumulation" dictCode="accumulation" placeholder="请选择有效期累加" :disabled="props.disabled" />
-          </a-form-item>
-        </a-col>
+        <!-- 储值 -->
+        <template v-if="formData.cardType != 2 && formData.cardType != 3 && formData.cardType != 4">
+          <a-col :span="24">
+            <a-form-item label="通用属性" v-bind="validateInfos.commonAttributes">
+              <j-dict-select-tag v-model:value="formData.commonAttributes" :showChooseOption="false" dictCode="common_attributes" placeholder="请选择通用属性" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="充值金额" v-bind="validateInfos.amount">
+              <a-input-number v-model:value="formData.amount" placeholder="请输入充值金额" style="width: 100%" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="赠送金额" v-bind="validateInfos.giftAmount">
+              <a-input-number v-model:value="formData.giftAmount" placeholder="请输入赠送金额" style="width: 100%" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+        </template>
+        <!-- 次卡 -->
+        <template v-else-if="formData.cardType != 1 && formData.cardType != 3 && formData.cardType != 4">
+          <a-col :span="24">
+            <a-form-item label="卡属性" v-bind="validateInfos.cardAttribute">
+              <j-dict-select-tag v-model:value="formData.cardAttribute" :showChooseOption="false" dictCode="card_attribute" placeholder="请选择卡属性" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="有效期" v-bind="validateInfos.termOfValidity">
+              <a-input-number v-model:value="formData.termOfValidity" placeholder="请输入有效期" style="width: 100%" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="有效期累加" v-bind="validateInfos.accumulation">
+              <j-dict-select-tag v-model:value="formData.accumulation" :showChooseOption="false" dictCode="accumulation" placeholder="请选择有效期累加" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="次数" v-bind="validateInfos.numberOf">
+              <a-input-number v-model:value="formData.numberOf" placeholder="请输入次数" style="width: 100%" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="赠送次数" v-bind="validateInfos.numberOfGifts">
+              <a-input-number v-model:value="formData.numberOfGifts" placeholder="请输入赠送次数" style="width: 100%" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+        </template>
+        <!-- 时段 -->
+        <template v-else-if="formData.cardType != 1 && formData.cardType != 2 && formData.cardType != 4">
+          <a-col :span="24">
+            <a-form-item label="通用属性" v-bind="validateInfos.commonAttributes">
+              <j-dict-select-tag v-model:value="formData.commonAttributes" :showChooseOption="false" dictCode="common_attributes" placeholder="请选择通用属性" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="限制" v-bind="validateInfos.astrict">
+              <a-input-number v-model:value="formData.astrict" placeholder="请输入限制" style="width: 100%" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="有效期" v-bind="validateInfos.termOfValidity">
+              <a-input-number v-model:value="formData.termOfValidity" placeholder="请输入有效期" style="width: 100%" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="有效期累加" v-bind="validateInfos.accumulation">
+              <j-dict-select-tag v-model:value="formData.accumulation" :showChooseOption="false" dictCode="accumulation" placeholder="请选择有效期累加" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="价格" v-bind="validateInfos.price">
+              <a-input-number v-model:value="formData.price" placeholder="请输入价格" style="width: 100%" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+        </template>
+        <!-- 自定义 -->
+        <template v-else>
+          <a-col :span="24">
+            <a-form-item label="卡属性" v-bind="validateInfos.cardAttribute">
+              <j-dict-select-tag v-model:value="formData.cardAttribute" :showChooseOption="false" dictCode="card_attribute" placeholder="请选择卡属性" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="有效期" v-bind="validateInfos.termOfValidity">
+              <a-input-number v-model:value="formData.termOfValidity" placeholder="请输入有效期" style="width: 100%" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="有效期累加" v-bind="validateInfos.accumulation">
+              <j-dict-select-tag v-model:value="formData.accumulation" :showChooseOption="false" dictCode="accumulation" placeholder="请选择有效期累加" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="通用属性" v-bind="validateInfos.commonAttributes">
+              <j-dict-select-tag v-model:value="formData.commonAttributes" :showChooseOption="false" dictCode="common_attributes" placeholder="请选择通用属性" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="限制" v-bind="validateInfos.astrict">
+              <a-input-number v-model:value="formData.astrict" placeholder="请输入限制" style="width: 100%" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="次数" v-bind="validateInfos.numberOf">
+              <a-input-number v-model:value="formData.numberOf" placeholder="请输入次数" style="width: 100%" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="赠送次数" v-bind="validateInfos.numberOfGifts">
+              <a-input-number v-model:value="formData.numberOfGifts" placeholder="请输入赠送次数" style="width: 100%" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="充值金额" v-bind="validateInfos.amount">
+              <a-input-number v-model:value="formData.amount" placeholder="请输入充值金额" style="width: 100%" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="赠送金额" v-bind="validateInfos.giftAmount">
+              <a-input-number v-model:value="formData.giftAmount" placeholder="请输入赠送金额" style="width: 100%" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="价格" v-bind="validateInfos.price">
+              <a-input-number v-model:value="formData.price" placeholder="请输入价格" style="width: 100%" :disabled="props.disabled" />
+            </a-form-item>
+          </a-col>
+        </template>
         <a-col :span="24">
           <a-form-item label="线上同步" v-bind="validateInfos.onLineIs">
             <j-dict-select-tag type="radio" v-model:value="formData.onLineIs" dictCode="is_exist" placeholder="请选择线上同步" :disabled="props.disabled" />
-          </a-form-item>
-        </a-col>
-        <a-col :span="24">
-          <a-form-item label="次数" v-bind="validateInfos.numberOf">
-            <a-input-number v-model:value="formData.numberOf" placeholder="请输入次数" style="width: 100%" :disabled="props.disabled" />
-          </a-form-item>
-        </a-col>
-        <a-col :span="24">
-          <a-form-item label="赠送次数" v-bind="validateInfos.numberOfGifts">
-            <a-input-number v-model:value="formData.numberOfGifts" placeholder="请输入赠送次数" style="width: 100%" :disabled="props.disabled" />
-          </a-form-item>
-        </a-col>
-        <a-col :span="24">
-          <a-form-item label="充值金额" v-bind="validateInfos.amount">
-            <a-input-number v-model:value="formData.amount" placeholder="请输入充值金额" style="width: 100%" :disabled="props.disabled" />
-          </a-form-item>
-        </a-col>
-        <a-col :span="24">
-          <a-form-item label="赠送金额" v-bind="validateInfos.giftAmount">
-            <a-input-number v-model:value="formData.giftAmount" placeholder="请输入赠送金额" style="width: 100%" :disabled="props.disabled" />
-          </a-form-item>
-        </a-col>
-        <a-col :span="24">
-          <a-form-item label="价格" v-bind="validateInfos.price">
-            <a-input-number v-model:value="formData.price" placeholder="请输入价格" style="width: 100%" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
@@ -87,7 +164,7 @@
   import { useMessage } from '/@/hooks/web/useMessage';
   import JDictSelectTag from '/@/components/Form/src/jeecg/components/JDictSelectTag.vue';
   import { getValueType } from '/@/utils';
-  import { saveOrUpdate } from '../SysPcVipCard.api';
+  import { saveOrUpdate, getCardNumber } from '../SysPcVipCard.api';
   import { Form } from 'ant-design-vue';
 
   const props = defineProps({
@@ -125,8 +202,9 @@
   /**
    * 新增
    */
-  function add() {
-    edit({});
+  async function add() {
+    let id = await getCardNumber();
+    edit({ cardNumber: id });
   }
 
   /**

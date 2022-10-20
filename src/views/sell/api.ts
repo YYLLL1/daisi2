@@ -5,7 +5,11 @@ const { createConfirm } = useMessage();
 
 enum Api {
   list = '/systicket/sysTicket/list',
+  // 待付款
   save = '/sysordermain/sysOrderMain/add',
+  // 已付款
+  payOrder = '/sysordermain/sysOrderMain/payOrder',
+
   saveBind = '/sysordermain/sysOrderMain/bindingOrderTicket',
   braceletNo = '/sysbracelet/sysBracelet/queryBraceletNo',
 
@@ -44,12 +48,21 @@ export const list = () => defHttp.get({ url: Api.list });
  * @param params
  */
 export const getBraceletNo = () => defHttp.get({ url: Api.braceletNo });
+/**
+ * 待支付
+ * @param params
+ */
 
+export const save = (params, handleSuccess) => {
+  return defHttp.post({ url: Api.save, params }, { joinParamsToUrl: true }).then((res) => {
+    handleSuccess(res);
+  });
+};
 /**
  * 添加成功
  * @param params
  */
-export const save = (params, handleSuccess) => {
+export const payOrder = (params, handleSuccess) => {
   createConfirm({
     iconType: 'warning',
     title: '确认提交',
@@ -57,7 +70,7 @@ export const save = (params, handleSuccess) => {
     okText: '确认',
     cancelText: '取消',
     onOk: () => {
-      return defHttp.post({ url: Api.save, data: params }, { joinParamsToUrl: true }).then((res) => {
+      return defHttp.post({ url: Api.payOrder, data: params }, { joinParamsToUrl: true }).then((res) => {
         handleSuccess(res);
       });
     },

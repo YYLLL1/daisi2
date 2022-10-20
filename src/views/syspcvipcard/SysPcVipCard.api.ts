@@ -11,6 +11,9 @@ enum Api {
   deleteBatch = '/syspcvipcard/sysPcVipCard/deleteBatch',
   importExcel = '/syspcvipcard/sysPcVipCard/importExcel',
   exportXls = '/syspcvipcard/sysPcVipCard/exportXls',
+
+  //获取卡号
+  cardNumber = '/sys/fillRule/executeRuleByCode/card_number',
 }
 
 /**
@@ -23,6 +26,12 @@ export const getExportUrl = Api.exportXls;
  * 导入api
  */
 export const getImportUrl = Api.importExcel;
+
+/**
+ * 获取卡号
+ * @param params
+ */
+export const getCardNumber = () => defHttp.put({ url: Api.cardNumber });
 
 /**
  * 列表接口

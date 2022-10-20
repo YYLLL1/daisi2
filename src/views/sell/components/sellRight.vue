@@ -49,6 +49,7 @@
 <script lang="ts" setup>
   import { computed, reactive, watch } from 'vue';
   import { message } from 'ant-design-vue';
+  import { save } from '../api';
   interface FormState {
     name: string;
     phone: string;
@@ -56,11 +57,13 @@
   const props = defineProps({
     selectData: { type: Array, default: () => [] },
   });
-  const data = reactive<any>({
-    selectData: [],
-  });
+
   const emit = defineEmits(['reduce', 'add', 'remove', 'openPaymentModal']);
 
+  const data = reactive<any>({
+    selectData: [],
+    sysOrder: {},
+  });
   const formState = reactive<FormState>({
     name: '',
     phone: '',
@@ -80,8 +83,30 @@
     },
     { deep: true }
   );
-  const onFinish = (values: any) => {
-    sellSubmit(values);
+  const onFinish = (values) => {
+    let sysOrderTicketList = <any>[];
+    data.selectData.forEach((item) => {
+      sysOrderTicketList.push({
+        sysTicketId: item.id,
+        num: item.quantity,
+      });
+    });
+    data.sysOrder = {
+      sysOrderTicketList,
+      sysOrderCustomerList: [values],
+    };
+    sellSubmit(data.sysOrder);
+  };
+  const sellSubmit = (list) => {
+    if (data.selectData.length == 0) {
+      message.warning('未添加票种！');
+      return;
+    }
+    save(list, returnData);
+    // console.log(result, 'orderStatus');
+  };
+  const returnData = (list) => {
+    emit('openPaymentModal', list);
   };
 
   const total = computed((): number => {
@@ -92,13 +117,6 @@
     return tal.toFixed(2);
   });
 
-  const sellSubmit = (list) => {
-    if (data.selectData.length == 0) {
-      message.warning('未添加票种！');
-      return;
-    }
-    emit('openPaymentModal', list);
-  };
   const reduceQuantity = (id) => {
     emit('reduce', id);
   };
