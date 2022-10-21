@@ -84,6 +84,7 @@
     } else {
       data.successVisible = false;
     }
+    data.selectData = [];
   };
 
   //结账

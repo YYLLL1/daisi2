@@ -1,5 +1,5 @@
 <template>
-  <a-modal :width="1000" :visible="props.successVisible" title="支付成功！" @ok="handleOk" @cancel="closeModal">
+  <a-modal :width="1000" :visible="props.successVisible" title="支付成功！" okText="关闭" @ok="handleOk" @cancel="closeModal">
     <h3>订单信息</h3>
     <a-descriptions bordered>
       <a-descriptions-item label="订单id">{{ data.id }}</a-descriptions-item>
@@ -40,7 +40,7 @@
         </div>
       </template>
       <template #operation="{ record, index }">
-        <a-button class="ly-table-button" type="primary" @click="submitHandel(record, index)" block>确定</a-button>
+        <a-button class="ly-table-button" type="primary" @click="submitHandel(record, index)" block>绑定</a-button>
       </template>
     </a-table>
   </a-modal>

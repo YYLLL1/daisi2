@@ -31,7 +31,7 @@
   });
   const getSelectHomePageData = async () => {
     let result = await getSelectHomePage();
-    data.ticketList = result[0].data;
+    data.ticketList = result[0].data.reverse();
     data.revenue = result[0].revenue;
     data.ticketCount = result[0].ticketCount;
     data.gateNumber = result[0].gateNumber;

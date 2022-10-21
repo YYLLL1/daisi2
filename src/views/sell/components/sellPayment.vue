@@ -1,5 +1,5 @@
 <template>
-  <a-modal class="ly-modal" :visible="paymentVisible" title="结算" :footer="false" :width="1000" @cancel="close">
+  <a-modal class="ly-modal" :visible="paymentVisible" title="待付款" :footer="false" :width="1000" @cancel="close">
     <div class="ly-sell-payment">
       <div class="ly-sell-payment-info ly-card-container">
         <div class="ly-card-header">
