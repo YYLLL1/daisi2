@@ -1,11 +1,3 @@
-export interface SysOrderTicket {
-  id?: string;
-  phone?: string;
-  sysPalmarveinId?: string;
-  sysHumanfaceId?: string;
-  sysBraceletId?: string;
-  deposit?: string;
-}
 export interface selectData {
   id: string;
   ticketType_dictText: string;
@@ -22,5 +14,4 @@ export const sellColumns = [
   { title: '人脸信息', key: 'sysHumanfaceId', dataIndex: 'sysHumanfaceId', slots: { customRender: 'sysHumanfaceId' }, align: 'center', width: 230 },
   { title: '手环租赁', key: 'sysBraceletId', dataIndex: 'sysBraceletId', slots: { customRender: 'sysBraceletId' }, align: 'center', width: 230 },
   { title: '支付押金', key: 'deposit', dataIndex: 'deposit', slots: { customRender: 'deposit' }, align: 'center', width: 120 },
-  { title: '操作', key: 'operation', slots: { customRender: 'operation' }, fixed: 'right', align: 'center', width: 80 },
 ];

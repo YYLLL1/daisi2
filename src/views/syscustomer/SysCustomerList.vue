@@ -16,7 +16,7 @@
           </a-col>
           <a-col :lg="6">
             <a-form-item label="注册时间">
-              <a-date-picker showTime valueFormat="YYYY-MM-DD HH:mm:ss" placeholder="请选择注册时间" v-model:value="queryParam.registerTime" />
+              <a-date-picker valueFormat="YYYY-MM-DD" placeholder="请选择注册时间" v-model:value="queryParam.registerTime" />
             </a-form-item>
           </a-col>
           <a-col :lg="6">

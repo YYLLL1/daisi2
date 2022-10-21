@@ -21,7 +21,7 @@
           </a-col>
           <a-col :lg="5">
             <a-form-item label="进出闸时间">
-              <a-date-picker showTime valueFormat="YYYY-MM-DD HH:mm:ss" placeholder="请选择进出闸时间" v-model:value="queryParam.gateTime" />
+              <a-date-picker valueFormat="YYYY-MM-DD" placeholder="请选择进出闸时间" v-model:value="queryParam.gateTime" />
             </a-form-item>
           </a-col>
           <a-col :lg="4">

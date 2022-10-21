@@ -39,7 +39,7 @@
         </a-col>
         <a-col :span="24">
           <a-form-item label="进出闸时间" v-bind="validateInfos.gateTime">
-            <a-date-picker placeholder="请选择进出闸时间" v-model:value="formData.gateTime" showTime value-format="YYYY-MM-DD HH:mm:ss" style="width: 100%" :disabled="props.disabled" />
+            <a-date-picker placeholder="请选择进出闸时间" v-model:value="formData.gateTime" value-format="YYYY-MM-DD" style="width: 100%" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
       </a-row>

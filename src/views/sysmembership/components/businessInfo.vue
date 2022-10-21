@@ -85,7 +85,7 @@
   const selectCard = ref('0');
   const typeCard = ref('0');
   const formState = reactive({
-    phone: '15309679875',
+    phone: '',
   });
   const formRules = reactive({
     phone: {

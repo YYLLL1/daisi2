@@ -44,7 +44,7 @@
         </a-col>
         <a-col :span="24">
           <a-form-item label="下单时间" v-bind="validateInfos.orderTime">
-            <a-date-picker placeholder="请选择下单时间" v-model:value="formData.orderTime" showTime value-format="YYYY-MM-DD HH:mm:ss" style="width: 100%" :disabled="props.disabled" />
+            <a-date-picker placeholder="请选择下单时间" v-model:value="formData.orderTime" value-format="YYYY-MM-DD" style="width: 100%" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
@@ -74,23 +74,14 @@
   const formData = reactive<Record<string, any>>({
     id: '',
     braceletStatu: '',
-    id: '',
     sysBraceletId: '',
-    id: '',
     username: '',
-    id: '',
     phone: '',
-    id: '',
     braceletOrderCode: '',
-    id: '',
     deposit: undefined,
-    id: '',
     paymentMethod: '',
-    id: '',
     orderForm: '',
-    id: '',
     orderTime: '',
-    id: '',
     cabinetStatu: '',
   });
   const { createMessage } = useMessage();

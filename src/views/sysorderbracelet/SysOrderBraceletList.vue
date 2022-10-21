@@ -16,7 +16,7 @@
           </a-col>
           <a-col :lg="6">
             <a-form-item label="下单时间">
-              <a-date-picker showTime valueFormat="YYYY-MM-DD HH:mm:ss" placeholder="请选择下单时间" v-model:value="queryParam.orderTime" />
+              <a-date-picker valueFormat="YYYY-MM-DD" placeholder="请选择下单时间" v-model:value="queryParam.orderTime" />
             </a-form-item>
           </a-col>
           <a-col :lg="6">

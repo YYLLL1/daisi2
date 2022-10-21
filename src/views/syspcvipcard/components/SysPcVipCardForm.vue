@@ -14,14 +14,14 @@
         </a-col>
         <a-col :span="24">
           <a-form-item label="卡类型" v-bind="validateInfos.cardType">
-            <j-dict-select-tag v-model:value="formData.cardType" :showChooseOption="false" dictCode="card_type" placeholder="请选择卡类型" :disabled="props.disabled" />
+            <j-dict-select-tag v-model:value="formData.cardType" dictCode="card_type" placeholder="请选择卡类型" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
         <!-- 储值 -->
         <template v-if="formData.cardType != 2 && formData.cardType != 3 && formData.cardType != 4">
           <a-col :span="24">
             <a-form-item label="通用属性" v-bind="validateInfos.commonAttributes">
-              <j-dict-select-tag v-model:value="formData.commonAttributes" :showChooseOption="false" dictCode="common_attributes" placeholder="请选择通用属性" :disabled="props.disabled" />
+              <j-dict-select-tag v-model:value="formData.commonAttributes" dictCode="common_attributes" placeholder="请选择通用属性" :disabled="props.disabled" />
             </a-form-item>
           </a-col>
           <a-col :span="24">
@@ -39,7 +39,7 @@
         <template v-else-if="formData.cardType != 1 && formData.cardType != 3 && formData.cardType != 4">
           <a-col :span="24">
             <a-form-item label="卡属性" v-bind="validateInfos.cardAttribute">
-              <j-dict-select-tag v-model:value="formData.cardAttribute" :showChooseOption="false" dictCode="card_attribute" placeholder="请选择卡属性" :disabled="props.disabled" />
+              <j-dict-select-tag v-model:value="formData.cardAttribute" dictCode="card_attribute" placeholder="请选择卡属性" :disabled="props.disabled" />
             </a-form-item>
           </a-col>
           <a-col :span="24">
@@ -49,7 +49,7 @@
           </a-col>
           <a-col :span="24">
             <a-form-item label="有效期累加" v-bind="validateInfos.accumulation">
-              <j-dict-select-tag v-model:value="formData.accumulation" :showChooseOption="false" dictCode="accumulation" placeholder="请选择有效期累加" :disabled="props.disabled" />
+              <j-dict-select-tag v-model:value="formData.accumulation" dictCode="accumulation" placeholder="请选择有效期累加" :disabled="props.disabled" />
             </a-form-item>
           </a-col>
           <a-col :span="24">
@@ -67,7 +67,7 @@
         <template v-else-if="formData.cardType != 1 && formData.cardType != 2 && formData.cardType != 4">
           <a-col :span="24">
             <a-form-item label="通用属性" v-bind="validateInfos.commonAttributes">
-              <j-dict-select-tag v-model:value="formData.commonAttributes" :showChooseOption="false" dictCode="common_attributes" placeholder="请选择通用属性" :disabled="props.disabled" />
+              <j-dict-select-tag v-model:value="formData.commonAttributes" dictCode="common_attributes" placeholder="请选择通用属性" :disabled="props.disabled" />
             </a-form-item>
           </a-col>
           <a-col :span="24">
@@ -82,7 +82,7 @@
           </a-col>
           <a-col :span="24">
             <a-form-item label="有效期累加" v-bind="validateInfos.accumulation">
-              <j-dict-select-tag v-model:value="formData.accumulation" :showChooseOption="false" dictCode="accumulation" placeholder="请选择有效期累加" :disabled="props.disabled" />
+              <j-dict-select-tag v-model:value="formData.accumulation" dictCode="accumulation" placeholder="请选择有效期累加" :disabled="props.disabled" />
             </a-form-item>
           </a-col>
           <a-col :span="24">
@@ -95,7 +95,7 @@
         <template v-else>
           <a-col :span="24">
             <a-form-item label="卡属性" v-bind="validateInfos.cardAttribute">
-              <j-dict-select-tag v-model:value="formData.cardAttribute" :showChooseOption="false" dictCode="card_attribute" placeholder="请选择卡属性" :disabled="props.disabled" />
+              <j-dict-select-tag v-model:value="formData.cardAttribute" dictCode="card_attribute" placeholder="请选择卡属性" :disabled="props.disabled" />
             </a-form-item>
           </a-col>
           <a-col :span="24">
@@ -105,12 +105,12 @@
           </a-col>
           <a-col :span="24">
             <a-form-item label="有效期累加" v-bind="validateInfos.accumulation">
-              <j-dict-select-tag v-model:value="formData.accumulation" :showChooseOption="false" dictCode="accumulation" placeholder="请选择有效期累加" :disabled="props.disabled" />
+              <j-dict-select-tag v-model:value="formData.accumulation" dictCode="accumulation" placeholder="请选择有效期累加" :disabled="props.disabled" />
             </a-form-item>
           </a-col>
           <a-col :span="24">
             <a-form-item label="通用属性" v-bind="validateInfos.commonAttributes">
-              <j-dict-select-tag v-model:value="formData.commonAttributes" :showChooseOption="false" dictCode="common_attributes" placeholder="请选择通用属性" :disabled="props.disabled" />
+              <j-dict-select-tag v-model:value="formData.commonAttributes" dictCode="common_attributes" placeholder="请选择通用属性" :disabled="props.disabled" />
             </a-form-item>
           </a-col>
           <a-col :span="24">
@@ -183,7 +183,7 @@
     astrict: undefined,
     termOfValidity: undefined,
     accumulation: undefined,
-    onLineIs: undefined,
+    onLineIs: '1',
     numberOf: undefined,
     numberOfGifts: undefined,
     amount: undefined,

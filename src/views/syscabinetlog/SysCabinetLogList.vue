@@ -21,14 +21,14 @@
           </a-col>
           <a-col :lg="6">
             <a-form-item label="开柜时间">
-              <a-date-picker showTime valueFormat="YYYY-MM-DD HH:mm:ss" placeholder="请选择开柜时间" v-model:value="queryParam.openCabinetTime" />
+              <a-date-picker valueFormat="YYYY-MM-DD" placeholder="请选择开柜时间" v-model:value="queryParam.openCabinetTime" />
             </a-form-item>
           </a-col>
         </a-row>
         <a-row :gutter="24">
           <a-col :lg="6">
             <a-form-item label="退柜时间">
-              <a-date-picker showTime valueFormat="YYYY-MM-DD HH:mm:ss" placeholder="请选择退柜时间" v-model:value="queryParam.returnCabinetTime" />
+              <a-date-picker valueFormat="YYYY-MM-DD" placeholder="请选择退柜时间" v-model:value="queryParam.returnCabinetTime" />
             </a-form-item>
           </a-col>
           <a-col :lg="6">

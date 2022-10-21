@@ -39,12 +39,12 @@
         </a-col>
         <a-col :span="24">
           <a-form-item label="开柜时间" v-bind="validateInfos.openCabinetTime">
-            <a-date-picker placeholder="请选择开柜时间" v-model:value="formData.openCabinetTime" showTime value-format="YYYY-MM-DD HH:mm:ss" style="width: 100%" :disabled="props.disabled" />
+            <a-date-picker placeholder="请选择开柜时间" v-model:value="formData.openCabinetTime" value-format="YYYY-MM-DD" style="width: 100%" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
           <a-form-item label="退柜时间" v-bind="validateInfos.returnCabinetTime">
-            <a-date-picker placeholder="请选择退柜时间" v-model:value="formData.returnCabinetTime" showTime value-format="YYYY-MM-DD HH:mm:ss" style="width: 100%" :disabled="props.disabled" />
+            <a-date-picker placeholder="请选择退柜时间" v-model:value="formData.returnCabinetTime" value-format="YYYY-MM-DD" style="width: 100%" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
       </a-row>
@@ -69,21 +69,13 @@
   const formData = reactive<Record<string, any>>({
     id: '',
     rentCabinetStatus: '',
-    id: '',
     lockerNo: '',
-    id: '',
     username: '',
-    id: '',
     phone: '',
-    id: '',
     cabinetOrderCode: '',
-    id: '',
     openCabinetType: '',
-    id: '',
     bindingId: '',
-    id: '',
     openCabinetTime: '',
-    id: '',
     returnCabinetTime: '',
   });
   const { createMessage } = useMessage();

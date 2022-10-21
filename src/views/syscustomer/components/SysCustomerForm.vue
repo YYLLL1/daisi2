@@ -69,7 +69,7 @@
         </a-col> -->
         <a-col :span="24">
           <a-form-item label="注册时间" v-bind="validateInfos.registerTime">
-            <a-date-picker placeholder="请选择注册时间" v-model:value="formData.registerTime" showTime value-format="YYYY-MM-DD HH:mm:ss" style="width: 100%" :disabled="props.disabled" />
+            <a-date-picker placeholder="请选择注册时间" v-model:value="formData.registerTime" value-format="YYYY-MM-DD" style="width: 100%" :disabled="props.disabled" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
@@ -126,12 +126,12 @@
     id: '',
     customerCode: '',
     name: '',
-    sex: '',
+    sex: '1',
     phone: '',
     sysPalmarveinId: '',
     sysHumanfaceId: '',
     sysPcVipCardId: '',
-    costOfProduction: undefined,
+    costOfProduction: '1',
     customerType: '2',
     discount: undefined,
     deposit: undefined,

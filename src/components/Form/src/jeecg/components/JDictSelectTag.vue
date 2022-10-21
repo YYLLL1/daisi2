@@ -59,7 +59,7 @@
         default: (node) => node.parentNode,
       },
       // 是否显示【请选择】选项
-      showChooseOption: propTypes.bool.def(true),
+      showChooseOption: propTypes.bool.def(false),
       // 下拉项-online使用
       options: {
         type: Array,
