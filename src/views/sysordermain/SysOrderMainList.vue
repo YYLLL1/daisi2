@@ -91,6 +91,7 @@
           show-quick-jumper
           :show-total="(total) => `总共 ${total} 个`"
           @change="onChange"
+          @showSizeChange="onShowSizeChange"
         />
       </div>
     </a-card>
@@ -127,7 +128,12 @@
   };
   const onChange = (isCur: number) => {
     data.parentPagination.current = isCur;
-    getList(isCur);
+    getList(isCur, data.parentPagination.size);
+  };
+  const onShowSizeChange = (current: number, pageSize: number) => {
+    data.parentPagination.current = current;
+    data.parentPagination.size = pageSize;
+    getList(current, pageSize);
   };
   const mockHandel = async (type, id, index) => {
     const refsI = `lockerNo${index}`;
@@ -140,10 +146,10 @@
     }
     switch (type) {
       case 1:
-        await entranceGate({ id, lockerNo }, getList);
+        await entranceGate({ id, lockerNo }, getList(data.parentPagination.current, data.parentPagination.size));
         break;
       case 2:
-        await exitGate({ id, lockerNo }, getList);
+        await exitGate({ id, lockerNo }, getList(data.parentPagination.current, data.parentPagination.size));
         break;
     }
   };

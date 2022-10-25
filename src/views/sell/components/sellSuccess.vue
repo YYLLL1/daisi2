@@ -35,9 +35,7 @@
         </div>
       </template>
       <template #deposit="{ record }">
-        <div class="ly-table-input">
-          <a-input v-model:value="record.deposit" placeholder="输入押金" block />
-        </div>
+        <a-input-number v-model:value="record.deposit" :min="0" :max="9999" placeholder="输入押金" style="min-width: 100%" />
       </template>
     </a-table>
   </a-modal>

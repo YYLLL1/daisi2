@@ -99,7 +99,7 @@
     createConfirm({
       iconType: 'warning',
       title: '确认删除',
-      content: '是否删除选中柜子',
+      content: '是否删除选中手环',
       okText: '确认',
       cancelText: '取消',
       onOk: () => {

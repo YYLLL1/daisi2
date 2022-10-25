@@ -57,7 +57,7 @@ export default {
   },
   table: {
     settingDens: '密度',
-    settingDensDefault: '默认',
+    settingDensDefault: '最大',
     settingDensMiddle: '中等',
     settingDensSmall: '紧凑',
     settingColumn: '列设置',
