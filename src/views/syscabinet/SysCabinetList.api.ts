@@ -69,4 +69,4 @@ export const addList = (params, handleSuccess) => {
  * 统计
  * @param params
  */
-export const listStatistics = () => defHttp.get({ url: Api.statistics });
+export const listStatistics = (params) => defHttp.get({ url: Api.statistics, params });

@@ -3,7 +3,7 @@
     <a-card class="ly-card" :tab-list="position" :active-tab-key="key" @tabChange="(item) => onTabChange(item)">
       <div class="ly-card-container">
         <div class="ly-card-tool">
-          <p v-for="(state, index) of cabinetList.statistics" :key="index">{{ state.cabinetState }}：{{ state.cabinetCount }}</p>
+          <p v-for="(state, index) of cabinetList.statistics" :key="index" :class="cabinetState(state.cabinetState)">{{ state.cabinetState }}：{{ state.cabinetCount }}</p>
           <a-button type="primary" @click="add">新增更衣柜</a-button>
         </div>
         <div class="ly-card-content">
@@ -35,6 +35,7 @@
             show-quick-jumper
             :show-total="(total) => `总共 ${total} 个`"
             @change="handlePageChange"
+            @showSizeChange="onShowSizeChange"
           />
         </div>
       </div>
@@ -69,10 +70,10 @@
   // 测试点击
   const sysBraceletId = ref('');
   const cabinetRent = async () => {
-    await editCabinetRent({ sysBraceletId: sysBraceletId.value }, getList(key.value));
+    await editCabinetRent({ sysBraceletId: sysBraceletId.value }, getList(key.value, cabinetList.current, cabinetList.size));
   };
   const cabinetOut = async () => {
-    await editCabinetOut({ sysBraceletId: sysBraceletId.value }, getList(key.value));
+    await editCabinetOut({ sysBraceletId: sysBraceletId.value }, getList(key.value, cabinetList.current, cabinetList.size));
   };
 
   const APagination = Pagination;
@@ -80,10 +81,10 @@
   let key = ref('1');
 
   let cabinetList = reactive<any>({
-    pages: 0,
-    current: 0,
-    size: 0,
-    total: 0,
+    pages: 1,
+    current: 1,
+    size: 40,
+    total: 1,
     records: [],
     statistics: [],
   });
@@ -117,16 +118,67 @@
       spinning.value = false;
     });
   };
-  const getStatistics = async () => {
-    //获取tab列表
-    let result = await listStatistics();
+  //获取更衣柜统计数据
+  const getStatistics = async (key) => {
+    let result = await listStatistics({ position: key });
     cabinetList.statistics = result;
   };
-  //提交编辑
-  const editCabinet = async (params) => {
-    await editList(params, getList(key.value));
+  // 初始化
+  onMounted(() => {
+    getTab();
+    getStatistics(key.value);
+    getList(key.value, cabinetList.current, cabinetList.size);
+  });
+  // 根据状态进行分类
+  const cabinetState = (state) => {
+    let status = '';
+    switch (state) {
+      case '1' || '空闲':
+        status = 'c-green';
+        break;
+      case '2' || '维护中':
+        status = 'c-grey';
+        break;
+      case '3' || '逾期':
+        status = 'c-orange';
+        break;
+      case '4' || '租借中':
+        status = 'c-blue';
+        break;
+      default:
+        status = 'c-blank';
+        break;
+    }
+    return status;
   };
-  //删除
+  // 切换分页
+  const handlePageChange = (value) => {
+    cabinetList.current = value;
+    getList(key.value, cabinetList.current, cabinetList.size);
+  };
+  // 切换每页数量
+  const onShowSizeChange = (current: number, pageSize: number) => {
+    cabinetList.current = current;
+    cabinetList.size = pageSize;
+    getList(key.value, cabinetList.current, cabinetList.size);
+  };
+  // 切换男女跟衣柜请求
+  const onTabChange = (value: string) => {
+    key.value = value;
+    getList(key.value, cabinetList.current, cabinetList.size);
+    getStatistics(key.value);
+  };
+  // 打开编辑弹窗
+  const edit = (item) => {
+    modalList.cabinetEditVisible = true;
+    modalList.cabinetTitle = `编辑：${item.lockerNo} 号柜`;
+    modalList.cabinetForm = item;
+  };
+  // 打开添加弹窗
+  const add = () => {
+    modalList.cabinetAddVisible = true;
+  };
+  // 删除柜子
   const deleteCabinet = (id) => {
     createConfirm({
       iconType: 'warning',
@@ -134,78 +186,26 @@
       content: '是否删除选中柜子',
       okText: '确认',
       cancelText: '取消',
-      onOk: () => {
-        return deleteData(id);
+      onOk: async () => {
+        return await deleteList({ id }, getList(key.value, cabinetList.current, cabinetList.size));
       },
     });
   };
-  const deleteData = async (id) => {
-    await deleteList({ id }, getList(key.value));
-  };
-  //新增
-  const addCabinet = async (params) => {
-    await addList(params, getList(key.value));
-  };
-
-  onMounted(() => {
-    getTab();
-    getStatistics();
-    getList(key.value);
-  });
-  const cabinetState = (state) => {
-    let status = '';
-    switch (state) {
-      case '1':
-        status = 'c-green';
-        break;
-      case '2':
-        status = 'c-grey';
-        break;
-      case '3':
-        status = 'c-orange';
-        break;
-      case '4':
-        status = 'c-blue';
-        break;
-
-      default:
-        status = 'c-blank';
-        break;
-    }
-    return status;
-  };
-  const handlePageChange = (value) => {
-    getList(key.value, value);
-  };
-  const onTabChange = (value: string) => {
-    key.value = value;
-    getList(key.value);
-  };
-
-  const edit = (item) => {
-    modalList.cabinetEditVisible = true;
-    modalList.cabinetTitle = `编辑：${item.lockerNo} 号柜`;
-    modalList.cabinetForm = item;
-  };
-  const add = () => {
-    modalList.cabinetAddVisible = true;
-  };
-  // 关闭弹窗
+  // 关闭所有弹窗
   const closeSuccessModal = (isShow: boolean) => {
     modalList.cabinetEditVisible = isShow;
     modalList.cabinetAddVisible = isShow;
     modalList.cabinetTitle = '';
     modalList.cabinetForm = {};
   };
-
-  const submitModal = (type, data) => {
+  //请求分类
+  const submitModal = async (type, data) => {
     if (type == '编辑') {
-      editCabinet(data);
+      await editList(data, getList(key.value, cabinetList.current, cabinetList.size));
     } else {
-      addCabinet(data);
+      await addList(data, getList(key.value, cabinetList.current, cabinetList.size));
     }
     closeSuccessModal(false);
-    getList(key.value);
   };
 </script>
 

@@ -1,6 +1,27 @@
 <template>
   <div class="ly-container">
     <a-card class="ly-card">
+      <div class="jeecg-basic-table-form-container">
+        <h2>模拟出/入闸</h2>
+        <a-form :model="mockList" :label-col="labelCol" :wrapper-col="wrapperCol">
+          <a-row :gutter="24">
+            <a-col :lg="6">
+              <a-form-item label="票ID">
+                <a-input placeholder="请输入票ID" v-model:value="mockList.id" />
+              </a-form-item>
+            </a-col>
+            <a-col :lg="6">
+              <a-form-item label="闸机号">
+                <a-input placeholder="请输入闸机号" v-model:value="mockList.lockerNo" />
+              </a-form-item>
+            </a-col>
+            <a-col :lg="6">
+              <a-button type="primary" @click="mockGateEntry">入闸</a-button>
+              <a-button type="primary" @click="mockExitGate" style="margin-left: 8px">出闸</a-button>
+            </a-col>
+          </a-row>
+        </a-form>
+      </div>
       <a-table
         :loading="data.isLoading"
         bordered
@@ -67,18 +88,6 @@
               <a-button size="small" type="primary" v-if="record.ticketWriteOff == '1'">未核销</a-button>
               <a-button size="small" v-if="record.ticketWriteOff == '2'">已核销</a-button>
             </template>
-            <template #ticketAccessGate="{ record, index }">
-              <template v-if="record.ticketAccessGate == '1'">
-                <a-input :ref="`lockerNo${index}`" type="text" placeholder="请输入闸机号" style="width: 120px; margin-right: 10px" />
-                <a-button size="small" @click="mockHandel(1, record.id, index)">未入闸</a-button>
-              </template>
-              <template v-if="record.ticketAccessGate == '2'">
-                <a-input :ref="`lockerNo${index}`" type="text" placeholder="请输入闸机号" style="width: 120px; margin-right: 10px" />
-                <a-button size="small" type="primary" @click="mockHandel(2, record.id, index)">申请出闸</a-button>
-              </template>
-
-              <a-button size="small" type="primary" v-if="record.ticketAccessGate == '3'" disabled>已出闸</a-button>
-            </template>
           </a-table>
         </template>
       </a-table>
@@ -98,15 +107,13 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { getCurrentInstance, onMounted, reactive } from 'vue';
+  import { onMounted, reactive } from 'vue';
   import { columns, childrenColumn } from './SysOrderMain.data';
   import { list, entranceGate, exitGate } from './SysOrderMain.api';
-  import { message, Pagination } from 'ant-design-vue';
-  // 获取ref
-  const ComponentInternalInstance = getCurrentInstance();
+  import { Pagination } from 'ant-design-vue';
 
   const APagination = Pagination;
-  let data = reactive({
+  let data = reactive<any>({
     isLoading: true,
     parentPagination: {
       size: 10,
@@ -116,9 +123,34 @@
     },
     parentData: [],
   });
+  const labelCol = reactive({
+    xs: { span: 24 },
+    sm: { span: 7 },
+  });
+  const wrapperCol = reactive({
+    xs: { span: 24 },
+    sm: { span: 16 },
+  });
+  // 模拟出入闸数据
+  const mockList = reactive({
+    id: '',
+    lockerNo: '',
+  });
+  // 模拟入闸
+  const mockGateEntry = async () => {
+    let result = await entranceGate(mockList);
+    if (result == '入闸成功') getList(data.parentPagination.current, data.parentPagination.size);
+  };
+  // 模拟出闸;
+  const mockExitGate = async () => {
+    let result = await exitGate(mockList);
+    if (result == '出闸成功') getList(data.parentPagination.current, data.parentPagination.size);
+  };
+  // 初始化列表数据
   onMounted(() => {
     getList();
   });
+  // 获取列表数据
   const getList = async (pageNo = 1, pageSize = 10) => {
     data.isLoading = true;
     let { size, total, pages, current, records } = await list({ pageNo, pageSize });
@@ -126,32 +158,16 @@
     data.parentData = records[0];
     data.isLoading = false;
   };
+  //切换当前页
   const onChange = (isCur: number) => {
     data.parentPagination.current = isCur;
     getList(isCur, data.parentPagination.size);
   };
+  //切换每页显示数据量
   const onShowSizeChange = (current: number, pageSize: number) => {
     data.parentPagination.current = current;
     data.parentPagination.size = pageSize;
     getList(current, pageSize);
-  };
-  const mockHandel = async (type, id, index) => {
-    const refsI = `lockerNo${index}`;
-    const { $refs } = (ComponentInternalInstance as any).proxy;
-    const lockerNo = $refs[refsI].stateValue;
-    if (!lockerNo) {
-      $refs[refsI].focus();
-      message.error('未检测到闸机数据！');
-      return;
-    }
-    switch (type) {
-      case 1:
-        await entranceGate({ id, lockerNo }, getList(data.parentPagination.current, data.parentPagination.size));
-        break;
-      case 2:
-        await exitGate({ id, lockerNo }, getList(data.parentPagination.current, data.parentPagination.size));
-        break;
-    }
   };
 </script>
 <style lang="less" scoped>
@@ -162,5 +178,18 @@
   .ly-card-pagination {
     margin-top: 16px;
     text-align: right;
+  }
+  .jeecg-basic-table-form-container {
+    background-color: #fff;
+    padding: 0;
+    .query-group-cust {
+      width: calc(50% - 15px);
+      min-width: 100px !important;
+    }
+    .query-group-split-cust {
+      width: 30px;
+      display: inline-block;
+      text-align: center;
+    }
   }
 </style>

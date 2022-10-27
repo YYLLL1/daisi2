@@ -41,8 +41,8 @@
             </a-form-item>
           </a-col>
           <a-col :lg="6">
-            <a-button type="primary" preIcon="ant-design:search-outlined" @click="mockGateEntry">入闸</a-button>
-            <a-button type="primary" preIcon="ant-design:reload-outlined" @click="mockExitGate" style="margin-left: 8px">出闸</a-button>
+            <a-button type="primary" @click="mockGateEntry">入闸</a-button>
+            <a-button type="primary" @click="mockExitGate" style="margin-left: 8px">出闸</a-button>
           </a-col>
         </a-row>
       </a-form>

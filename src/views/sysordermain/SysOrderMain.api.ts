@@ -16,16 +16,10 @@ enum Api {
 export const list = (params?) => defHttp.get({ url: Api.list, params });
 
 // 模拟接口
-export const entranceGate = (params, handleSuccess) => {
-  return defHttp.get({ url: Api.entranceGate, params }, { joinParamsToUrl: true }).then(() => {
-    handleSuccess;
-  });
-};
-export const exitGate = (params, handleSuccess) => {
-  return defHttp.get({ url: Api.exitGate, params }, { joinParamsToUrl: true }).then(() => {
-    handleSuccess;
-  });
-};
+export const entranceGate = (params) => defHttp.get({ url: Api.entranceGate, params }, { joinParamsToUrl: true });
+
+// 模拟接口
+export const exitGate = (params) => defHttp.get({ url: Api.exitGate, params }, { joinParamsToUrl: true });
 
 // /**
 //  * 删除单个

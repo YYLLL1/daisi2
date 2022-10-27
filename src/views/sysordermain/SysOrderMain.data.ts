@@ -80,10 +80,16 @@ export const childrenColumn = [
     dataIndex: 'phone',
   },
   {
-    title: '订单号',
+    title: '票号',
     align: 'center',
     key: 'ticketNumber',
     dataIndex: 'ticketNumber',
+  },
+  {
+    title: '票ID',
+    align: 'center',
+    key: 'id',
+    dataIndex: 'id',
   },
   {
     title: '实收款',
@@ -111,13 +117,5 @@ export const childrenColumn = [
     dataIndex: 'ticketWriteOff',
     key: 'ticketWriteOff',
     slots: { customRender: 'ticketWriteOff' },
-  },
-  {
-    title: '出闸判断',
-    align: 'center',
-    dataIndex: 'ticketAccessGate',
-    key: 'ticketAccessGate',
-    width: 240,
-    slots: { customRender: 'ticketAccessGate' },
   },
 ];
