@@ -3,7 +3,7 @@
     <a-card class="ly-card" :tab-list="position" :active-tab-key="key" @tabChange="(item) => onTabChange(item)">
       <div class="ly-card-container">
         <div class="ly-card-tool">
-          <p v-for="(state, index) of cabinetList.statistics" :key="index" :class="cabinetState(state.cabinetState)">{{ state.cabinetState }}：{{ state.cabinetCount }}</p>
+          <p v-for="(state, index) of cabinetList.statistics" :key="index">{{ state.cabinetState }}：{{ state.cabinetCount }}</p>
           <a-button type="primary" @click="add">新增更衣柜</a-button>
         </div>
         <div class="ly-card-content">
@@ -133,16 +133,16 @@
   const cabinetState = (state) => {
     let status = '';
     switch (state) {
-      case '1' || '空闲':
+      case '1':
         status = 'c-green';
         break;
-      case '2' || '维护中':
+      case '2':
         status = 'c-grey';
         break;
-      case '3' || '逾期':
+      case '3':
         status = 'c-orange';
         break;
-      case '4' || '租借中':
+      case '4':
         status = 'c-blue';
         break;
       default:
