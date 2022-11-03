@@ -14,6 +14,7 @@ enum Api {
   customerCode = '/sys/fillRule/executeRuleByCode/customer_code',
   entranceGate = '/sysordermain/sysOrderMain/entranceGate',
   exitGate = '/sysordermain/sysOrderMain/exitGate',
+  enterPalMarVein = '/sys/socketTest/enterPalMarVein',
 }
 // 模拟接口
 export const entranceGate = (params, handleSuccess) => {
@@ -42,6 +43,11 @@ export const getImportUrl = Api.importExcel;
  * @param params
  */
 export const list = (params) => defHttp.get({ url: Api.list, params });
+/**
+ * 列表接口
+ * @param params
+ */
+export const enterPalMarVein = (params) => defHttp.post({ url: Api.enterPalMarVein, params });
 
 /**
  * 生成客户编码流水地址

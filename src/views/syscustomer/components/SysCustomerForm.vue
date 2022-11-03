@@ -24,7 +24,8 @@
         </a-col>
         <a-col :span="24">
           <a-form-item label="掌静脉ID" v-bind="validateInfos.sysPalmarveinId">
-            <a-input v-model:value="formData.sysPalmarveinId" placeholder="请输入掌静脉ID" :disabled="props.disabled" />
+            <a-input v-model:value="formData.sysPalmarveinId" placeholder="请输入掌静脉ID" disabled style="width: calc(100% - 79px); margin-right: 10px" />
+            <a-button type="primary" preIcon="ant-design:scan-outlined" title="点击录入" :loading="palmarveLoading" @click="handlePalmarve" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
@@ -108,14 +109,14 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, reactive, nextTick } from 'vue';
+  import { ref, reactive, nextTick, onMounted, onUnmounted } from 'vue';
   import { useMessage } from '/@/hooks/web/useMessage';
   import JDictSelectTag from '/@/components/Form/src/jeecg/components/JDictSelectTag.vue';
   import JImageUpload from '/@/components/Form/src/jeecg/components/JImageUpload.vue';
   import { getValueType } from '/@/utils';
-  import { saveOrUpdate, customerCode } from '../SysCustomer.api';
-  import { Form } from 'ant-design-vue';
-
+  import { saveOrUpdate, customerCode, enterPalMarVein } from '../SysCustomer.api';
+  import { Form, message } from 'ant-design-vue';
+  import { onWebSocket, offWebSocket } from '/@/hooks/web/useWebSocket';
   const props = defineProps({
     disabled: { type: Boolean, default: false },
   });
@@ -152,6 +153,26 @@
   //表单验证
   const validatorRules = {};
   const { resetFields, validate, validateInfos } = useForm(formData, validatorRules, { immediate: true });
+
+  const handlePalmarve = async () => {
+    palmarveLoading.value = true;
+    let result = await enterPalMarVein({ userId: 'userId999' });
+    console.log(result);
+  };
+  const palmarveLoading = ref(false);
+  onMounted(() => {
+    onWebSocket(onWebSocketMessage);
+  });
+  onUnmounted(() => {
+    offWebSocket(onWebSocketMessage);
+  });
+  const onWebSocketMessage = (data) => {
+    if (data.cmd === 'sign') {
+      message.success(data.msgTxt);
+      console.log(data, 'onWebSocketMessage');
+    }
+    if (data.msgTxt == '采集成功') palmarveLoading.value = false;
+  };
 
   /**
    * 新增
