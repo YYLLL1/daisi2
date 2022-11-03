@@ -25,7 +25,7 @@
         <a-col :span="24">
           <a-form-item label="掌静脉ID" v-bind="validateInfos.sysPalmarveinId">
             <a-input v-model:value="formData.sysPalmarveinId" placeholder="请输入掌静脉ID" disabled style="width: calc(100% - 79px); margin-right: 10px" />
-            <a-button type="primary" preIcon="ant-design:scan-outlined" title="点击录入" :loading="palmarveLoading" @click="handlePalmarve" />
+            <a-button type="primary" preIcon="ant-design:scan-outlined" title="点击录入" :loading="palmarVeinLoading" @click="handlePalmarVein" style="width: 69px" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
@@ -106,6 +106,15 @@
       </a-row>
     </a-form>
   </a-spin>
+  <a-modal v-model:visible="palmarVeinLoading" title="录入掌静脉信息" :ok="resetModal">
+    <template #footer>
+      <a-button key="back" @click="resetModal">取消</a-button>
+      <a-button key="submit" type="primary" :loading="submitLoading" @click="resetModal">完成</a-button>
+    </template>
+    <div style="padding: 24px">
+      <p v-for="(item, index) of palmarVeinList" :key="index">{{ index + 1 }} - {{ item.text }}</p>
+    </div>
+  </a-modal>
 </template>
 
 <script lang="ts" setup>
@@ -154,12 +163,15 @@
   const validatorRules = {};
   const { resetFields, validate, validateInfos } = useForm(formData, validatorRules, { immediate: true });
 
-  const handlePalmarve = async () => {
-    palmarveLoading.value = true;
+  // socket通讯，返回掌静脉信息
+  let palmarVeinList = reactive([{ text: '等待信息录入...' }]);
+  const palmarVeinLoading = ref(false);
+  const submitLoading = ref(true);
+  const handlePalmarVein = async () => {
+    palmarVeinLoading.value = true;
     let result = await enterPalMarVein({ userId: 'userId999' });
-    console.log(result);
+    if (result) formData.sysPalmarveinId = result;
   };
-  const palmarveLoading = ref(false);
   onMounted(() => {
     onWebSocket(onWebSocketMessage);
   });
@@ -168,12 +180,19 @@
   });
   const onWebSocketMessage = (data) => {
     if (data.cmd === 'sign') {
-      message.success(data.msgTxt);
-      console.log(data, 'onWebSocketMessage');
+      palmarVeinList.push({ text: data.msgTxt });
+      console.log(data);
     }
-    if (data.msgTxt == '采集成功') palmarveLoading.value = false;
+    if (data.msgTxt == '采集成功') {
+      message.success(data.msgTxt);
+      submitLoading.value = false;
+    }
   };
-
+  const resetModal = () => {
+    palmarVeinLoading.value = false;
+    submitLoading.value = true;
+    palmarVeinList = [{ text: '等待信息录入...' }];
+  };
   /**
    * 新增
    */
