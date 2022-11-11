@@ -169,8 +169,15 @@
   const submitLoading = ref(true);
   const handlePalmarVein = async () => {
     palmarVeinLoading.value = true;
+    palmarVeinList.splice(0, palmarVeinList.length);
+    palmarVeinList.push({ text: '等待信息录入...' });
     let result = await enterPalMarVein({ userId: 'userId999' });
-    if (result) formData.sysPalmarveinId = result;
+    if (result == '10000') {
+      palmarVeinList.push({ text: '该掌静脉已有数据!' });
+      submitLoading.value = false;
+    } else {
+      formData.sysPalmarveinId = result;
+    }
   };
   onMounted(() => {
     onWebSocket(onWebSocketMessage);
@@ -181,7 +188,6 @@
   const onWebSocketMessage = (data) => {
     if (data.cmd === 'sign') {
       palmarVeinList.push({ text: data.msgTxt });
-      console.log(data);
     }
     if (data.msgTxt == '采集成功') {
       message.success(data.msgTxt);
@@ -191,7 +197,6 @@
   const resetModal = () => {
     palmarVeinLoading.value = false;
     submitLoading.value = true;
-    palmarVeinList = [{ text: '等待信息录入...' }];
   };
   /**
    * 新增
