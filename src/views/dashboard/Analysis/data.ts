@@ -25,7 +25,8 @@ export const indexRight: GrowCardItem[] = [
     title: '会员充值',
     icon: 'ant-design:info-circle-outlined',
     footer: '会员卡办理/充值',
-    path: '',
+    path: '/sysmembership/business',
+    color: 'blue',
   },
   {
     title: '收银',

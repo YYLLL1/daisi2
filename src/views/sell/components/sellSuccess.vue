@@ -28,10 +28,9 @@
           <a-button type="primary" @click="inputHandel('sysHumanfaceId', index)" preIcon="ant-design:scan-outlined" title="点击录入" />
         </div>
       </template>
-      <template #sysBraceletId="{ record, index }">
+      <template #sysBraceletId="{ record }">
         <div class="ly-table-input">
-          <a-input readonly v-model:value="record.sysBraceletId" placeholder="扫描手环" block />
-          <a-button type="primary" @click="inputHandel('sysBraceletId', index)" preIcon="ant-design:scan-outlined" title="点击录入" />
+          <a-input v-model:value="record.sysBraceletId" placeholder="扫描手环" block />
         </div>
       </template>
       <template #deposit="{ record }">
@@ -43,8 +42,7 @@
 <script lang="ts" setup>
   import { reactive, watch } from 'vue';
   import { sellColumns } from '../data';
-  import { saveBind, getBraceletNo } from '../api';
-  import { message } from 'ant-design-vue';
+  import { saveBind } from '../api';
 
   const props = defineProps({
     successData: { type: Object },
@@ -77,15 +75,6 @@
       case 'sysHumanfaceId':
         sysOrderTicketList[index].sysHumanfaceId = '人脸' + index;
         break;
-      //手环
-      case 'sysBraceletId':
-        let result = await getBraceletNo();
-        if (result) {
-          data.sysOrderTicketList[index].sysBraceletId = result;
-        } else {
-          message.error('未检测到手环数据！');
-        }
-        break;
     }
   };
   const submitHandel = async () => {
@@ -102,6 +91,7 @@
         },
       });
     });
+    console.log(data.bindTicketList);
     await saveBind(data.bindTicketList);
   };
   const emit = defineEmits(['closeSuccessModal']);
